@@ -1,0 +1,16 @@
+# Ignore artifacts:
+build
+.next
+package-lock.json
+package.json
+postcss.config.js 
+tailwind.config.js
+tsconfig.json 
+.eslintrc.json
+.prettierrc.js 
+next-env.d.ts
+next.config.js 
+README.md 
+
+# Ignore all HTML files:
+*.html
