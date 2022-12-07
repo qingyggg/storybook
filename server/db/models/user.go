@@ -6,9 +6,8 @@ import (
 
 type User struct {
 	gorm.Model
-	Name     string
-	Email    string
-	Age      uint8
+	Email    string `gorm:"unique"`
+	Password string
 	Articles []Article   `gorm:"foreignKey:AuthorID"`
 	Comments []Comment   `gorm:"foreignKey:UserID"`
 	Profile  UserProfile `gorm:"foreignKey:UserID"`

@@ -7,9 +7,10 @@ import (
 type UserProfile struct{
 	gorm.Model
 	UserID uint
+	Name string
+	Age      uint8
 	Avatar []byte
 	Description string
-	Email string
   Contact Contact
 }
 
