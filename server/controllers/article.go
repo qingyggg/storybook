@@ -17,16 +17,6 @@ func ArticleController() {
 		//...
 
 	})
-	article.POST("/comment", func(ctx *gin.Context) {
-		//TODO: article ID,userID,comment model
-		//...
-
-	})
-	article.POST("/like", func(ctx *gin.Context) {
-		//TODO: article ID,userID
-		//...
-
-	})
 	article.POST("/create", func(ctx *gin.Context) {
 		//TODO: userID,article model(except ID)
 		//...
