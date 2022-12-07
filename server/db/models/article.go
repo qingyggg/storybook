@@ -8,13 +8,9 @@ type Article struct {
 	Description string
 	Content     string
 	AuthorID    uint 
-	Comments []Comment `gorm:"foreignKey:CommentID"`
+	Comments []Comment `gorm:"foreignKey:ArticleID"`
+	Likes []Like `gorm:"foreignKey:ArticleID"`
 }
 
-type Comment struct{
-	gorm.Model
-	UserId uint
-	ArticleId uint
-	Content string
-}
+
 

@@ -4,12 +4,14 @@ import (
 	models "github.com/qingyggg/storybook/server/db/models"
 	"gorm.io/gorm"
 )
+
 var db *gorm.DB
-func Bootstrap(){
-	db=dbConnect()
-	db.AutoMigrate(&models.Article{}, &models.User{},&models.Comment{})
+
+func Bootstrap() {
+	db = dbConnect()
+	db.AutoMigrate(&models.Article{}, &models.User{}, &models.Comment{},  &models.Like{},&models.UserProfile{})
 }
 
-func getDataBase() *gorm.DB{
+func getDataBase() *gorm.DB {
 	return db
 }
