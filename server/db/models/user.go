@@ -10,4 +10,5 @@ type User struct {
 	Email string
   Age uint8
   Articles []Article `gorm:"foreignKey:AuthorID"`
+  Comments []Comment `gorm:"foreignKey:UserID"`
 }

@@ -5,20 +5,25 @@ import (
 	"github.com/qingyggg/storybook/server/router"
 )
 
-func AuthController(){
+func CommentController(){
 	comment:=router.GetAppRouter().Group("/comment")
-	comment.POST("/login",func(ctx *gin.Context) {
+	comment.POST("/comment",func(ctx *gin.Context) {
 		//TODO: article ID,userID,comment model
 		//...
 		
 	})
-	comment.POST("/register",func(ctx *gin.Context) {
+	comment.POST("/deleteComment",func(ctx *gin.Context) {
 		//TODO: article ID,userID,comment Id
 		//...
 		
 	})
-	comment.POST("/modifyProfile",func(ctx *gin.Context) {
+	comment.POST("/editComment",func(ctx *gin.Context) {
 		//TODO: article ID,userID,comment Model
+		//...
+		
+	})
+	comment.POST("/like",func(ctx *gin.Context) {
+		//TODO: article ID,userID
 		//...
 		
 	})

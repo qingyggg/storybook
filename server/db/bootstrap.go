@@ -1,12 +1,15 @@
 package db
 
-import models "github.com/qingyggg/storybook/server/db/models"
+import (
+	models "github.com/qingyggg/storybook/server/db/models"
+	"gorm.io/gorm"
+)
+var db *gorm.DB
+func Bootstrap(){
+	db=dbConnect()
+	db.AutoMigrate(&models.Article{}, &models.User{},&models.Comment{})
+}
 
-func Bootstrap() error{
-	db,err:=dbConnect()
-	if err!=nil{
-		return err
-	}
-	db.AutoMigrate(&models.Article{}, &models.User{})
-	return nil
+func getDataBase() *gorm.DB{
+	return db
 }
