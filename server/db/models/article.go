@@ -12,5 +12,6 @@ type Article struct {
 	Likes []Like `gorm:"foreignKey:ArticleID"`
 }
 
+type Articles []Article
 
 

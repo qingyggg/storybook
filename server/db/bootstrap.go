@@ -5,13 +5,13 @@ import (
 	"gorm.io/gorm"
 )
 
-var db *gorm.DB
+var DB *gorm.DB
 
 func Bootstrap() {
-	db = dbConnect()
-	db.AutoMigrate(&models.Article{}, &models.User{}, &models.Comment{},  &models.Like{},&models.UserProfile{})
+	DB = dbConnect()
+	DB.AutoMigrate(&models.Article{}, &models.User{}, &models.Comment{},  &models.Like{},&models.UserProfile{})
 }
 
-func getDataBase() *gorm.DB {
-	return db
+func GetDataBase() *gorm.DB {
+	return DB
 }
