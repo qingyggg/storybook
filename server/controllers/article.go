@@ -11,30 +11,35 @@ import (
 
 func ArticleController() {
 	article := router.GetAppRouter().Group("/article")
-	as:=services.Article{DB:db.GetDataBase()}
+	as := services.Article{DB: db.GetDataBase()}
 
 	article.GET("/list", func(ctx *gin.Context) {
-		as.List(util.StringConvertToUint(ctx.Query("offset")))//url:/list?offset=25
+		ok, list := as.List(util.StringConvertToUint(ctx.Query("offset"))) //url:/list?offset=25
+		util.Response(ctx, ok, list)
 	})
 
 	article.GET("/detail", func(ctx *gin.Context) {
-		as.Detail(util.StringConvertToUint("articleID"))
+		ok, detail := as.Detail(util.StringConvertToUint("articleID"))
+		util.Response(ctx, ok, detail)
 	})
 
 	article.POST("/create", func(ctx *gin.Context) {
 		// using BindJson method to serialize body with struct
-		aBody:=&dto.ArticleDto{}
-		util.AssignBodyJson(ctx,aBody)
-		as.Create(aBody)
+		aBody := &dto.ArticleDto{}
+		util.AssignBodyJson(ctx, aBody) //get request body and assign to aBody
+		ok := as.Create(aBody)
+		util.Response(ctx, ok)
 	})
 	article.POST("/edit", func(ctx *gin.Context) {
-		aBody:=&dto.ArticleDtoForEdit{}
-		util.AssignBodyJson(ctx,aBody)
-		as.Edit(aBody)
+		aBody := &dto.ArticleDtoForEdit{}
+		util.AssignBodyJson(ctx, aBody)
+		ok := as.Edit(aBody)
+		util.Response(ctx, ok)
 	})
 	article.POST("/delete", func(ctx *gin.Context) {
-		aBody:=&dto.ArticleDtoForDelete{}
-		util.AssignBodyJson(ctx,aBody)
-		as.Delete(aBody)
+		aBody := &dto.ArticleDtoForDelete{}
+		util.AssignBodyJson(ctx, aBody)
+		ok := as.Delete(aBody)
+		util.Response(ctx, ok)
 	})
 }

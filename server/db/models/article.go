@@ -4,6 +4,7 @@ import "gorm.io/gorm"
 
 type Article struct {
 	gorm.Model
+	ID        uint `gorm:"primarykey;autoIncrement"`
 	Title       string
 	Description string
 	Content     string
@@ -12,6 +13,14 @@ type Article struct {
 	Likes []Like `gorm:"foreignKey:ArticleID"`
 }
 
-type Articles []Article
+type ApiArticleListForItem struct{
+	ID        uint 
+	Title       string
+	Description string
+	Likes []Like
+}
+
+type ApiArticleList =[]ApiArticleListForItem
+
 
 
