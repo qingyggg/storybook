@@ -30,7 +30,7 @@ func (a *Article) Detail(articleID uint) (bool, *models.Article) {
 
 func (a *Article) Create(articleDto *dto.ArticleDto) bool {
 	article := &models.Article{
-		AuthorID:    articleDto.UserID,
+		UserID:      articleDto.UserID,
 		Title:       articleDto.Title,
 		Description: articleDto.Description,
 		Content:     articleDto.Content,
@@ -42,7 +42,7 @@ func (a *Article) Create(articleDto *dto.ArticleDto) bool {
 func (a *Article) Edit(articleDto *dto.ArticleDtoForEdit) bool {
 	article := &models.Article{
 		ID:          articleDto.ArticleID,
-		AuthorID:    articleDto.UserID,
+		UserID:      articleDto.UserID,
 		Title:       articleDto.Title,
 		Description: articleDto.Description,
 		Content:     articleDto.Content,

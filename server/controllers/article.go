@@ -13,6 +13,11 @@ func ArticleController() {
 	article := router.GetAppRouter().Group("/article")
 	as := services.Article{DB: db.GetDataBase()}
 
+	article.GET("/", func(ctx *gin.Context) {
+		ok, list := as.List(util.StringConvertToUint(ctx.Query("offset"))) //url:/list?offset=25
+		util.Response(ctx, ok, list)
+	})
+
 	article.GET("/list", func(ctx *gin.Context) {
 		ok, list := as.List(util.StringConvertToUint(ctx.Query("offset"))) //url:/list?offset=25
 		util.Response(ctx, ok, list)

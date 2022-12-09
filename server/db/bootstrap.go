@@ -9,7 +9,7 @@ var DB *gorm.DB
 
 func Bootstrap() {
 	DB = dbConnect()
-	DB.AutoMigrate(&models.Article{}, &models.User{}, &models.Comment{},  &models.Like{},&models.UserProfile{})
+	DB.AutoMigrate(&models.User{},&models.UserProfile{},&models.Article{},&models.Like{}, &models.Comment{})
 }
 
 func GetDataBase() *gorm.DB {

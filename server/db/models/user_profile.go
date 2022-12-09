@@ -11,7 +11,7 @@ type UserProfile struct{
 	Age      uint8
 	Avatar []byte
 	Description string
-  Contact Contact
+  Contact Contact `gorm:"embedded"`
 }
 
 type Contact struct{

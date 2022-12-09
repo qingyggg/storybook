@@ -4,7 +4,8 @@ import "gorm.io/gorm"
 
 type Comment struct{
 	gorm.Model
-	UserId uint
-	ArticleId uint
+	ID          uint `gorm:"primarykey;autoIncrement"`
+	UserID uint
+	ArticleID uint
 	Content string
 }
