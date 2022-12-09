@@ -2,24 +2,38 @@ package controllers
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/qingyggg/storybook/server/db"
+	"github.com/qingyggg/storybook/server/dto"
 	"github.com/qingyggg/storybook/server/router"
+	"github.com/qingyggg/storybook/server/services"
+	"github.com/qingyggg/storybook/server/util"
 )
 
 func AuthController() {
 	auth := router.GetAppRouter().Group("/auth")
+	aus := services.Auth{DB: db.GetDataBase()}
 	auth.POST("/login", func(ctx *gin.Context) {
-		//TODO: article ID,userID,comment model
-		//...
-
+		auBody := &dto.AuthDto{}
+		util.AssignBodyJson(ctx, auBody)
+		ok := aus.Login(auBody, false)
+		util.Response(ctx, ok)
 	})
 	auth.POST("/register", func(ctx *gin.Context) {
-		//TODO: article ID,userID,comment Id
-		//...
+		auBody := &dto.AuthDto{}
+		util.AssignBodyJson(ctx, auBody)
+		ok1 := aus.Login(auBody, true)
+		if !ok1 {
+			ok2 := aus.Register(auBody)
+			util.Response(ctx, ok2)
+		} else {
+			util.Response(ctx, false)
+		}
 
 	})
 	auth.POST("/modifyPwd", func(ctx *gin.Context) {
-		//TODO: article ID,userID,comment Id
-		//...
-
+		auBody := &dto.AuthDtoForModify{}
+		util.AssignBodyJson(ctx, auBody)
+		ok := aus.Modify(auBody)
+		util.Response(ctx, ok)
 	})
 }

@@ -8,9 +8,7 @@ type CommentDtoForCreate struct{
 
 type CommentDtoForEdit struct{
 	ID uint
-	UserID uint
-	ArticleID uint
-	Content string
+	CommentDtoForCreate
 }
 
 type CommentDtoForDelete struct{
