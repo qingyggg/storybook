@@ -50,3 +50,4 @@ func (a *Auth) Register(authDto *dto.AuthDto) bool {
 	result := a.DB.Create(auth)
 	return util.CrudJudgement(result)
 }
+//initialize db

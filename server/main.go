@@ -7,6 +7,13 @@ import (
 )
 
 func main() {
-	db.Bootstrap()                                  //initialize db
-	router.Bootstrap(controllers.ArticleController) //initialize router
+	//initialize db
+	db.Bootstrap() 
+	//initialize router
+	router.Bootstrap(
+		controllers.ArticleController,
+		controllers.AuthController,
+		controllers.CommentController,
+		controllers.ProfileController,
+	) 
 }

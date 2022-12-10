@@ -1,14 +1,15 @@
 package dto
 
-type ProfileDto struct{
-	Name string 
-	Age      uint8
-	Avatar []byte
+type UserProfileDto struct {
+	Name        string
+	Age         uint8
+	Avatar      []byte
 	Description string
-  Contact 
+	Github      string
+	WeChat      string
+	Twitter     string
 }
-type Contact struct{
-	Github string
-	WeChat string
-	Twitter string
+type UserProfileDtoForEdit struct {
+	ID uint
+	UserProfileDto
 }
