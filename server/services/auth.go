@@ -21,8 +21,9 @@ func (a *Auth) Modify(authDto *dto.AuthDtoForModify) bool {
 	result := a.DB.Model(&models.User{}).Updates(auth)
 	return util.CrudJudgement(result)
 }
-//forRegister false is bool zero value
-func (a *Auth) Login(authDto *dto.AuthDto,forRegister bool) bool {
+
+// forRegister false is bool zero value
+func (a *Auth) Login(authDto *dto.AuthDto, forRegister bool) bool {
 	var auth *models.User
 	if forRegister {
 		auth = &models.User{
@@ -50,4 +51,3 @@ func (a *Auth) Register(authDto *dto.AuthDto) bool {
 	result := a.DB.Create(auth)
 	return util.CrudJudgement(result)
 }
-//initialize db
