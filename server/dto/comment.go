@@ -12,7 +12,8 @@ type CommentDtoForEdit struct{
 }
 
 type CommentDtoForDelete struct{
-	ID uint
+	ID uint 
+	ArticleID uint
 }
 
 type LikeDto struct{

@@ -45,6 +45,22 @@ func (c *Comment) Edit(commentDto *dto.CommentDtoForEdit) bool {
 	return util.CrudJudgement(result)
 }
 
+func (c *Comment) LikeStatusShow(likeDto *dto.LikeDto) (ok bool, isLike bool) {
+	like := &models.Like{
+		ArticleID: likeDto.ArticleID,
+		UserID:    likeDto.UserID,
+	}
+	var like2 *models.Like
+	ok = util.CrudJudgement(c.DB.Where(like).Find(like2))
+	//current user like status
+	if like2.ID == like.ID {
+		isLike = true
+	} else {
+		isLike = false
+	}
+	return
+}
+
 func (c *Comment) Like(likeDto *dto.LikeDto) bool {
 	like := &models.Like{
 		ArticleID: likeDto.ArticleID,
@@ -71,17 +87,49 @@ func (c *Comment) LikeJudgement(likeDto *dto.LikeDto) (has int, RecordId uint) {
 	like := &models.Like{}
 	//if like exists
 	result := c.DB.Where(likeForCondition).Find(like)
-	if result.Error!=nil{
+	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			//has no record
 			has = 0
-		} else{
-			has=-1
+		} else {
+			has = -1
 		}
-	}else {
+	} else {
 		//has record
 		has = 1
 		RecordId = like.ID
 	}
 	return
+}
+
+func (c *Comment) LikeNumberModify(articleID uint, isAdd bool) bool {
+	var payload *models.ApiArticleLikesAndCommentsAmount
+	results := c.DB.Where(&models.Article{ID: articleID}).Find(&payload)
+	if util.CrudJudgement(results) {
+		if isAdd {
+			payload.LikeNumber += 1
+		} else {
+			payload.LikeNumber -= 1
+		}
+		results2 := c.DB.Model(&models.Article{ID: articleID}).Updates(payload)
+		return util.CrudJudgement(results2)
+	} else {
+		return false
+	}
+}
+
+func (c *Comment) CommentNumberModify(articleID uint, isAdd bool) bool {
+	var payload *models.ApiArticleLikesAndCommentsAmount
+	results := c.DB.Where(&models.Article{ID: articleID}).Find(&payload)
+	if util.CrudJudgement(results) {
+		if isAdd {
+			payload.CommentNumber += 1
+		} else {
+			payload.CommentNumber -= 1
+		}
+		results2 := c.DB.Model(&models.Article{ID: articleID}).Updates(payload)
+		return util.CrudJudgement(results2)
+	} else {
+		return false
+	}
 }
