@@ -2,7 +2,8 @@ interface articleItemForListI{
   ID: string
   Title: string
   Description: string
-  Likes:any[]
+	LikeNumber: number
+	CommentNumber:number
 }
 
 export type articleListType=articleItemForListI[]
@@ -14,5 +15,6 @@ export interface articleDetailI{
 	Content     :string
 	UserID      :number
 	Comments    :any[]
-	Likes       :any[]
+	LikeNumber: number
+	CommentNumber:number
 } 

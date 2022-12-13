@@ -1,6 +1,6 @@
-import { articleCreateI, articleEditI, articleDeleteI } from './requestTypes/article';
-import { articleListType, articleDetailI } from './responsetypes/article';
-import { get, post } from './../util/request';
+import { articleI, articleEditI, articleDeleteI } from './reqTypes';
+import { articleListType, articleDetailI } from './resTypes';
+import { get, post } from '../../util/request';
 import { AxiosResponse } from 'axios';
 //use promise or async/await instead of callback
 export const getArticleList = async (offset: number):Promise<AxiosResponse<articleListType, any>>=> { 
@@ -11,7 +11,7 @@ export const getArticleDetail =async (articleID:number):Promise<AxiosResponse<ar
   return await get("/article/detail?/articleID"+articleID)
 }
 
-export const postArticleCreate = async (article:articleCreateI) => { 
+export const postArticleCreate = async (article:articleI) => { 
   return await post("/article/create",article)
 }
 
