@@ -1,19 +1,21 @@
+import { LIKE, LIKE_ERR, COMMENT, COMMENT_ERR, COMMENT_DELETE, COMMENT_DELETE_ERR, COMMENT_EDIT } from './../../constants/messages/comment';
+import { alertInfoAttach } from './../../util/funs';
 import { likeI, commentI, commentDeleteI, commentEditI } from './reqTypes';
 import { post, get } from '../../util/request';
-export const postLike =async (like:likeI) => { 
-  return await post('/comment/like',like)
+export const postLike = (like:likeI) => { 
+  return  alertInfoAttach(()=>post('/comment/like',like),LIKE,LIKE_ERR) 
 }
 
-export const postComment =async (comment:commentI) => { 
-  return await post('/comment/create',comment)
+export const postComment = (comment:commentI) => { 
+  return  alertInfoAttach(()=>post('/comment/create',comment),COMMENT,COMMENT_ERR) 
 }
 
-export const postCommentEdit =async (comment:commentEditI) => {
-  return await post('/comment/create',comment)
+export const postCommentEdit = (comment:commentEditI) => {
+  return  alertInfoAttach(()=>post('/comment/edit',comment),COMMENT_EDIT,COMMENT_DELETE_ERR) 
 }
 
-export const postCommentDelete =async (comment:commentDeleteI) => {
-  return await post('/comment/edit',comment)
+export const postCommentDelete = (comment:commentDeleteI) => {
+  return  alertInfoAttach(()=>post('/comment/delete',comment),COMMENT_DELETE,COMMENT_DELETE_ERR) 
 } 
 
 

@@ -1,24 +1,25 @@
+import { ARTICLE_LIST, ARTICLE_LIST_ERR, ARTICLE_DELETE, ARTICLE_DELETE_ERR, ARTICLE_CREATE, ARTICLE_CREATE_ERR, ARTICLE_EDIT, ARTICLE_EDIT_ERR } from './../../constants/messages/article';
 import { articleI, articleEditI, articleDeleteI } from './reqTypes';
-import { articleListType, articleDetailI } from './resTypes';
+import {  articleDetailI, articleListType } from './resTypes';
 import { get, post } from '../../util/request';
-import { AxiosResponse } from 'axios';
+import { alertInfoAttach } from '../../util/funs';
 //use promise or async/await instead of callback
-export const getArticleList = async (offset: number):Promise<AxiosResponse<articleListType, any>>=> { 
-  return await get("/article/list?offset=" + offset)
+export const getArticleList =()=> { 
+  return alertInfoAttach((offset: number)=>get<articleListType>("/article/list?offset=" + offset),ARTICLE_LIST,ARTICLE_LIST_ERR) 
 }
 
-export const getArticleDetail =async (articleID:number):Promise<AxiosResponse<articleDetailI, any>>=> {
-  return await get("/article/detail?/articleID"+articleID)
+export const getArticleDetail =()=> {
+  return alertInfoAttach((articleID:number)=>get<articleDetailI>("/article/detail?/articleID"+articleID),ARTICLE_DELETE,ARTICLE_DELETE_ERR)
 }
 
-export const postArticleCreate = async (article:articleI) => { 
-  return await post("/article/create",article)
+export const postArticleCreate = () => { 
+  return  alertInfoAttach((article:articleI)=>post("/article/create",article),ARTICLE_CREATE,ARTICLE_CREATE_ERR)
 }
 
-export const postArticleEdit =async (article:articleEditI) => { 
-  return await post("/article/edit",article)
+export const postArticleEdit =() => { 
+  return  alertInfoAttach((article:articleEditI)=>post("/article/edit",article),ARTICLE_EDIT,ARTICLE_EDIT_ERR)
 }
 
-export const postArticleDelete =async (article:articleDeleteI) => {
-  return await post("/article/delete",article)
+export const postArticleDelete =() => {
+  return  alertInfoAttach((article:articleDeleteI)=>post("/article/delete",article),ARTICLE_DELETE,ARTICLE_DELETE_ERR)
 }
