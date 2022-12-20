@@ -2,7 +2,7 @@ import { ARTICLE_LIST, ARTICLE_LIST_ERR, ARTICLE_DELETE, ARTICLE_DELETE_ERR, ART
 import { articleI, articleEditI, articleDeleteI } from './reqTypes';
 import {  articleDetailI, articleListType } from './resTypes';
 import { get, post } from '../../util/request';
-import { alertInfoAttach } from '../../util/funs';
+import { alertInfoAttach } from '../../util/alert';
 //use promise or async/await instead of callback
 export const getArticleList =()=> { 
   return alertInfoAttach((offset: number)=>get<articleListType>("/article/list?offset=" + offset),ARTICLE_LIST,ARTICLE_LIST_ERR) 

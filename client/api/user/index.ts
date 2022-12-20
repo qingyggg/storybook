@@ -1,5 +1,5 @@
 import { LOGIN, LOGIN_ERR, REGISTER, REGISTER_FAILED, MODIFY, MODIFY_ERR, PROFILE, PROFILE_ERR, PROFILE_CREATE, PROFILE_CREATE_ERR, PROFILE_EDIT, PROFILE_EDIT_ERR } from './../../constants/messages/user';
-import { alertInfoAttach } from '../../util/funs';
+import { alertInfoAttach } from '../../util/alert';
 import { get, post } from '../../util/request';
 import { loginI, modifyT, registerI, profileI, userIdT, editProfileI } from './reqTypes';
 import { showProfileI } from './resTypes';

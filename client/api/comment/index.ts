@@ -1,5 +1,5 @@
 import { LIKE, LIKE_ERR, COMMENT, COMMENT_ERR, COMMENT_DELETE, COMMENT_DELETE_ERR, COMMENT_EDIT } from './../../constants/messages/comment';
-import { alertInfoAttach } from './../../util/funs';
+import { alertInfoAttach } from '../../util/alert';
 import { likeI, commentI, commentDeleteI, commentEditI } from './reqTypes';
 import { post, get } from '../../util/request';
 export const postLike = (like:likeI) => { 
