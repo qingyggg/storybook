@@ -19,11 +19,16 @@ A table:
 | a | b |
 | - | - |
 `
-export default function index() {
+
+//login,register,modify
+//comment dialog,user profile
+//about
+//optimize code
+export default function index() {      
   return (
     <div className='w-full flex-row flex'>
       <div className='w-4/5 flex-col flex items-center bg-cyan-200'>
-        <h1 className='text-4xl'>i am the tile</h1>
+        <h1 className='text-4xl'>i am the tileuhuu</h1>
         <div>
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
         </div>
