@@ -1,2 +1,2 @@
-export let infoQueue = []
-export let errQueue=[]
+export let infoQueue = [];
+export let errQueue = [];

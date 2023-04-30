@@ -1,11 +1,11 @@
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
-interface UserStateI{
-  ID: number
-  Avatar: string
-  Description:string
+interface UserStateI {
+  ID: number;
+  Avatar: string;
+  Description: string;
 }
 export const userState = atom<UserStateI>({
-  key: 'userState', 
-  default: {ID:0,Avatar:"",Description:"Im alice"}
+  key: 'userState',
+  default: { ID: 0, Avatar: '', Description: 'Im alice' },
 });

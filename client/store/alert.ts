@@ -1,7 +1,6 @@
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
 export const alertState = atom<string>({
-  key: 'userState', 
-  default: ""
+  key: 'userState',
+  default: '',
 });
-

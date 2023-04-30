@@ -1,5 +1,5 @@
-import React from 'react'
-import ArticleCard from './ArticleCard'
+import React from 'react';
+import ArticleCard from './ArticleCard';
 
 export default function ArticleList() {
   return (
@@ -8,7 +8,7 @@ export default function ArticleList() {
       <ArticleCard />
       <ArticleCard />
       <ArticleCard />
-      <ArticleCard/>
+      <ArticleCard />
     </div>
-  )
+  );
 }

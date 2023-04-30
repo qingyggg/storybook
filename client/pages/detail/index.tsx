@@ -1,9 +1,9 @@
-import React from 'react'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import CommentCard from '../../components/CommentCard'
-import AliceSpeedDial from '../../components/AliceSpeedDial'
-import AuthorForArticleDetail from '../../components/AuthorForArticleDetail'
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import CommentCard from '../../components/CommentCard';
+import AliceSpeedDial from '../../components/AliceSpeedDial';
+import AuthorForArticleDetail from '../../components/AuthorForArticleDetail';
 
 const markdown = `
 A paragraph with *emphasis* and **strong importance**.
@@ -18,13 +18,13 @@ A table:
 
 | a | b |
 | - | - |
-`
+`;
 
 //login,register,modify
 //comment dialog,user profile
 //about
 //optimize code
-export default function index() {      
+export default function index() {
   return (
     <div className='w-full flex-row flex'>
       <div className='w-4/5 flex-col flex items-center bg-cyan-200'>
@@ -35,12 +35,12 @@ export default function index() {
         <div className='w-full flex flex-col space-y-4 items-center mt-6'>
           <CommentCard />
           <CommentCard />
-          <CommentCard/>
+          <CommentCard />
         </div>
       </div>
       <div className='fixed top-28 right-8'>
-        <AuthorForArticleDetail/>
+        <AuthorForArticleDetail />
       </div>
     </div>
-  )
+  );
 }

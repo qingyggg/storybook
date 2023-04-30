@@ -1,22 +1,28 @@
-import axios from "axios";
+import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: "localhost:8080",
-  timeout:1000
-})
-
-axios.interceptors.request.use(function (config) {
-  return config;
-}, function (error) {
-  //TODO:
-  //error.request 404 error
-  return Promise.reject(error);
+  baseURL: 'localhost:8080',
+  timeout: 1000,
 });
 
-axios.interceptors.response.use(function (response) {
-  return response;
-}, function (error) {
-  return Promise.reject(error);
-});
+axios.interceptors.request.use(
+  function (config) {
+    return config;
+  },
+  function (error) {
+    //TODO:
+    //error.request 404 error
+    return Promise.reject(error);
+  },
+);
 
-export {instance}
+axios.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  function (error) {
+    return Promise.reject(error);
+  },
+);
+
+export { instance };
