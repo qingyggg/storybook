@@ -13,11 +13,10 @@ type Article struct {
 
 //TODO: label,keyword will add later
 
-func (a *Article) List(offset uint) (bool, *models.ApiArticleList) {
+func (a *Article) List(offset uint,keyword string) (bool, *models.ApiArticleList) {
 	//NOTE: except title,description field,other field will be returned zero value
 	articles := new(models.ApiArticleList)
-	//default limits:25
-	result := a.DB.Model(&models.Article{}).Limit(10).Offset(int(offset)).Find(articles)
+	result := a.DB.Model(&models.Article{}).Where("title like"+"%"+keyword+"%").Limit(10).Offset(int(offset)).Find(articles)
 	return util.CrudJudgement(result), articles
 }
 

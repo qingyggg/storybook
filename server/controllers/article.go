@@ -14,7 +14,8 @@ func ArticleController() {
 	as := services.Article{DB: db.GetDataBase()}
 
 	article.GET("/list", func(ctx *gin.Context) {
-		ok, list := as.List(util.StringConvertToUint(ctx.Query("offset"))) //url:/list?offset=25
+		offset:=util.QueryDefaultAssigner(ctx,"offset","0")
+		ok, list := as.List(util.StringConvertToUint(offset),ctx.Query("keyword")) //url:/list?offset=25
 		util.Response(ctx, ok, list)
 	})
 

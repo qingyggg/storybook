@@ -24,7 +24,6 @@ func (p *Profile) Edit(profileDto *dto.UserProfileDtoForEdit) (ok bool) {
 		Avatar:      profileDto.Avatar,
 		Description: profileDto.Description,
 		Github:      profileDto.Github,
-		WeChat:      profileDto.WeChat,
 		Twitter:     profileDto.Twitter,
 	}
 	result := p.DB.Model(&models.UserProfile{ID: profileDto.ID}).Updates(profile)
@@ -40,7 +39,6 @@ func (p *Profile) Create(profileDto *dto.UserProfileDto) (ok bool) {
 		Avatar:      profileDto.Avatar,
 		Description: profileDto.Description,
 		Github:      profileDto.Github,
-		WeChat:      profileDto.WeChat,
 		Twitter:     profileDto.Twitter,
 	}
 	result := p.DB.Create(profile)

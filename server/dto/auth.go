@@ -10,3 +10,4 @@ type AuthDtoForModify struct{
 	ID uint
 	AuthDto
 }
+ 
