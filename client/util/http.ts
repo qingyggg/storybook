@@ -1,26 +1,28 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import { log } from 'console';
 
 const instance = axios.create({
-  baseURL: 'localhost:8080',
+  baseURL: 'http://127.0.0.1:8080',
   timeout: 1000,
 });
 
-axios.interceptors.request.use(
+instance.interceptors.request.use(
   function (config) {
     return config;
   },
   function (error) {
     //TODO:
     //error.request 404 error
+    console.log(222, error);
     return Promise.reject(error);
   },
 );
 
-axios.interceptors.response.use(
+instance.interceptors.response.use(
   function (response) {
     return response;
   },
-  function (error) {
+  function (error: AxiosError) {
     return Promise.reject(error);
   },
 );

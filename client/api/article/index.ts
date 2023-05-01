@@ -13,7 +13,7 @@ import { articleDetailI, articleListType } from './resTypes';
 import { get, post } from '../../util/request';
 import { alertInfoAttach } from '../../util/alert';
 //use promise or async/await instead of callback
-export const getArticleList = () => {
+export const getArticleListApi = () => {
   return alertInfoAttach(
     (offset: number) => get<articleListType>('/article/list?offset=' + offset),
     ARTICLE_LIST,
@@ -21,7 +21,7 @@ export const getArticleList = () => {
   );
 };
 
-export const getArticleDetail = () => {
+export const getArticleDetailApi = () => {
   return alertInfoAttach(
     (articleID: number) =>
       get<articleDetailI>('/article/detail?/articleID' + articleID),
@@ -30,7 +30,7 @@ export const getArticleDetail = () => {
   );
 };
 
-export const postArticleCreate = () => {
+export const postArticleCreateApi = () => {
   return alertInfoAttach(
     (article: articleI) => post('/article/create', article),
     ARTICLE_CREATE,
@@ -38,7 +38,7 @@ export const postArticleCreate = () => {
   );
 };
 
-export const postArticleEdit = () => {
+export const postArticleEditApi = () => {
   return alertInfoAttach(
     (article: articleEditI) => post('/article/edit', article),
     ARTICLE_EDIT,
@@ -46,7 +46,7 @@ export const postArticleEdit = () => {
   );
 };
 
-export const postArticleDelete = () => {
+export const postArticleDeleteApi = () => {
   return alertInfoAttach(
     (article: articleDeleteI) => post('/article/delete', article),
     ARTICLE_DELETE,

@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"github.com/qingyggg/storybook/server/db"
 	"github.com/qingyggg/storybook/server/dto"
@@ -22,8 +24,10 @@ func AuthController() {
 		auBody := &dto.AuthDto{}
 		util.AssignBodyJson(ctx, auBody)
 		ok1 := aus.Login(auBody, true)
+		fmt.Println("ok1",ok1)
 		if !ok1 {
 			ok2 := aus.Register(auBody)
+			fmt.Println("ok1",ok2)
 			util.Response(ctx, ok2)
 		} else {
 			util.Response(ctx, false)

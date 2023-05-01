@@ -3,13 +3,9 @@ export interface loginI {
   Password: string;
 }
 
-export interface registerI {
-  ID: number;
-  Email: string;
-  Password: string;
-}
+export interface registerI extends loginI{}
 
-export type modifyT = registerI;
+export type modifyT = registerI & {ID:number};
 //for showProfile() api
 export type userIdT = number;
 

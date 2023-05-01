@@ -23,11 +23,11 @@ import {
   editProfileI,
 } from './reqTypes';
 import { showProfileI } from './resTypes';
-export const login = (auth: loginI) => {
+export const loginApi = (auth: loginI) => {
   return alertInfoAttach(() => post('/auth/login', auth), LOGIN, LOGIN_ERR);
 };
 
-export const register = (auth: registerI) => {
+export const registerApi = (auth: registerI) => {
   return alertInfoAttach(
     () => post('/auth/register', auth),
     REGISTER,
@@ -35,7 +35,7 @@ export const register = (auth: registerI) => {
   );
 };
 
-export const modify = (auth: modifyT) => {
+export const modifyApi = (auth: modifyT) => {
   return alertInfoAttach(
     () => post('/auth/modifyPwd', auth),
     MODIFY,
@@ -43,7 +43,7 @@ export const modify = (auth: modifyT) => {
   );
 };
 
-export const showProfile = (id: userIdT) => {
+export const showProfileApi = (id: userIdT) => {
   return alertInfoAttach(
     () => get<showProfileI>('/profile/show?userId=' + id),
     PROFILE,
@@ -51,7 +51,7 @@ export const showProfile = (id: userIdT) => {
   );
 };
 //this api only been executed once for per user
-export const createProfile = (profile: profileI) => {
+export const createProfileApi = (profile: profileI) => {
   return alertInfoAttach(
     () => post('/profile/create', profile),
     PROFILE_CREATE,
@@ -59,7 +59,7 @@ export const createProfile = (profile: profileI) => {
   );
 };
 
-export const editProfile = (profile: editProfileI) => {
+export const editProfileApi = (profile: editProfileI) => {
   return alertInfoAttach(
     () => post('profile/edit', profile),
     PROFILE_EDIT,

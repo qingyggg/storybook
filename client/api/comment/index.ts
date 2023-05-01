@@ -14,7 +14,7 @@ export const postLike = (like: likeI) => {
   return alertInfoAttach(() => post('/comment/like', like), LIKE, LIKE_ERR);
 };
 
-export const postComment = (comment: commentI) => {
+export const postCommentApi = (comment: commentI) => {
   return alertInfoAttach(
     () => post('/comment/create', comment),
     COMMENT,
@@ -22,7 +22,7 @@ export const postComment = (comment: commentI) => {
   );
 };
 
-export const postCommentEdit = (comment: commentEditI) => {
+export const postCommentEditApi = (comment: commentEditI) => {
   return alertInfoAttach(
     () => post('/comment/edit', comment),
     COMMENT_EDIT,
@@ -30,7 +30,7 @@ export const postCommentEdit = (comment: commentEditI) => {
   );
 };
 
-export const postCommentDelete = (comment: commentDeleteI) => {
+export const postCommentDeleteApi = (comment: commentDeleteI) => {
   return alertInfoAttach(
     () => post('/comment/delete', comment),
     COMMENT_DELETE,
