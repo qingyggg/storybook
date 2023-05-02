@@ -24,7 +24,7 @@ func AuthController() {
 		newRes:=new(util.ResPayload) 
 		auBody := &dto.AuthDto{}
 		util.AssignBodyJson(ctx, auBody)
-		isErr,msg := aus.Login(auBody, false)
+		isErr,msg := aus.Login(auBody, true) 
 		//sql error
 		if msg==cst.SERVER_ERR{
 			newRes.SetDefaultMsg(true).Response(ctx)

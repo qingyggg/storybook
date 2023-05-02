@@ -38,8 +38,8 @@ func (a *Auth) Login(authDto *dto.AuthDto, forRegisterAuth bool) (bool,string) {
 			Password: authDto.Password,
 		}
 	}
-	results:=a.DB.Model(&models.User{}).Find(auth)//excute sql
-
+	results:=a.DB.Find(&models.User{},auth)//excute sql
+	
 	//tackle sql results for response body
 	ds.AssignResults(results).DistinguishSqlErrType().AssignMessage([]string{cst.LOGIN,cst.ACCOUNT_REPEAT_OR_ERROR_PASSWORD}).AssignIsErr([]uint{1,0})
 	c,b:=ds.ReturnInfo()

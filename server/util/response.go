@@ -59,6 +59,8 @@ func (res *ResPayload) Response(ctx *gin.Context) {
 	var status int
 	if(res.isError){
 		status=http.StatusBadRequest
+	}else if(res.message==cst.SERVER_ERR){
+		status=http.StatusInternalServerError
 	}else{
 		status=http.StatusAccepted
 	}

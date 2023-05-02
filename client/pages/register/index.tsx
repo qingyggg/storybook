@@ -3,12 +3,18 @@ import Auth from '../../components/Auth';
 import { Button, TextField } from '@mui/material';
 import { registerApi } from '../../api/user';
 import { useRequest } from '../../hooks/useRequest';
+import { usePassword } from '../../hooks/usePassword';
+import { useRouter } from 'next/router';
 
 export default function Register() {
+  const router = useRouter();
   const [Email, setEmail] = useState('');
-  const [Password, setPassword] = useState('');
-  const registerReq = useRequest(...registerApi({ Email, Password }));
-  const register = async () => (await registerReq)();
+  const [Password, setPassword, cryptPwdByMd5] = usePassword();
+  const registerReq = useRequest(registerApi({ Email, Password })[0],()=>router.push('/'));
+  const register =async () => {
+    cryptPwdByMd5(); //crypto password
+    (await registerReq)()
+  };
   return (
     <Auth>
       <>

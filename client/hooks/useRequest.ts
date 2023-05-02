@@ -1,27 +1,31 @@
-import { AxiosResponse } from "axios"
-import { baseRes } from "../util/request"
-import { useRecoilState } from "recoil"
-import { alertState } from "../store/alert"
+import { AxiosResponse } from 'axios';
+import { baseRes } from '../util/request';
+import { useRecoilState } from 'recoil';
+import { alertState } from '../store/alert';
 
-export const useRequest =async (api: apiType, sI: string, eI: string, setData?: setDataType) => {
-  const [, setAlsState] = useRecoilState(alertState)
-  return async() => {
+export const useRequest = async (api: apiType, s:sucCb=()=>void 0,e:errCb=()=>void 0) => {
+  const [, setAlsState] = useRecoilState(alertState);
+  return async () => {
     try {
-      let { data } = await api()
-      if (setData) {
-        setData(data)
-      }
-      setAlsState({info:'error',message:sI,open:true})
-    }catch(err:any){
-      if (err.code === 'ERR_NETWORK') {
-        setAlsState({info:'error',message:"network 404",open:true})
+      let { data } = await api();
+      s(data.data)//set data on callback function
+      setAlsState({ info: 'success', message: data.message, open: true });
+    } catch (err: any) {
+      e(err)
+      if (err.code === 'ERR_BAD_REQUEST') {
+        setAlsState({
+          info: 'error',
+          message: err.response.data.message,
+          open: true,
+        });
       } else {
-        //server internal error
-        setAlsState({info:'error',message:eI,open:true})
+        //404,internal server error....
+        setAlsState({ info: 'error', message: 'network 404', open: true });
       }
     }
-  }
-}
+  };
+};
 
-type apiType = () => Promise<AxiosResponse<baseRes<unknown>, any>>
-type setDataType=React.Dispatch<React.SetStateAction<unknown>>
+type apiType = () => Promise<AxiosResponse<baseRes<unknown>, any>>;
+type sucCb = (data: any) => any
+type errCb=(err:any)=>any
