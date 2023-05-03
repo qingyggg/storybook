@@ -8,6 +8,7 @@ type AuthDto struct{
 
 type AuthDtoForModify struct{
 	ID uint
-	AuthDto
+	OldPassword string
+  Password string
 }
  

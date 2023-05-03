@@ -3,13 +3,15 @@ import { baseRes } from '../util/request';
 import { useRecoilState } from 'recoil';
 import { alertState } from '../store/alert';
 
-export const useRequest = async (api: apiType, s:sucCb=()=>void 0,e:errCb=()=>void 0) => {
+export const useRequest = async (api: apiType, s:sucCb=()=>void 0,e:errCb=()=>void 0,forbidSetAlsStateWhenSuccess:boolean=false) => {
   const [, setAlsState] = useRecoilState(alertState);
   return async () => {
     try {
       let { data } = await api();
       s(data.data)//set data on callback function
-      setAlsState({ info: 'success', message: data.message, open: true });
+      if (!forbidSetAlsStateWhenSuccess) {
+        setAlsState({ info: 'success', message: data.message, open: true });
+      }
     } catch (err: any) {
       e(err)
       if (err.code === 'ERR_BAD_REQUEST') {

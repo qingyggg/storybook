@@ -14,7 +14,7 @@ func AuthController() {
 	auth := router.GetAppRouter().Group("/auth")//initialize route
 	aus := services.Auth{DB: db.GetDataBase()}//initialize database
 	auth.POST("/login", func(ctx *gin.Context) {
-		var newRes *util.ResPayload
+		newRes :=new(util.ResPayload) 
 		auBody := &dto.AuthDto{}//get request template
 		util.AssignBodyJson(ctx, auBody)//get request body
 		isErr,msg := aus.Login(auBody, false)//invoke  service fuc
@@ -43,11 +43,17 @@ func AuthController() {
 		}
 	})
 	auth.POST("/modifyPwd", func(ctx *gin.Context) {
+		newRes:=new(util.ResPayload) 
 		auBody := &dto.AuthDtoForModify{}
 		util.AssignBodyJson(ctx, auBody)
-		ok := aus.Modify(auBody)
-		util.Response(ctx, ok)
-	})
+		isErr,message:=aus.BeforeModify(auBody)
+		if isErr{
+			newRes.SetIsError(true).SetMessage(message).Response(ctx)
+		}else{
+			isErr,message:=aus.Modify(auBody)
+			newRes.SetMessage(message).SetIsError(isErr).Response(ctx)
+		}
+	}) 
 }
 
 

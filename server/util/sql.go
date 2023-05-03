@@ -15,6 +15,7 @@ func CrudJudgement(ctx *gorm.DB) (a bool) {
 	return
 }
 //new struct with series of methods,used to cope sql results
+//isError != errType,errType is equal to sql results condition
 type DbRes struct{
 	ctx sqlResults
 	message string
@@ -37,7 +38,18 @@ func (dr *DbRes) AssignResults(res *gorm.DB) *DbRes{
 	return dr
 }
 
-func (dr *DbRes) ReturnInfo() (bool,string){
+func (dr *DbRes) ReturnDefaultInfo(res *gorm.DB) (bool,string){
+	if(dr.errType==1){//rows.affected>0
+		dr.message="sql is okay"
+		dr.isError=false
+	}else{
+		dr.isError=true
+		dr.message=constants.SERVER_ERR
+	}
+	return dr.isError,dr.message
+}
+
+func (dr *DbRes) ReturnInfo() (isError bool,message string){
 	return dr.isError,dr.message
 }
 
@@ -59,6 +71,15 @@ func (dr *DbRes) AssignMessage(msg []string) *DbRes{
 		dr.message= msg[0]
 	}else{
 		dr.message= msg[1]
+	}
+	return dr
+}
+
+func (dr *DbRes) AssignDefaultsIsErr() *DbRes{
+	if(dr.errType==1){//rows.affected>0
+		dr.isError=false
+	}else{
+		dr.isError=true
 	}
 	return dr
 }

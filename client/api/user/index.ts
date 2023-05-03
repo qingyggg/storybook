@@ -1,22 +1,8 @@
-import {
-  LOGIN,
-  LOGIN_ERR,
-  REGISTER,
-  REGISTER_FAILED,
-  MODIFY,
-  MODIFY_ERR,
-  PROFILE,
-  PROFILE_ERR,
-  PROFILE_CREATE,
-  PROFILE_CREATE_ERR,
-  PROFILE_EDIT,
-  PROFILE_EDIT_ERR,
-} from './../../constants/messages/user';
 import { alertInfoAttach } from '../../util/alert';
 import { get, post } from '../../util/request';
 import {
   loginI,
-  modifyT,
+  modifyT, 
   registerI,
   profileI,
   userIdT,
@@ -24,45 +10,25 @@ import {
 } from './reqTypes';
 import { showProfileI } from './resTypes';
 export const loginApi = (auth: loginI) => {
-  return alertInfoAttach(() => post('/auth/login', auth), LOGIN, LOGIN_ERR);
+  return () => post('/auth/login', auth)
 };
 
 export const registerApi = (auth: registerI) => {
-  return alertInfoAttach(
-    () => post('/auth/register', auth),
-    REGISTER,
-    REGISTER_FAILED,
-  );
+  return () => post('/auth/register', auth)
 };
 
 export const modifyApi = (auth: modifyT) => {
-  return alertInfoAttach(
-    () => post('/auth/modifyPwd', auth),
-    MODIFY,
-    MODIFY_ERR,
-  );
+  return () => post('/auth/modifyPwd', auth)
 };
 
 export const showProfileApi = (id: userIdT) => {
-  return alertInfoAttach(
-    () => get<showProfileI>('/profile/show?userId=' + id),
-    PROFILE,
-    PROFILE_ERR,
-  );
+  return () => get<showProfileI>('/profile/show?userId=' + id)
 };
 //this api only been executed once for per user
 export const createProfileApi = (profile: profileI) => {
-  return alertInfoAttach(
-    () => post('/profile/create', profile),
-    PROFILE_CREATE,
-    PROFILE_CREATE_ERR,
-  );
+  return  () => post('/profile/create', profile)
 };
 
 export const editProfileApi = (profile: editProfileI) => {
-  return alertInfoAttach(
-    () => post('profile/edit', profile),
-    PROFILE_EDIT,
-    PROFILE_EDIT_ERR,
-  );
+  return () => post('profile/edit', profile)
 };
