@@ -9,6 +9,6 @@ type UserProfileDto struct {
 	Twitter     string
 }
 type UserProfileDtoForEdit struct {
-	ID uint
+	UserId uint
 	UserProfileDto
 }

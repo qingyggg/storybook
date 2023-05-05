@@ -10,7 +10,7 @@ function Login() {
   const router = useRouter();
   const [Email, setEmail] = useState('');
   const [Password, setPassword, cryptPwdByMd5] = usePassword();
-  const loginReq = useRequest(loginApi({ Email, Password })[0], () =>
+  const loginReq = useRequest(loginApi({ Email, Password }), () =>
     router.push('/'),
   );
   const login = async () => {

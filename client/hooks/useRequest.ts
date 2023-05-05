@@ -3,7 +3,7 @@ import { baseRes } from '../util/request';
 import { useRecoilState } from 'recoil';
 import { alertState } from '../store/alert';
 
-export const useRequest = async (api: apiType, s:sucCb=()=>void 0,e:errCb=()=>void 0,forbidSetAlsStateWhenSuccess:boolean=false) => {
+export const useRequest = async <T=any>(api: apiType, s:sucCb=(res:baseRes<T>)=>void 0,e:errCb=()=>void 0,forbidSetAlsStateWhenSuccess:boolean=false) => {
   const [, setAlsState] = useRecoilState(alertState);
   return async () => {
     try {

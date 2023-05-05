@@ -14,19 +14,17 @@ export type modifyT = {
 export type userIdT = number;
 
 export interface profileI {
-  Name: string;
-  Age: number;
-  Avatar: any[];
-  Description: string;
-  Github: string;
-  WeChat: string;
-  Twitter: string;
+  Name?: string; 
+  Age?: number;
+  Avatar?: any[];
+  Description?: string;
+  Github?: string;
+  WeChat?: string;
+  Twitter?: string;
 }
 
 export interface editProfileI extends profileI {
-  ID: number;
+  UserId?: number;
 }
 
-export interface deleteProfileI {
-  ID: number;
-}
+

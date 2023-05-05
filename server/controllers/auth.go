@@ -12,7 +12,8 @@ import (
 
 func AuthController() {
 	auth := router.GetAppRouter().Group("/auth")//initialize route
-	aus := services.Auth{DB: db.GetDataBase()}//initialize database
+	aus := services.Auth{DB: db.GetDataBase()}//initialize database and service
+	pus:=services.Profile{DB: db.GetDataBase()}
 	auth.POST("/login", func(ctx *gin.Context) {
 		newRes :=new(util.ResPayload) 
 		auBody := &dto.AuthDto{}//get request template
@@ -35,8 +36,14 @@ func AuthController() {
 			newRes.SetIsError(true).SetMessage(cst.ACCOUNT_EXISTS).Response(ctx)
 		}else{
 				ok := aus.Register(auBody)
-				if(ok){
-					newRes.SetIsError(false).SetMessage(cst.REGISTER).Response(ctx)
+				if ok{
+					//set Original user profile
+					ok1:=pus.Create(&dto.UserProfileDto{},auBody)
+					if ok1{
+						newRes.SetIsError(false).SetMessage(cst.REGISTER).Response(ctx)
+					}else{
+						newRes.SetIsError(true).SetMessage(cst.SERVER_ERR).Response(ctx)
+					}
 				}else{
 					newRes.SetDefaultMsg(true).Response(ctx)
 				}

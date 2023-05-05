@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"github.com/qingyggg/storybook/server/db"
 	"github.com/qingyggg/storybook/server/dto"
@@ -8,7 +10,7 @@ import (
 	"github.com/qingyggg/storybook/server/services"
 	"github.com/qingyggg/storybook/server/util"
 )
-
+ 
 func ProfileController() {
 	profile := router.GetAppRouter().Group("/profile")
 	ps:=services.Profile{DB: db.GetDataBase()}
@@ -17,15 +19,11 @@ func ProfileController() {
 		util.Response(ctx,ok,profile)
 	})
 	profile.POST("/edit", func(ctx *gin.Context) {
-		pBody := &dto.UserProfileDtoForEdit{}
+		newRes :=new(util.ResPayload) 
+		pBody := &dto.UserProfileDtoForEdit{}		
 		util.AssignBodyJson(ctx, pBody)
-		ok:=ps.Edit(pBody)//* get value, & get address,*int type
-		util.Response(ctx,ok)
+		fmt.Println(pBody)
+		ok:=ps.Edit(pBody)
+		newRes.SetDefault(!ok,nil).Response(ctx)
 	})
-	profile.POST("/create", func(ctx *gin.Context) {	
-		pBody := &dto.UserProfileDto{}
-		util.AssignBodyJson(ctx, pBody)
-		ok:=ps.Create(pBody)//* get value, & get address,*int type
-		util.Response(ctx,ok)
-	})
-}
+}  

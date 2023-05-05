@@ -10,7 +10,7 @@ export default function Register() {
   const router = useRouter();
   const [Email, setEmail] = useState('');
   const [Password, setPassword, cryptPwdByMd5] = usePassword();
-  const registerReq = useRequest(registerApi({ Email, Password })[0],()=>router.push('/'));
+  const registerReq = useRequest(registerApi({ Email, Password }),()=>router.push('/'));
   const register =async () => {
     cryptPwdByMd5(); //crypto password
     (await registerReq)()

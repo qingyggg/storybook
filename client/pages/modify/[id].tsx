@@ -1,4 +1,4 @@
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, FormControl, useFormControl } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import Auth from '../../components/Auth';
 import { useRouter } from 'next/router';
@@ -10,6 +10,7 @@ import { idTransform } from '../../util/common';
 import { alertState } from '../../store/alert';
 
 export default function Modify() {
+  const { focused } = useFormControl() || {};
   const router = useRouter();
   const { id } = router.query;
   const [, setAlsState] = useRecoilState(alertState);
@@ -18,7 +19,7 @@ export default function Modify() {
   const [Password2, setPassword2, cryptPwdByMd52] = usePassword();
   const [isInputErrStyle, setIsInputErrStyle] = useState<boolean>(false);
   const modifyReq = useRequest(
-    modifyApi({ ID: idTransform(id), OldPassword, Password: Password2 })[0],
+    modifyApi({ ID: idTransform(id), OldPassword, Password: Password2 }),
     () => router.push('/'),
     () => {
       setIsInputErrStyle(true);
@@ -42,10 +43,12 @@ export default function Modify() {
       (await modifyReq)();
     }
   };
-
+  useEffect(() => {
+    setIsInputErrStyle(false)
+  },[focused])
   return (
     <Auth>
-      <>
+      <FormControl sx={{ width: '25ch' }}>
         <h1 className='text-4xl mb-3 '>Modify</h1>
         <TextField
           error={isInputErrStyle}
@@ -81,7 +84,7 @@ export default function Modify() {
         <Button variant='outlined' onClick={modify}>
           Modify Password
         </Button>
-      </>
+      </FormControl>
     </Auth>
   );
 }
