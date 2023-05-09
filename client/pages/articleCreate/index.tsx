@@ -1,13 +1,19 @@
 import { Box, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
+import ReactMarkdown from 'react-markdown';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../store/user';
+import remarkGfm from "remark-gfm";
+import {test_markdown} from "./test";
 
 const ArticleCreate: React.FC = () => {
   const [markdown, setMarkdown] = useState<string>('');
   const [userInfo] = useRecoilState(userState);
   const { ID } = userInfo;
-  return (
+    useEffect(()=>{
+        setMarkdown(test_markdown)
+    },[])
+    return (
     <div className='flex justify-between'>
       <Box
         sx={{
@@ -16,7 +22,7 @@ const ArticleCreate: React.FC = () => {
         }}>
         <TextField
           id='filled-multiline-static'
-          label='Multiline'
+          label='write your story in markdown form'
           multiline
           rows={60}
           fullWidth
@@ -31,7 +37,9 @@ const ArticleCreate: React.FC = () => {
           width: '50%',
           maxWidth: '100%',
         }}>
-        {/* <article className='prose lg:prose-xl'>{markdown}</article> */}
+         <article className='prose lg:prose-xl'>
+             <ReactMarkdown  remarkPlugins={[remarkGfm]} >{markdown}</ReactMarkdown>
+         </article>
       </Box>
     </div>
   );

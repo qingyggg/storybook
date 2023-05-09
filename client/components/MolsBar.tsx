@@ -8,8 +8,8 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import Avatar from '@mui/material/Avatar/Avatar';
-import deepPurple from '@mui/material/colors/deepPurple';
+import Avatar from '@mui/material/Avatar';
+import {deepPurple} from "@mui/material/colors";
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
