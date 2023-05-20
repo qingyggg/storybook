@@ -5,17 +5,29 @@ import { useRouter } from 'next/router';
 import { loginApi } from '../../api/user';
 import { usePassword } from '../../hooks/usePassword';
 import { useRequest } from '../../hooks/useRequest';
+import useLocalStorage from '../../hooks/useLocalStorage';
+import useToken from '../../hooks/useToken';
 
 function Login() {
   const router = useRouter();
   const [Email, setEmail] = useState('');
-  const [Password, setPassword, cryptPwdByMd5] = usePassword();
-  const loginReq = useRequest(loginApi({ Email, Password }), () =>
-    router.push('/'),
+  const [Password, setPassword, cryptedPwdByMd5] = usePassword();
+  const [, setUserId] = useLocalStorage('userId');
+  const { generateToken } = useToken();
+  const loginReq = useRequest(
+    loginApi({ Email, Password: cryptedPwdByMd5 }),
+    async (ud: string) => {
+      setUserId(ud);
+      await (
+        await generateToken
+      )();
+      router.push('/');
+    },
   );
   const login = async () => {
-    cryptPwdByMd5(); //crypto password
-    (await loginReq)();
+    await (
+      await loginReq
+    )();
   };
   return (
     <Auth>
@@ -40,9 +52,15 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className='my-1'></div>
-        <Button variant='outlined' onClick={login}>
-          login
-        </Button>
+        <div className='flex flex-row'>
+          <Button variant='outlined' onClick={login}>
+            login
+          </Button>
+          <div className='mr-10'></div>
+          <Button variant='outlined' onClick={() => router.push('/register')}>
+            register
+          </Button>
+        </div>
       </>
     </Auth>
   );

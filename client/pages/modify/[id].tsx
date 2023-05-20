@@ -19,7 +19,11 @@ export default function Modify() {
   const [Password2, setPassword2, cryptPwdByMd52] = usePassword();
   const [isInputErrStyle, setIsInputErrStyle] = useState<boolean>(false);
   const modifyReq = useRequest(
-    modifyApi({ ID: idTransform(id), OldPassword, Password: Password2 }),
+    modifyApi({
+      ID: idTransform(id),
+      OldPassword: cryptOldPwdByMd5,
+      Password: cryptPwdByMd52,
+    }),
     () => router.push('/'),
     () => {
       setIsInputErrStyle(true);
@@ -37,15 +41,12 @@ export default function Modify() {
       });
       setIsInputErrStyle(true);
     } else {
-      cryptOldPwdByMd5();
-      cryptPwdByMd51();
-      cryptPwdByMd52();
       (await modifyReq)();
     }
   };
   useEffect(() => {
-    setIsInputErrStyle(false)
-  },[focused])
+    setIsInputErrStyle(false);
+  }, [focused]);
   return (
     <Auth>
       <FormControl sx={{ width: '25ch' }}>

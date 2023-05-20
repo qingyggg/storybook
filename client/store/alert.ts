@@ -1,4 +1,4 @@
-import { atom,selector } from 'recoil';
+import { atom, selector } from 'recoil';
 
 export const alertState = atom<stateI>({
   key: 'alertState',
@@ -7,11 +7,11 @@ export const alertState = atom<stateI>({
 
 export const alertOpenState = selector({
   key: 'charCountState', // unique ID (with respect to other atoms/selectors)
-  get: ({get}) => {
+  get: ({ get }) => {
     const state = get(alertState);
     return state.open;
   },
-}); 
+});
 
 interface stateI {
   info: 'error' | 'warning' | 'info' | 'success';

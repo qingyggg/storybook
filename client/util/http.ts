@@ -8,12 +8,15 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   function (config) {
+    let token = localStorage.getItem('token');
+    if (token) {
+      //''===false
+      // @ts-ignore
+      config.headers.common['token'] = token;
+    }
     return config;
   },
   function (error) {
-    //TODO:
-    //error.request 404 error
-    console.log(222, error);
     return Promise.reject(error);
   },
 );

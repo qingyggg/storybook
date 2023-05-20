@@ -5,15 +5,28 @@ import { registerApi } from '../../api/user';
 import { useRequest } from '../../hooks/useRequest';
 import { usePassword } from '../../hooks/usePassword';
 import { useRouter } from 'next/router';
+import useToken from '../../hooks/useToken';
+import useLocalStorage from '../../hooks/useLocalStorage';
+import useStatelessStorage from '../../hooks/useStatelessStorage';
 
 export default function Register() {
   const router = useRouter();
   const [Email, setEmail] = useState('');
-  const [Password, setPassword, cryptPwdByMd5] = usePassword();
-  const registerReq = useRequest(registerApi({ Email, Password }),()=>router.push('/'));
-  const register =async () => {
-    cryptPwdByMd5(); //crypto password
-    (await registerReq)()
+  const [Password, setPassword, cryptedPwdByMd5] = usePassword();
+  const [, setUserId] = useStatelessStorage('userId');
+  const { generateToken } = useToken();
+  const registerReq = useRequest(
+    registerApi({ Email, Password: cryptedPwdByMd5 }),
+    async (ud: string) => {
+      setUserId(ud);
+      await (
+        await generateToken
+      )();
+      router.push('/');
+    },
+  );
+  const register = async () => {
+    (await registerReq)();
   };
   return (
     <Auth>
@@ -38,9 +51,15 @@ export default function Register() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className='my-1'></div>
-        <Button variant='outlined' onClick={register}>
-          register
-        </Button>
+        <div className='flex flex-row'>
+          <Button variant='outlined' onClick={register}>
+            register
+          </Button>
+          <div className='mr-10'></div>
+          <Button variant='outlined' onClick={() => router.push('/login')}>
+            login
+          </Button>
+        </div>
       </>
     </Auth>
   );

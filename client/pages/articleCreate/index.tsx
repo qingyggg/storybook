@@ -1,25 +1,25 @@
 import { Box, TextField } from '@mui/material';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useRecoilState } from 'recoil';
-import { userState } from '../../store/user';
-import remarkGfm from "remark-gfm";
-import {test_markdown} from "./test";
+import remarkGfm from 'remark-gfm';
+import { test_markdown } from './test';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const ArticleCreate: React.FC = () => {
   const [markdown, setMarkdown] = useState<string>('');
-  const [userInfo] = useRecoilState(userState);
-  const { ID } = userInfo;
-    useEffect(()=>{
-        setMarkdown(test_markdown)
-    },[])
-    return (
+  const [ud] = useLocalStorage('userId');
+  useEffect(() => {
+    setMarkdown(test_markdown);
+  }, []);
+  return (
     <div className='flex justify-between'>
       <Box
         sx={{
           width: '50%',
           maxWidth: '50%',
-        }}>
+        }}
+      >
         <TextField
           id='filled-multiline-static'
           label='write your story in markdown form'
@@ -36,10 +36,11 @@ const ArticleCreate: React.FC = () => {
         sx={{
           width: '50%',
           maxWidth: '100%',
-        }}>
-         <article className='prose lg:prose-xl'>
-             <ReactMarkdown  remarkPlugins={[remarkGfm]} >{markdown}</ReactMarkdown>
-         </article>
+        }}
+      >
+        <article className='prose lg:prose-xl'>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
+        </article>
       </Box>
     </div>
   );

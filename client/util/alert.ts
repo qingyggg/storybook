@@ -4,7 +4,7 @@ export const alertInfoAttach = <T>(
   sucInfo: string,
   errInfo: string,
 ): apiType<T> => {
-  return [api, sucInfo, errInfo]  
+  return [api, sucInfo, errInfo];
 };
 
-export type apiType<T>= [T,string,string]
+export type apiType<T> = [T, string, string];

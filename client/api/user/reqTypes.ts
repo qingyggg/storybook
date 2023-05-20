@@ -3,18 +3,18 @@ export interface loginI {
   Password: string;
 }
 
-export interface registerI extends loginI{}
+export interface registerI extends loginI {}
 
 export type modifyT = {
-  ID: number
-  OldPassword:string
-  Password:string
+  ID: number;
+  OldPassword: string;
+  Password: string;
 };
 //for showProfile() api
 export type userIdT = number;
 
 export interface profileI {
-  Name?: string; 
+  Name?: string;
   Age?: number;
   Avatar?: any[];
   Description?: string;
@@ -26,5 +26,3 @@ export interface profileI {
 export interface editProfileI extends profileI {
   UserId?: number;
 }
-
-

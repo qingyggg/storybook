@@ -16,16 +16,16 @@ func AuthController() {
 	pus := services.Profile{DB: db.GetDataBase()}
 	auth.POST("/login", func(ctx *gin.Context) {
 		newRes := new(util.ResPayload)
-		auBody := &dto.AuthDto{}                               //get request template
-		util.AssignBodyJson(ctx, auBody)                       //get request body
-		isErr, msg := aus.Login(auBody, false)                 //invoke  service fuc
-		newRes.SetIsError(isErr).SetMessage(msg).Response(ctx) //set response body and response to client
+		auBody := &dto.AuthDto{}                                               //get request template
+		util.AssignBodyJson(ctx, auBody)                                       //get request body
+		isErr, msg, userId := aus.Login(auBody, false)                         //invoke  service fuc
+		newRes.SetIsError(isErr).SetMessage(msg).SetData(userId).Response(ctx) //set response body and response to client
 	})
 	auth.POST("/register", func(ctx *gin.Context) {
 		newRes := new(util.ResPayload)
 		auBody := &dto.AuthDto{}
 		util.AssignBodyJson(ctx, auBody)
-		isErr, msg := aus.Login(auBody, true)
+		isErr, msg, userId := aus.Login(auBody, true)
 		//sql error
 		if msg == cst.SERVER_ERR {
 			newRes.SetDefaultMsg(true).Response(ctx)
@@ -40,7 +40,7 @@ func AuthController() {
 				//set Original user profile
 				ok1 := pus.Create(&dto.UserProfileDto{}, auBody)
 				if ok1 {
-					newRes.SetIsError(false).SetMessage(cst.REGISTER).Response(ctx)
+					newRes.SetIsError(false).SetMessage(cst.REGISTER).SetData(userId).Response(ctx)
 				} else {
 					newRes.SetIsError(true).SetMessage(cst.SERVER_ERR).Response(ctx)
 				}
@@ -83,7 +83,6 @@ func resToken(ctx *gin.Context, userId string, newRes *util.ResPayload) {
 	if err != nil {
 		newRes.SetDefault(true, nil).Response(ctx)
 	} else {
-		ctx.Header("Token", token)
-		newRes.SetDefault(false, nil).Response(ctx)
+		newRes.SetDefault(false, token).Response(ctx)
 	}
 }

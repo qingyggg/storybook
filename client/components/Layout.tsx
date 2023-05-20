@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: ReactElement }) {
         handleClickClose={() => void 0}
         handleClickOpen={() => void 0}
       />
-      <MolsAlert/>
+      <MolsAlert />
       {/* <Footer/> */}
     </>
   );

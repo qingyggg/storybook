@@ -12,13 +12,13 @@ var r *gin.Engine
 func Bootstrap(routes ...func()) {
 	r = gin.Default() //initialize gin
 	r.Use(Cors())
-
-	r.GET("/", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusAccepted, "welcome visited storybook server!")
-	})
+	r.Use(JwtAuth())
 	//register controller
 	RegRoutes(routes)
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	err := r.Run()
+	if err != nil {
+		return
+	} // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 
 func GetAppRouter() *gin.Engine {

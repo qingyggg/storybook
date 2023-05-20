@@ -6,6 +6,7 @@ import (
 	"github.com/qingyggg/storybook/server/dto"
 	"github.com/qingyggg/storybook/server/util"
 	"gorm.io/gorm"
+	"strconv"
 )
 
 type Auth struct {
@@ -36,9 +37,10 @@ func (a *Auth) Modify(authDto *dto.AuthDtoForModify) (bool, string) {
 	return ds.AssignResults(result).DistinguishSqlErrType().AssignMessage([]string{cst.MODIFY, cst.SERVER_ERR}).AssignDefaultsIsErr().ReturnInfo()
 }
 
-// forRegisterAuth:whether used for register auth or only used for login
-func (a *Auth) Login(authDto *dto.AuthDto, forRegisterAuth bool) (bool, string) {
+// Login forRegisterAuth:whether used for register auth or only used for login
+func (a *Auth) Login(authDto *dto.AuthDto, forRegisterAuth bool) (bool, string, string) {
 	var auth *models.User
+	var auth2 = new(models.User)
 	ds := new(util.DbRes)
 	if forRegisterAuth {
 		auth = &models.User{
@@ -51,15 +53,15 @@ func (a *Auth) Login(authDto *dto.AuthDto, forRegisterAuth bool) (bool, string) 
 			Password: authDto.Password,
 		}
 	}
-	results := a.DB.Find(&models.User{}, auth) //excute sql
+	results := a.DB.Where(auth).Find(auth2) //excute sql
 
 	//tackle sql results for response body
 	ds.AssignResults(results).DistinguishSqlErrType().AssignMessage([]string{cst.LOGIN, cst.ACCOUNT_REPEAT_OR_ERROR_PASSWORD}).AssignIsErr([]uint{1, 0})
 	c, b := ds.ReturnInfo()
-	return c, b
+	return c, b, strconv.Itoa(int(auth2.ID))
 }
 
-// before call Register,controller should call login,
+// Register before call Register,controller should call login,
 // to ensure this user was not exists
 func (a *Auth) Register(authDto *dto.AuthDto) bool {
 

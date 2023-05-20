@@ -1,7 +1,7 @@
-export const idTransform = (id:string | string[] | undefined) => {
+export const idTransform = (id: string | string[] | undefined) => {
   if (typeof id === 'string') {
-    return parseInt(id)
+    return parseInt(id);
   } else {
-    return 0
+    return 0;
   }
-}
+};
