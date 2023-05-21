@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Auth from '../../components/Auth';
 import { Button, TextField } from '@mui/material';
 import { useRouter } from 'next/router';
@@ -7,13 +7,21 @@ import { usePassword } from '../../hooks/usePassword';
 import { useRequest } from '../../hooks/useRequest';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import useToken from '../../hooks/useToken';
+import { useRecoilState } from 'recoil';
+import { authState } from '../../store/auth';
 
 function Login() {
   const router = useRouter();
   const [Email, setEmail] = useState('');
   const [Password, setPassword, cryptedPwdByMd5] = usePassword();
   const [, setUserId] = useLocalStorage('userId');
+  const [auth, setAuth] = useRecoilState(authState);
   const { generateToken } = useToken();
+  //synchronize atom state to this component state
+  useEffect(() => {
+    setEmail(auth.Email);
+    setPassword(auth.Password);
+  }, []);
   const loginReq = useRequest(
     loginApi({ Email, Password: cryptedPwdByMd5 }),
     async (ud: string) => {
@@ -57,7 +65,13 @@ function Login() {
             login
           </Button>
           <div className='mr-10'></div>
-          <Button variant='outlined' onClick={() => router.push('/register')}>
+          <Button
+            variant='outlined'
+            onClick={() => {
+              setAuth({ Email, Password });
+              router.push('/register');
+            }}
+          >
             register
           </Button>
         </div>

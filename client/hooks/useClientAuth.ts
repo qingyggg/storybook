@@ -3,9 +3,10 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { alertState } from '../store/alert';
+import useStatelessStorage from './useStatelessStorage';
 
 const useClientAuth = () => {
-  const [userId] = useLocalStorage('userId');
+  const [userId] = useStatelessStorage('userId');
   const router = useRouter();
   const [, setAlsState] = useRecoilState(alertState);
   let blackList: string[] = [];
@@ -13,13 +14,14 @@ const useClientAuth = () => {
     blackList.forEach((e) => {
       const regex = new RegExp(e);
       regex.test(router.pathname);
+      //TODO: accomplishing this
     });
-  }, [router]);
+  }, [router.pathname]);
   const routerAttach = (rs: string[]) => {
     blackList = rs;
   };
   const onClientAuth = (sucCb: () => any) => {
-    if (!userId) {
+    if (!userId()) {
       setAlsState({
         info: 'warning',
         message: 'please login or register at first',

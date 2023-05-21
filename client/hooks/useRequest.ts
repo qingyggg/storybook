@@ -12,6 +12,13 @@ export const useRequest = <T = any>(
 ) => {
   const [, setAlsState] = useRecoilState(alertState);
   const router = useRouter();
+  const alertSet = (err: any) => {
+    setAlsState({
+      info: 'error',
+      message: err.response.data.message,
+      open: true,
+    });
+  };
   return async () => {
     try {
       let { data } = await api();
@@ -20,24 +27,16 @@ export const useRequest = <T = any>(
         setAlsState({ info: 'success', message: data.message, open: true });
       }
     } catch (err: any) {
-      e(err);
-      if (err.code === 'ERR_BAD_REQUEST') {
-        setAlsState({
-          info: 'error',
-          message: err.response.data.message,
-          open: true,
-        });
-        //unauthorized case
-      } else if (err.response.status === 401) {
-        setAlsState({
-          info: 'error',
-          message: err.response.data.message,
-          open: true,
-        });
-        router.push('/login');
-      } else {
-        //404,internal server error....
+      e(err); //exe error callback
+      console.log(err);
+      if (err.response.status === 404) {
+        //404
         setAlsState({ info: 'error', message: 'network 404', open: true });
+      } else {
+        alertSet(err);
+        if (err.response.status === 401) {
+          router.push('/login');
+        }
       }
     }
   };

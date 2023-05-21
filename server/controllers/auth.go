@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	cst "github.com/qingyggg/storybook/server/constants"
 	"github.com/qingyggg/storybook/server/db"
@@ -74,6 +75,7 @@ func AuthController() {
 		newRes := new(util.ResPayload)
 		auBody := &dto.AuthDtoJWT{}
 		util.AssignBodyJson(ctx, auBody)
+		fmt.Println("generate token," + auBody.UserId)
 		resToken(ctx, auBody.UserId, newRes)
 	})
 }

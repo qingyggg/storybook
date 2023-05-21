@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Auth from '../../components/Auth';
 import { Button, TextField } from '@mui/material';
 import { registerApi } from '../../api/user';
@@ -8,6 +8,8 @@ import { useRouter } from 'next/router';
 import useToken from '../../hooks/useToken';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import useStatelessStorage from '../../hooks/useStatelessStorage';
+import { useRecoilState } from 'recoil';
+import { authState } from '../../store/auth';
 
 export default function Register() {
   const router = useRouter();
@@ -15,6 +17,11 @@ export default function Register() {
   const [Password, setPassword, cryptedPwdByMd5] = usePassword();
   const [, setUserId] = useStatelessStorage('userId');
   const { generateToken } = useToken();
+  const [auth, setAuth] = useRecoilState(authState);
+  useEffect(() => {
+    setEmail(auth.Email);
+    setPassword(auth.Password);
+  }, []);
   const registerReq = useRequest(
     registerApi({ Email, Password: cryptedPwdByMd5 }),
     async (ud: string) => {
@@ -56,7 +63,13 @@ export default function Register() {
             register
           </Button>
           <div className='mr-10'></div>
-          <Button variant='outlined' onClick={() => router.push('/login')}>
+          <Button
+            variant='outlined'
+            onClick={() => {
+              setAuth({ Email, Password });
+              router.push('/login');
+            }}
+          >
             login
           </Button>
         </div>

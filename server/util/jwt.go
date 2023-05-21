@@ -10,11 +10,11 @@ import (
 	"time"
 )
 
-var secretKey = "Alice-like-Marisa-so-much!!!"
+var secretKey = []byte("AliceMarisaCouplesWen")
 var BlackList = []string{"/article/create", "/article/edit", "/article/delete", "/auth/modifyPwd", "/comment/create", "/comment/delete", "/comment/like", "/profile/show", "/profile/edit"}
 
 func GenerateJWT(userId string) (string, error) {
-	token := jwt.New(jwt.SigningMethodEdDSA)
+	token := jwt.New(jwt.SigningMethodHS256)
 	claims := token.Claims.(jwt.MapClaims)
 	claims["exp"] = time.Now().Add(12 * 8 * time.Hour)
 	claims["authorized"] = true
@@ -29,9 +29,9 @@ func GenerateJWT(userId string) (string, error) {
 }
 
 func VerifyJwt(ctx *gin.Context) {
-	if ctx.GetHeader("Token") != "" {
-		jwt.Parse(ctx.GetHeader("Token"), func(token *jwt.Token) (interface{}, error) {
-			_, ok := token.Method.(*jwt.SigningMethodECDSA)
+	if ctx.GetHeader("Authorization") != "" {
+		jwt.Parse(ctx.GetHeader("Authorization"), func(token *jwt.Token) (interface{}, error) {
+			_, ok := token.Method.(*jwt.SigningMethodHMAC)
 			if !ok {
 				errResponseByAuthorization(ctx)
 			} else {
@@ -47,8 +47,8 @@ func VerifyJwt(ctx *gin.Context) {
 }
 
 func ExtractClaims(ctx *gin.Context) (string, error) {
-	if ctx.GetHeader("Token") != "" {
-		tokenString := ctx.GetHeader("Token")
+	if ctx.GetHeader("Authorization") != "" {
+		tokenString := ctx.GetHeader("Authorization")
 		token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 			if _, ok := token.Method.(*jwt.SigningMethodECDSA); !ok {
 				return nil, fmt.Errorf("there's an error with the signing method")

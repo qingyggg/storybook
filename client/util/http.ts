@@ -12,7 +12,7 @@ instance.interceptors.request.use(
     if (token) {
       //''===false
       // @ts-ignore
-      config.headers.common['token'] = token;
+      config.headers['Authorization'] = 'Bearer' + ' ' + token;
     }
     return config;
   },
