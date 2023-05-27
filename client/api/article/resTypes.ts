@@ -1,4 +1,4 @@
-interface articleItemForListI {
+export interface articleItemForListI {
   ID: string;
   Title: string;
   Description: string;

@@ -1,4 +1,3 @@
-import useLocalStorage from './useLocalStorage';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
@@ -10,11 +9,19 @@ const useClientAuth = () => {
   const router = useRouter();
   const [, setAlsState] = useRecoilState(alertState);
   let blackList: string[] = [];
+  //when token expired
+  //profile->routerAttach success->request->authentication failed->login->profile->routerAttach failed->login
+  //TODO:test this
   useEffect(() => {
     blackList.forEach((e) => {
       const regex = new RegExp(e);
-      regex.test(router.pathname);
-      //TODO: accomplishing this
+      const b = regex.test(router.pathname);
+      if (b) {
+        //authentication according userId.whether userId===''
+        if (userId() === '') {
+          router.push('/login');
+        }
+      }
     });
   }, [router.pathname]);
   const routerAttach = (rs: string[]) => {

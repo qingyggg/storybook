@@ -1,29 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CommentCard from '../../components/CommentCard';
 import AuthorForArticleDetail from '../../components/AuthorForArticleDetail';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { idTransform } from '../../util/common';
+import { useRouter } from 'next/router';
+import useStatelessStorage from '../../hooks/useStatelessStorage';
+import { useRequest } from '../../hooks/useRequest';
+import { articleDetailI } from '../../api/article/resTypes';
+import { getArticleDetailApi } from '../../api/article';
 
-const markdown = `
-A paragraph with *emphasis* and **strong importance**.
-
-> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
-
-* Lists
-* [ ] todo
-* [x] done
-
-A table:
-
-| a | b |
-| - | - |
-`;
-
-//login,register,modify
-//comment dialog,user profile
-//about
-//optimize code
-export default function index() {
+export default function Detail() {
+  const [markdown, setMarkdown] = useState<string>('');
+  const router = useRouter();
+  const { ad } = router.query;
+  const getArticleDetail = useRequest(
+    getArticleDetailApi(idTransform(ad)),
+    (res) => {
+      setMarkdown(res.Content);
+    },
+  );
+  useEffect(() => {
+    if (idTransform(ad) === 0) {
+      return;
+    }
+    getArticleDetail();
+  }, [ad]);
   return (
     <div className='w-full flex-row flex'>
       <div className='w-4/5 flex-col flex items-center bg-cyan-200'>

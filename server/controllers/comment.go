@@ -16,10 +16,10 @@ func CommentController() {
 		var ok bool
 		cBody := &dto.CommentDtoForCreate{}
 		util.AssignBodyJson(ctx, cBody)
-		if cs.Create(cBody)&&cs.CommentNumberModify(cBody.ArticleID,true){
-			ok=true
-		}else{
-			ok=false
+		if cs.Create(cBody) && cs.CommentNumberModify(cBody.ArticleID, true) {
+			ok = true
+		} else {
+			ok = false
 		}
 		util.Response(ctx, ok)
 	})
@@ -27,11 +27,11 @@ func CommentController() {
 		var ok *bool
 		cBody := &dto.CommentDtoForDelete{}
 		util.AssignBodyJson(ctx, cBody)
-		if cs.Delete(cBody)&&cs.CommentNumberModify(cBody.ArticleID,true){
+		if cs.Delete(cBody) && cs.CommentNumberModify(cBody.ArticleID, true) {
 			//*type *get value  &get address
-			*ok=true
-		}else{
-			*ok=false
+			*ok = true
+		} else {
+			*ok = false
 		}
 		util.Response(ctx, *ok)
 	})
@@ -43,32 +43,32 @@ func CommentController() {
 	})
 	comment.POST("/like", func(ctx *gin.Context) {
 		lBody := &dto.LikeDto{}
-		dlBody:=&dto.DisLikeDto{}
+		dlBody := &dto.DisLikeDto{}
 		var ok bool
 		util.AssignBodyJson(ctx, lBody)
 		if has, recordID := cs.LikeJudgement(lBody); has == 0 {
-			if cs.Like(lBody) && cs.LikeNumberModify(lBody.ArticleID,true){
+			if cs.Like(lBody) && cs.LikeNumberModify(lBody.ArticleID, true) {
 				//*type *get value  &get address
-				ok=true
-			}else{
-				ok=false
+				ok = true
+			} else {
+				ok = false
 			}
 		} else if has == 1 {
-			dlBody.ID=recordID
-			if cs.DisLike(dlBody) && cs.LikeNumberModify(lBody.ArticleID,false){
-				ok=true
-			}else{
-				ok=false
+			dlBody.ID = recordID
+			if cs.DisLike(dlBody) && cs.LikeNumberModify(lBody.ArticleID, false) {
+				ok = true
+			} else {
+				ok = false
 			}
 		} else { //record==-a,this means sql has happened some errors except no records
 			ok = false
 		}
-		if(ok){
+		if ok {
 			//NOTE:ok2 variable is different from ok
-			ok2,isLike:=cs.LikeStatusShow(lBody)
-			util.Response(ctx,ok2,isLike)
-		}else{
-			util.Response(ctx,ok)
+			ok2, isLike := cs.LikeStatusShow(lBody)
+			util.Response(ctx, ok2, isLike)
+		} else {
+			util.Response(ctx, ok)
 		}
 	})
 }

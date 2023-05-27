@@ -18,6 +18,7 @@ export default function Modify() {
   const [Password1, setPassword1, cryptPwdByMd51] = usePassword();
   const [Password2, setPassword2, cryptPwdByMd52] = usePassword();
   const [isInputErrStyle, setIsInputErrStyle] = useState<boolean>(false);
+
   const modifyReq = useRequest(
     modifyApi({
       ID: idTransform(id),

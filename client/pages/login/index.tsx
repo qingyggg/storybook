@@ -9,12 +9,13 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 import useToken from '../../hooks/useToken';
 import { useRecoilState } from 'recoil';
 import { authState } from '../../store/auth';
+import useStatelessStorage from '../../hooks/useStatelessStorage';
 
 function Login() {
   const router = useRouter();
   const [Email, setEmail] = useState('');
   const [Password, setPassword, cryptedPwdByMd5] = usePassword();
-  const [, setUserId] = useLocalStorage('userId');
+  const [, setUserId] = useStatelessStorage('userId');
   const [auth, setAuth] = useRecoilState(authState);
   const { generateToken } = useToken();
   //synchronize atom state to this component state

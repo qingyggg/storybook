@@ -7,7 +7,7 @@ export const getArticleListApi = (offset: number) => {
 };
 
 export const getArticleDetailApi = (articleID: number) => {
-  return () => get<articleDetailI>('/article/detail?/articleID' + articleID);
+  return () => get<articleDetailI>('/article/detail?articleID=' + articleID);
 };
 
 export const postArticleCreateApi = (article: articleI) => {

@@ -75,7 +75,7 @@ export default function MenuAppBar() {
               <MenuItem
                 onClick={() => {
                   handleClose();
-                  router.push('/profile');
+                  router.push('/profile/' + ud());
                 }}
               >
                 Profile
@@ -83,7 +83,7 @@ export default function MenuAppBar() {
               <MenuItem
                 onClick={() => {
                   handleClose();
-                  router.push('/modify' + ud);
+                  router.push('/modify/' + ud());
                 }}
               >
                 modify password

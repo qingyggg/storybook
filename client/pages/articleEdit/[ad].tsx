@@ -2,31 +2,51 @@ import { Box, Button, TextField } from '@mui/material';
 import React, {useEffect, useMemo, useState} from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { test_markdown } from './test';
 import { useRequest } from '../../hooks/useRequest';
-import { postArticleCreateApi } from '../../api/article';
+import {
+  getArticleDetailApi,
+  postArticleCreateApi,
+  postArticleEditApi,
+} from '../../api/article';
 import { useRouter } from 'next/router';
+import useStatelessStorage from '../../hooks/useStatelessStorage';
 import ArticleDialog from '../../components/articleDialog';
-import useLocalStorage from '../../hooks/useLocalStorage';
+import { idTransform } from '../../util/common';
+import { articleDetailI } from '../../api/article/resTypes';
+import useLocalStorage from "../../hooks/useLocalStorage";
 
-const ArticleCreate: React.FC = () => {
+const ArticleEdit: React.FC = () => {
   const [markdown, setMarkdown] = useState<string>('');
   const [ud] = useLocalStorage('userId');
-  const [numUd,setNumUd]=useState<number>(0)
   const router = useRouter();
   const [Title, setTitle] = useState('');
   const [Description, setDescription] = useState('');
-  useEffect(() => {
-    setMarkdown(test_markdown);
-  }, []);
+  const [numUd,setNumUd]=useState<number>(0)
+  const { ad } = router.query;
+  const getArticleDetail = useRequest(
+    getArticleDetailApi(idTransform(ad)),
+    (res) => {
+      const data=res
+      setTitle(data.Title);
+      setDescription(data.Description);
+      setMarkdown(data.Content);
+    },
+  );
   useMemo(()=>{
-    setNumUd(parseInt(ud))
+    setNumUd(numUd)
   },[ud])
-  const createReq = useRequest(
-    postArticleCreateApi({
-      UserID: numUd,
+  useEffect(() => {
+    if (idTransform(ad) === 0) {
+      return;
+    }
+    getArticleDetail();
+  }, [ad]);
+  const editReq = useRequest(
+    postArticleEditApi({
+      UserID: parseInt(ud),
       Title,
       Description,
+      ArticleID: idTransform(ad),
       Content: markdown,
     }),
     () => {
@@ -35,7 +55,7 @@ const ArticleCreate: React.FC = () => {
   );
   const create = async () => {
     await (
-      await createReq
+      await editReq
     )();
   };
   return (
@@ -83,4 +103,4 @@ const ArticleCreate: React.FC = () => {
     </div>
   );
 };
-export default ArticleCreate;
+export default ArticleEdit;
