@@ -1,0 +1,72 @@
+Index: client/components/CommentDialog.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/components/CommentDialog.tsx b/client/components/CommentDialog.tsx
+new file mode 100644
+--- /dev/null	(date 1685439591982)
++++ b/client/components/CommentDialog.tsx	(date 1685439591982)
+@@ -0,0 +1,61 @@
++import React, {ChangeEvent, useState} from "react";
++import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField} from "@mui/material";
++
++
++function CommentDialog(props:propsI){
++    const [open, setOpen] = useState(false);
++
++    const handleClickOpen = () => {
++        setOpen(true);
++    };
++
++    const handleClose = (isCancel: boolean) => {
++        setOpen(false);
++        if (!isCancel) {
++            props.callback();
++        }
++    };
++
++    return (
++        <div>
++            <Button variant='outlined' onClick={handleClickOpen} endIcon={props.ButtonIcon}>
++                {props.dialogButton}
++            </Button>
++            <Dialog open={open} onClose={handleClose}>
++                <DialogTitle>{props.dialogTitle}</DialogTitle>
++                <DialogContent>
++                    <DialogContentText>{props.dialogContent}</DialogContentText>
++                    <TextField
++                        autoFocus
++                        margin='dense'
++                        id='content'
++                        label='content'
++                        type='text'
++                        fullWidth
++                        variant='standard'
++                        value={props.Content}
++                        onChange={props.onContentChange}
++                    />
++                </DialogContent>
++                <DialogActions>
++                    <Button onClick={() => handleClose(true)}>Cancel</Button>
++                    <Button onClick={() => handleClose(false)}>submit</Button>
++                </DialogActions>
++            </Dialog>
++        </div>
++    );
++}
++
++interface propsI {
++    callback: () => any;
++    dialogTitle: string;
++    dialogContent: string;
++    dialogButton: string;
++    Content: string;
++    onContentChange: (
++        e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
++    ) => any;
++    ButtonIcon: React.ReactNode;
++}
++
++export default CommentDialog
+\ No newline at end of file
