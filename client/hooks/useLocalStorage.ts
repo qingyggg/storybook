@@ -4,25 +4,28 @@ export default function useLocalStorage(
   storageKey: string,
   callback?: () => any,
 ): [string, (v: string) => void] {
-  const [value, setValue] = useState<string>('11');
-  const [isFirst,setIsFirst]=useState<boolean>(true)
+  const [value, setValue] = useState<string>('empty value');
+  const [isFirst, setIsFirst] = useState<boolean>(true);
   //useEffect in one hook can be combined when executing
   useEffect(() => {
     const stoV = localStorage.getItem(storageKey);
-    if(!stoV){
-      return
+    if (!stoV) {
+      return;
     }
     setValue(stoV);
-    setIsFirst(false)
+    setIsFirst(false);
   }, []);
   useEffect(() => {
     return () => {
-      if(!isFirst){
+      if (!isFirst) {
         localStorage.setItem(storageKey, value);
         callback && callback();
       }
     };
-  }, [value,isFirst]);
-
-  return [value, setValue];
+  }, [value, isFirst]);
+  const setPlusValue = (v: string) => {
+    isFirst && setIsFirst(false);
+    return setValue(v);
+  };
+  return [value, setPlusValue];
 }

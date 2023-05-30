@@ -67,10 +67,13 @@ func (dr *DbRes) DistinguishSqlErrType() *DbRes {
 
 func (dr *DbRes) AssignMessage(msg []string) *DbRes {
 	if dr.errType == 0 {
+		//sql err
 		dr.message = constants.SERVER_ERR
 	} else if dr.errType == 1 {
+		//has record
 		dr.message = msg[0]
 	} else {
+		//no record
 		dr.message = msg[1]
 	}
 	return dr
@@ -113,4 +116,12 @@ func (dr *DbRes) AssignIsErr(arr []uint) *DbRes {
 		}
 	}
 	return dr
+}
+func (dr *DbRes) GetErrType() uint {
+	return dr.errType
+}
+
+func (dr *DbRes) GetIsErr() (isError bool) {
+	isError = dr.isError
+	return
 }

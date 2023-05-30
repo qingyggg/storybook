@@ -1,5 +1,5 @@
 import { Box, Button, TextField } from '@mui/material';
-import React, {useEffect, useMemo, useState} from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useRequest } from '../../hooks/useRequest';
@@ -13,7 +13,7 @@ import useStatelessStorage from '../../hooks/useStatelessStorage';
 import ArticleDialog from '../../components/articleDialog';
 import { idTransform } from '../../util/common';
 import { articleDetailI } from '../../api/article/resTypes';
-import useLocalStorage from "../../hooks/useLocalStorage";
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const ArticleEdit: React.FC = () => {
   const [markdown, setMarkdown] = useState<string>('');
@@ -21,20 +21,20 @@ const ArticleEdit: React.FC = () => {
   const router = useRouter();
   const [Title, setTitle] = useState('');
   const [Description, setDescription] = useState('');
-  const [numUd,setNumUd]=useState<number>(0)
+  const [numUd, setNumUd] = useState<number>(0);
   const { ad } = router.query;
   const getArticleDetail = useRequest(
     getArticleDetailApi(idTransform(ad)),
     (res) => {
-      const data=res
-      setTitle(data.Title);
-      setDescription(data.Description);
-      setMarkdown(data.Content);
+      const data = res;
+      setTitle(data!.Title);
+      setDescription(data!.Description);
+      setMarkdown(data!.Content);
     },
   );
-  useMemo(()=>{
-    setNumUd(numUd)
-  },[ud])
+  useMemo(() => {
+    setNumUd(numUd);
+  }, [ud]);
   useEffect(() => {
     if (idTransform(ad) === 0) {
       return;

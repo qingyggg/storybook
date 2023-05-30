@@ -3,11 +3,17 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
 import StarRateIcon from '@mui/icons-material/StarRate';
 import { articleItemForListI, articleListType } from '../api/article/resTypes';
+import Link from 'next/link';
 export default function ArticleCard(props: propI) {
   return (
-    <div className='h-48 w-full bg-gray-200 p-4 flex justify-between'>
+    <div className='h-48 w-full bg-gray-200 p-4 flex justify-between  hover:shadow-xl'>
       <div className='flex flex-col'>
-        <h1 className='text-2xl'>{props.Title}</h1>
+        <Link
+          href={'/detail/' + props.ID}
+          className='hover:italic hover:text-violet-600'
+        >
+          <h1 className='text-2xl'>{props.Title}</h1>
+        </Link>
         <span className='text-ellipsis overflow-hidden'>
           {props.Description}
         </span>
@@ -19,7 +25,7 @@ export default function ArticleCard(props: propI) {
         </div>
         <div>
           <CommentIcon fontSize='large' />
-          <span>{props.LikeNumber}</span>
+          <span>{props.CommentNumber}</span>
         </div>
       </div>
     </div>

@@ -14,14 +14,15 @@ type Article struct {
 
 // List TODO: label,keyword will add later=
 func (a *Article) List(offset uint) (bool, *models.ApiArticleList) {
+	ds := new(util.DbRes)
 	//NOTE: except title,description field,other field will be returned zero value
 	articles := new(models.ApiArticleList)
 	result := a.DB.Model(&models.Article{}).Limit(10).Offset(int(offset)).Find(articles)
-	return util.CrudJudgement(result), articles
+	isErr, _ := ds.AssignResults(result).DistinguishSqlErrType().AssignIsErr([]uint{1, 1}).ReturnInfo()
+	return isErr, articles
 }
 
 func (a *Article) Detail(articleID uint) (bool, *models.Article) {
-	//NOTE:will return all field about this struct,none zero value fields
 	article := new(models.Article)
 	result := a.DB.First(article, "ID = ?", articleID) //default model is First()'s first argument
 	return util.CrudJudgement(result), article

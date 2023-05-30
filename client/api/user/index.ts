@@ -10,11 +10,11 @@ import {
 } from './reqTypes';
 import { showProfileI } from './resTypes';
 export const loginApi = (auth: loginI) => {
-  return () => post('/auth/login', auth);
+  return () => post<string>('/auth/login', auth);
 };
 
 export const registerApi = (auth: registerI) => {
-  return () => post('/auth/register', auth);
+  return () => post<string>('/auth/register', auth);
 };
 
 export const modifyApi = (auth: modifyT) => {

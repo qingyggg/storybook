@@ -24,7 +24,12 @@ export const useRequest = <T>(
   return async () => {
     try {
       let { data } = await api();
-      s && s(data.data[0]); //data.data=T[]
+      if (data.data) {
+        s && s(data.data[0]); //data.data=T[]
+      } else {
+        s && s(null);
+      }
+
       if (!forbidSetAlsStateWhenSuccess) {
         setAlsState({ info: 'success', message: data.message, open: true });
       }
@@ -46,5 +51,5 @@ export const useRequest = <T>(
 };
 
 type apiType<T> = (p?: any) => Promise<AxiosResponse<baseRes<T>, any>>;
-type sucCb<T> = (data: T) => any;
+type sucCb<T> = (data: T | null) => any;
 type errCb = (err: any) => any;

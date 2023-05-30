@@ -1,5 +1,5 @@
 import { Box, Button, TextField } from '@mui/material';
-import React, {useEffect, useMemo, useState} from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { test_markdown } from './test';
@@ -12,16 +12,16 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 const ArticleCreate: React.FC = () => {
   const [markdown, setMarkdown] = useState<string>('');
   const [ud] = useLocalStorage('userId');
-  const [numUd,setNumUd]=useState<number>(0)
+  const [numUd, setNumUd] = useState<number>(0);
   const router = useRouter();
   const [Title, setTitle] = useState('');
   const [Description, setDescription] = useState('');
   useEffect(() => {
     setMarkdown(test_markdown);
   }, []);
-  useMemo(()=>{
-    setNumUd(parseInt(ud))
-  },[ud])
+  useMemo(() => {
+    setNumUd(parseInt(ud));
+  }, [ud]);
   const createReq = useRequest(
     postArticleCreateApi({
       UserID: numUd,

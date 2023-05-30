@@ -8,7 +8,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import useLocalStorage from '../hooks/useLocalStorage';
 import useClientAuth from '../hooks/useClientAuth';
 import { useRouter } from 'next/router';
 import Link from 'next/dist/client/link';
@@ -87,6 +86,14 @@ export default function MenuAppBar() {
                 }}
               >
                 modify password
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  router.push('/articleCreate');
+                }}
+              >
+                write story
               </MenuItem>
               <MenuItem
                 onClick={() => {

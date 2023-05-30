@@ -1,0 +1,24 @@
+long-plan:
+2.deploy logical(finish it before bishe show)
+3.improve ui
+4.(3.1)
+5.(3.2)
+6.improve auth logical
+7.add seo,server-side redering(comment,article page),add swr fetch(for example:fetch article List page in serverside,and memoized data in recoil)
+8.set .env file(token set on env)
+9.go websocket+redis for chat room
+
+now:
+1.
+
+imporve UI:
+0:like logical
+3.add my-articles,my-comments page
+3.1:my articles edit,delete button
+3.2:my comments edit,delete button
+4.add article,comment search usage
+5.comments be liked,reply usage
+6.click name or avatar,and redirect to user_profile page that who has been clicked
+7.avatar upload
+8.add dark mode
+9.get user name and avatar in article detail(for <AuthorForArticleDetail/>)

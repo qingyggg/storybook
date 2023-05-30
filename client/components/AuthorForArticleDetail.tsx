@@ -1,10 +1,24 @@
 import { Avatar, Button } from '@mui/material';
 import { deepPurple } from '@mui/material/colors';
-import React from 'react';
+import React, { useState } from 'react';
 import AddCommentIcon from '@mui/icons-material/AddComment';
-import AddIcon from '@mui/icons-material/Add';
-//author info,follow,like/dislike article,add comment
-export default function AuthorForArticleDetail() {
+import CommentDialog from './CommentDialog';
+import { useRequest } from '../hooks/useRequest';
+import { postCommentApi } from '../api/comment';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
+export default function AuthorForArticleDetail(props: propsI) {
+  const { UserID, ArticleID, setCommentIsAdd } = props;
+  const [comment, setComment] = useState<string>('');
+  const addCommentReq = useRequest(
+    postCommentApi({ UserID, ArticleID, Content: comment }),
+    () => {
+      setCommentIsAdd(true);
+    },
+  );
+  const addComment = () => {
+    addCommentReq();
+  };
   return (
     <div className='w-60 flex flex-col items-center bg-slate-50 py-2 mr-12 space-y-4'>
       <div className='w-full cursor-pointer flex justify-around items-center'>
@@ -12,15 +26,22 @@ export default function AuthorForArticleDetail() {
         <span className='text-xl'>Marisa Author</span>
       </div>
       <div>
-        <Button variant='outlined' endIcon={<AddIcon />}>
-          Following
-        </Button>
+        <CommentDialog
+          callback={addComment}
+          dialogTitle='add comment'
+          dialogContent='please write your comment'
+          dialogButton='add comment'
+          Content={comment}
+          onContentChange={(e) => setComment(e.target.value)}
+          ButtonIcon={<AddCommentIcon />}
+        />
       </div>
-      <div>
-        <Button variant='outlined' endIcon={<AddCommentIcon />}>
-          AddComment
-        </Button>
-      </div>
+      <FavoriteIcon fontSize='large' />
     </div>
   );
+}
+interface propsI {
+  UserID: number;
+  ArticleID: number;
+  setCommentIsAdd: React.Dispatch<React.SetStateAction<boolean>>;
 }

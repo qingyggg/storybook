@@ -6,11 +6,8 @@ import (
 	"strconv"
 )
 
-//these function are common util function for save more code
-
-// for parse queryString like id(default string)
+// StringConvertToUint for parse queryString like id(default string)
 func StringConvertToUint(sVal string) uint {
-	//TODO: key word,label select
 	uVal, err := strconv.ParseUint(sVal, 10, 64)
 	fmt.Print(sVal)
 	if err != nil {

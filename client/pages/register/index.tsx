@@ -24,12 +24,12 @@ export default function Register() {
   }, []);
   const registerReq = useRequest(
     registerApi({ Email, Password: cryptedPwdByMd5 }),
-    async (ud: string) => {
-      setUserId(ud);
+    async (ud) => {
+      setUserId(ud!);
       await (
         await generateToken
       )();
-      router.push('/');
+      router.push('/profileEdit/' + ud);
     },
   );
   const register = async () => {

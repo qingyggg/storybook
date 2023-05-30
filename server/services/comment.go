@@ -1,16 +1,24 @@
 package services
 
 import (
-	"errors"
-
+	cst "github.com/qingyggg/storybook/server/constants"
 	"github.com/qingyggg/storybook/server/db/models"
 	"github.com/qingyggg/storybook/server/dto"
 	"github.com/qingyggg/storybook/server/util"
+	"golang.org/x/exp/slices"
 	"gorm.io/gorm"
 )
 
 type Comment struct {
 	DB *gorm.DB
+}
+
+func (c *Comment) List(ad uint) (bool, *models.ApiComments) {
+	ds := new(util.DbRes)
+	comments := &models.ApiComments{}
+	result := c.DB.Table("comments").Select("comments.id, comments.content,user_profiles.name user_name,user_profiles.user_id").Joins("left join user_profiles  on user_profiles.user_id = comments.user_id").Where("article_id = ?", ad).Scan(comments)
+	isSqlErr := ds.AssignResults(result).DistinguishSqlErrType().AssignIsErr([]uint{1, 1}).GetIsErr()
+	return isSqlErr, comments
 }
 
 func (c *Comment) Create(commentDto *dto.CommentDtoForCreate) bool {
@@ -70,45 +78,22 @@ func (c *Comment) Like(likeDto *dto.LikeDto) bool {
 	return util.CrudJudgement(result)
 }
 
-func (c *Comment) DisLike(disLikeDto *dto.DisLikeDto) bool {
-	disLike := &models.Like{
-		ID: disLikeDto.ID,
-	}
-	result := c.DB.Delete(disLike)
-	return util.CrudJudgement(result)
-}
-
-// if true,dislike it,if false,like it
-func (c *Comment) LikeJudgement(likeDto *dto.LikeDto) (has int, RecordId uint) {
-	likeForCondition := &models.Like{
+func (c *Comment) DisLike(likeDto *dto.LikeDto) bool {
+	like := &models.Like{
 		ArticleID: likeDto.ArticleID,
 		UserID:    likeDto.UserID,
 	}
-	like := &models.Like{}
-	//if like exists
-	result := c.DB.Where(likeForCondition).Find(like)
-	if result.Error != nil {
-		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
-			//has no record
-			has = 0
-		} else {
-			has = -1
-		}
-	} else {
-		//has record
-		has = 1
-		RecordId = like.ID
-	}
-	return
+	result := c.DB.Delete(like)
+	return util.CrudJudgement(result)
 }
 
-func (c *Comment) LikeNumberModify(articleID uint, isAdd bool) bool {
+func (c *Comment) LikeNumberModify(articleID uint, signal string) bool {
 	var payload *models.ApiArticleLikesAndCommentsAmount
 	results := c.DB.Where(&models.Article{ID: articleID}).Find(&payload)
 	if util.CrudJudgement(results) {
-		if isAdd {
+		if signal == "add" {
 			payload.LikeNumber += 1
-		} else {
+		} else if signal == "delete" {
 			payload.LikeNumber -= 1
 		}
 		results2 := c.DB.Model(&models.Article{ID: articleID}).Updates(payload)
@@ -118,18 +103,68 @@ func (c *Comment) LikeNumberModify(articleID uint, isAdd bool) bool {
 	}
 }
 
-func (c *Comment) CommentNumberModify(articleID uint, isAdd bool) bool {
-	var payload *models.ApiArticleLikesAndCommentsAmount
-	results := c.DB.Where(&models.Article{ID: articleID}).Find(&payload)
+func (c *Comment) CommentNumberModify(articleID uint, signal string) bool {
+	payload := &models.Article{
+		ID: articleID,
+	}
+	results := c.DB.Model(payload).First(&payload)
 	if util.CrudJudgement(results) {
-		if isAdd {
+		if signal == "add" {
 			payload.CommentNumber += 1
-		} else {
+		} else if signal == "delete" {
 			payload.CommentNumber -= 1
 		}
-		results2 := c.DB.Model(&models.Article{ID: articleID}).Updates(payload)
+		results2 := c.DB.Model(payload).Updates(payload)
 		return util.CrudJudgement(results2)
 	} else {
 		return false
 	}
+}
+
+func (c *Comment) LikeShow(likeDto *dto.LikeDto) (bool, string) {
+	ds := new(util.DbRes)
+	like := &models.Like{
+		ArticleID: likeDto.ArticleID,
+		UserID:    likeDto.UserID,
+	}
+	result := c.DB.Model(&models.Like{}).Where(like).First(&models.Like{})
+	return ds.AssignResults(result).DistinguishSqlErrType().AssignIsErr([]uint{1, 1}).AssignMessage([]string{cst.LIKE_RECORD, cst.LIKE_NO_RECORD}).ReturnInfo()
+}
+
+func (c *Comment) LikesShow(likesDto *dto.LikesDto) (bool, []bool) {
+	ds := new(util.DbRes)
+	likes := &models.Likes{}
+	adList := getLikesArticleId(likesDto)
+	result := c.DB.Model(&models.Like{}).Where("article_id IN ?", adList).Find(likes)
+	errTInSql := ds.AssignResults(result).DistinguishSqlErrType().GetErrType()
+	if errTInSql == 0 {
+		err, _ := ds.AssignMessage([]string{}).ReturnInfo()
+		return err, nil
+	} else if errTInSql == 1 {
+		return false, reconcileBoolList(likes, adList)
+	} else {
+		return false, []bool{}
+	}
+}
+func getLikesArticleId(likesDto *dto.LikesDto) []uint {
+	var adArr []uint
+	for _, v := range *likesDto {
+		adArr = append(adArr, v.ArticleID)
+	}
+	return adArr
+}
+func reconcileBoolList(ls *models.Likes, adList []uint) []bool {
+	var lsArr []uint
+	var boolArr []bool
+	for _, v := range *ls {
+		lsArr = append(lsArr, v.ArticleID)
+	}
+	for _, v := range adList {
+		if idx := slices.Index(lsArr, v); idx != -1 {
+			boolArr = append(boolArr, true)
+		} else {
+			boolArr = append(boolArr, false)
+		}
+	}
+	return boolArr
 }

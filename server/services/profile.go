@@ -1,7 +1,7 @@
 package services
 
 import (
-
+	"fmt"
 	"github.com/qingyggg/storybook/server/db/models"
 	"github.com/qingyggg/storybook/server/dto"
 	"github.com/qingyggg/storybook/server/util"
@@ -12,11 +12,11 @@ type Profile struct {
 	DB *gorm.DB
 }
 
-func (p *Profile) Show(userID uint) (bool,*models.UserProfile) {
-	profile:=new(models.UserProfile)
+func (p *Profile) Show(userID uint) (bool, *models.UserProfile) {
+	profile := new(models.UserProfile)
 	result := p.DB.Where("user_id = ?", userID).First(profile)
-	
-	return util.CrudJudgement(result),profile
+
+	return util.CrudJudgement(result), profile
 }
 
 func (p *Profile) Edit(profileDto *dto.UserProfileDtoForEdit) (ok bool) {
@@ -28,19 +28,20 @@ func (p *Profile) Edit(profileDto *dto.UserProfileDtoForEdit) (ok bool) {
 		Github:      profileDto.Github,
 		Twitter:     profileDto.Twitter,
 	}
-	result := p.DB.Model(&models.UserProfile{}).Where("user_id=?",profileDto.UserId).Updates(profile)
+	result := p.DB.Model(&models.UserProfile{}).Where("user_id=?", profileDto.UserId).Updates(profile)
+	fmt.Println(result.Error)
 	ok = util.CrudJudgement(result)
 	return
 }
 
 // one user only call this once after register
-func (p *Profile) Create(profileDto *dto.UserProfileDto,authDto *dto.AuthDto) (ok bool) {
-	userInfo:= &models.User{}
-	results:=p.DB.Where(&models.User{Email: authDto.Email,Password :authDto.Password}).First(userInfo)
+func (p *Profile) Create(profileDto *dto.UserProfileDto, authDto *dto.AuthDto) (ok bool) {
+	userInfo := &models.User{}
+	results := p.DB.Where(&models.User{Email: authDto.Email, Password: authDto.Password}).First(userInfo)
 	ok1 := util.CrudJudgement(results)
 	if ok1 {
 		profile := &models.UserProfile{
-			UserID: userInfo.ID,
+			UserID:      userInfo.ID,
 			Name:        profileDto.Name,
 			Age:         profileDto.Age,
 			Avatar:      profileDto.Avatar,
@@ -52,8 +53,8 @@ func (p *Profile) Create(profileDto *dto.UserProfileDto,authDto *dto.AuthDto) (o
 		//please use sql procedure in 2.0 version,instead of two sql statements in one service,its may make an effect on performance!!!!
 		result := p.DB.Create(profile)
 		ok = util.CrudJudgement(result)
-	}else{
-		ok=false
+	} else {
+		ok = false
 	}
 	return
 }

@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"github.com/gin-gonic/gin"
+	cst "github.com/qingyggg/storybook/server/constants"
 	"github.com/qingyggg/storybook/server/db"
 	"github.com/qingyggg/storybook/server/dto"
 	"github.com/qingyggg/storybook/server/router"
@@ -12,63 +13,85 @@ import (
 func CommentController() {
 	comment := router.GetAppRouter().Group("/comment")
 	cs := services.Comment{DB: db.GetDataBase()}
+	comment.GET("/list", func(ctx *gin.Context) {
+		articleId := util.QueryDefaultAssigner(ctx, "ArticleId", "0")
+		isErr, list := cs.List(util.StringConvertToUint(articleId))
+		util.Response(ctx, !isErr, list)
+	})
 	comment.POST("/create", func(ctx *gin.Context) {
 		var ok bool
+		newRes := new(util.ResPayload)
 		cBody := &dto.CommentDtoForCreate{}
 		util.AssignBodyJson(ctx, cBody)
-		if cs.Create(cBody) && cs.CommentNumberModify(cBody.ArticleID, true) {
+		if cs.Create(cBody) && cs.CommentNumberModify(cBody.ArticleID, "add") {
 			ok = true
 		} else {
 			ok = false
 		}
-		util.Response(ctx, ok)
+		newRes.SetIsError(!ok).SetMessage2(cst.COMMENT_CREATE).Response(ctx)
 	})
 	comment.POST("/delete", func(ctx *gin.Context) {
-		var ok *bool
+		var isErr *bool
+		newRes := new(util.ResPayload)
 		cBody := &dto.CommentDtoForDelete{}
 		util.AssignBodyJson(ctx, cBody)
-		if cs.Delete(cBody) && cs.CommentNumberModify(cBody.ArticleID, true) {
+		if cs.Delete(cBody) && cs.CommentNumberModify(cBody.ArticleID, "delete") {
 			//*type *get value  &get address
-			*ok = true
+			*isErr = false
 		} else {
-			*ok = false
+			*isErr = true
 		}
-		util.Response(ctx, *ok)
+		newRes.SetIsError(*isErr).SetMessage2(cst.COMMENT_DELETE).Response(ctx)
 	})
 	comment.POST("/edit", func(ctx *gin.Context) {
+		newRes := new(util.ResPayload)
 		cBody := &dto.CommentDtoForEdit{}
 		util.AssignBodyJson(ctx, cBody)
 		ok := cs.Edit(cBody)
-		util.Response(ctx, ok)
+		newRes.SetIsError(ok).SetMessage2(cst.COMMENT_EDIT).Response(ctx)
 	})
 	comment.POST("/like", func(ctx *gin.Context) {
+		var isErr bool
 		lBody := &dto.LikeDto{}
-		dlBody := &dto.DisLikeDto{}
-		var ok bool
 		util.AssignBodyJson(ctx, lBody)
-		if has, recordID := cs.LikeJudgement(lBody); has == 0 {
-			if cs.Like(lBody) && cs.LikeNumberModify(lBody.ArticleID, true) {
-				//*type *get value  &get address
-				ok = true
-			} else {
-				ok = false
-			}
-		} else if has == 1 {
-			dlBody.ID = recordID
-			if cs.DisLike(dlBody) && cs.LikeNumberModify(lBody.ArticleID, false) {
-				ok = true
-			} else {
-				ok = false
-			}
-		} else { //record==-a,this means sql has happened some errors except no records
-			ok = false
-		}
-		if ok {
-			//NOTE:ok2 variable is different from ok
-			ok2, isLike := cs.LikeStatusShow(lBody)
-			util.Response(ctx, ok2, isLike)
+		newRes := new(util.ResPayload)
+		if cs.Like(lBody) && cs.LikeNumberModify(lBody.ArticleID, "add") {
+			isErr = false
 		} else {
-			util.Response(ctx, ok)
+			isErr = true
 		}
+		newRes.SetIsError(isErr).SetMessage2(cst.ARTICLE_LIKE).Response(ctx)
+	})
+	comment.POST("/dislike", func(ctx *gin.Context) {
+		var isErr bool
+		lBody := &dto.LikeDto{}
+		util.AssignBodyJson(ctx, lBody)
+		newRes := new(util.ResPayload)
+		if cs.Like(lBody) && cs.LikeNumberModify(lBody.ArticleID, "add") {
+			isErr = false
+		} else {
+			isErr = true
+		}
+		newRes.SetIsError(isErr).SetMessage2(cst.ARTICLE_DISLIKE).Response(ctx)
+	})
+	comment.POST("/LikeStatus", func(ctx *gin.Context) {
+		var status bool
+		lBody := &dto.LikeDto{}
+		util.AssignBodyJson(ctx, lBody)
+		newRes := new(util.ResPayload)
+		isErr, msg := cs.LikeShow(lBody)
+		if msg == cst.LIKE_RECORD {
+			status = true
+		} else {
+			status = false
+		}
+		newRes.SetDefaultMsg(isErr).SetData(status).Response(ctx)
+	})
+	comment.POST("/BatchLikeStatus", func(ctx *gin.Context) {
+		newRes := new(util.ResPayload)
+		lsBody := &dto.LikesDto{}
+		util.AssignBodyJson(ctx, lsBody)
+		isErr, statusArr := cs.LikesShow(lsBody)
+		newRes.SetDefaultMsg(isErr).SetData(statusArr).Response(ctx)
 	})
 }

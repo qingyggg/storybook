@@ -31,6 +31,15 @@ func (res *ResPayload) SetDefault(isError bool, data interface{}) *ResPayload {
 	return res
 }
 
+func (res *ResPayload) SetMessage2(correctMsg string) *ResPayload {
+	if res.isError {
+		res.message = cst.SERVER_ERR
+	} else {
+		res.message = correctMsg
+	}
+	return res
+}
+
 func (res *ResPayload) SetMessage(message string) *ResPayload {
 	res.message = message
 	return res

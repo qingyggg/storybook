@@ -15,7 +15,7 @@ export default function Profile() {
   const [Profile, setProfile] = useState<editProfileI>(nullProfile);
   const showProfile = useRequest<showProfileI>(
     showProfileApi(idTransform(id)),
-    (res) => setProfile(res),
+    (res) => setProfile(res!),
     () => void 0,
     true,
   );
@@ -36,7 +36,7 @@ export default function Profile() {
       <h1 className='text-5xl'>user profile</h1>
       <div className='flex flex-col text-2xl'>
         <p>name:{Profile.Name}</p>
-        <p>age:{Profile.Name}</p>
+        <p>age:{Profile.Age}</p>
         <p>Description:{Profile.Description}</p>
         <div className='flex flex-row'>
           <Link href={Profile.Github} underline='none'>
