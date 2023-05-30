@@ -2,32 +2,34 @@ import React from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
 import StarRateIcon from '@mui/icons-material/StarRate';
-export default function ArticleCard() {
+import { articleItemForListI, articleListType } from '../api/article/resTypes';
+import Link from 'next/link';
+export default function ArticleCard(props: propI) {
   return (
-    <div className='h-48 w-full bg-gray-200 p-4 flex justify-between'>
+    <div className='h-48 w-full bg-gray-200 p-4 flex justify-between  hover:shadow-xl'>
       <div className='flex flex-col'>
-        <h1 className='text-2xl'>Alice story1</h1>
+        <Link
+          href={'/detail/' + props.ID}
+          className='hover:italic hover:text-violet-600'
+        >
+          <h1 className='text-2xl'>{props.Title}</h1>
+        </Link>
         <span className='text-ellipsis overflow-hidden'>
-          styled-components is the result of wondering how we could enhance CSS
-          for styling React component systems. By focusing on a single use case
-          we managed to optimize the experience for developers as well as the
-          output for end users.
+          {props.Description}
         </span>
       </div>
       <div className='w-36 h-36 flex flex-col justify-between'>
         <div>
           <FavoriteIcon fontSize='large' />
-          <span>16</span>
+          <span>{props.LikeNumber}</span>
         </div>
         <div>
           <CommentIcon fontSize='large' />
-          <span>16</span>
-        </div>
-        <div>
-          <StarRateIcon fontSize='large' />
-          <span>27</span>
+          <span>{props.CommentNumber}</span>
         </div>
       </div>
     </div>
   );
 }
+
+interface propI extends articleItemForListI {}

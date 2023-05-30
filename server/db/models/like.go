@@ -4,7 +4,8 @@ import "gorm.io/gorm"
 
 type Like struct {
 	gorm.Model
-	ID          uint `gorm:"primarykey;autoIncrement"`
+	ID        uint `gorm:"primarykey;autoIncrement"`
 	ArticleID uint
-	UserID uint
-} 
+	UserID    uint
+}
+type Likes = []Like

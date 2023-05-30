@@ -1,23 +1,54 @@
 package router
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"github.com/qingyggg/storybook/server/util"
+	"net/http"
+	"regexp"
 )
 
 var r *gin.Engine
 
 func Bootstrap(routes ...func()) {
 	r = gin.Default() //initialize gin
-	r.GET("/", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusAccepted, "welcome visited storybook server!")
-	})
+	r.Use(Cors())
+	r.Use(JwtAuth())
 	//register controller
 	RegRoutes(routes)
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	err := r.Run()
+	if err != nil {
+		return
+	} // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 
 func GetAppRouter() *gin.Engine {
 	return r
+}
+
+func Cors() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		method := ctx.Request.Method
+
+		ctx.Header("Access-Control-Allow-Origin", "*")
+		ctx.Header("Access-Control-Allow-Headers", "Content-Type,AccessToken,X-CSRF-Token, Authorization, Token, x-token")
+		ctx.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PATCH, PUT")
+		ctx.Header("Access-Control-Expose-Headers", "Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Content-Type")
+		ctx.Header("Access-Control-Allow-Credentials", "true")
+		if method == "OPTIONS" {
+			ctx.AbortWithStatus(http.StatusNoContent)
+		}
+	}
+}
+
+// JwtAuth jwt auth
+func JwtAuth() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		for i := 0; i < len(util.BlackList); i++ {
+			match, _ := regexp.MatchString(util.BlackList[i], ctx.FullPath())
+			if match {
+				util.VerifyJwt(ctx)
+				break
+			}
+		}
+	}
 }

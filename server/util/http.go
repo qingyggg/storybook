@@ -1,12 +1,22 @@
 package util
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	cst "github.com/qingyggg/storybook/server/constants"
+	"net/http"
 )
 
-// obtain json request body and convert to struct
+// QueryDefaultAssigner judging whether current query param is null or not,if null(the default query value is ""),then assign it a func specified default value
+func QueryDefaultAssigner(ctx *gin.Context, query string, defaultVal string) string {
+	var queryVal string
+	if queryVal = ctx.Query(query); queryVal == "" {
+		return defaultVal
+	} else {
+		return queryVal
+	}
+}
+
+// AssignBodyJson obtain json request body and convert to struct
 func AssignBodyJson[T any](ctx *gin.Context, bodyDto T) {
 	if err := ctx.BindJSON(bodyDto); err != nil {
 		ctx.AbortWithError(http.StatusBadRequest, err)
@@ -14,25 +24,11 @@ func AssignBodyJson[T any](ctx *gin.Context, bodyDto T) {
 	}
 }
 
-// gin.H type is `map[string]any“
+// Response old response func()
 func Response(ctx *gin.Context, ok bool, resObj ...interface{}) {
 	if !ok {
-		ctx.JSON(http.StatusBadRequest, gin.H{"message": "server has an internal error!", "isError": true, "data": nil})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"message": cst.SERVER_ERR, "isError": true, "data": nil})
 	} else {
-		ctx.JSON(http.StatusAccepted, gin.H{"message": "request ok!", "isError": false, "data": resObj})
+		ctx.JSON(http.StatusAccepted, gin.H{"message": cst.REQ_OK, "isError": false, "data": resObj})
 	}
 }
-
-//12-14
-// type ResponsePayload struct{
-// 	ok bool							--->true,false
-// 	okMessage string   --->article has been created
-// 	errMessage string		--->article created failed
-// }
-// func Response(ctx *gin.Context, rp *ResponsePayload,, resObj ...interface{}) {
-// 	if !ok {
-// 		ctx.JSON(http.StatusAccepted, gin.H{"message":rp.okMessage, "isErr": rp.ok, "data": resObj})
-// 	} else {
-// 		ctx.JSON(http.StatusBadRequest, gin.H{"message": rp.errMessage, "isErr": rp.ok, "data": nil})
-// 	}
-// }

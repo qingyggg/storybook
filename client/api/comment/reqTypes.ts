@@ -3,6 +3,8 @@ export interface likeI {
   UserID: number;
 }
 
+export type likesI = Array<likeI>;
+
 export interface commentI {
   UserID: number;
   ArticleID: number;

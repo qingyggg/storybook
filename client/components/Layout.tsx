@@ -2,6 +2,7 @@ import { ReactElement } from 'react';
 import Footer from './Footer';
 import MolsBar from './MolsBar';
 import AddCommentDialog from './AddCommentDialog';
+import { MolsAlert } from './MolsAlert';
 
 export default function Layout({ children }: { children: ReactElement }) {
   return (
@@ -13,7 +14,8 @@ export default function Layout({ children }: { children: ReactElement }) {
         handleClickClose={() => void 0}
         handleClickOpen={() => void 0}
       />
-      {/* <Footer/> */}
+      <MolsAlert />
+      <Footer />
     </>
   );
 }

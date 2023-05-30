@@ -2,10 +2,16 @@ package models
 
 import "gorm.io/gorm"
 
-type Comment struct{
+type Comment struct {
 	gorm.Model
-	ID          uint `gorm:"primarykey;autoIncrement"`
-	UserID uint
+	ID        uint `gorm:"primarykey;autoIncrement"`
+	UserID    uint
 	ArticleID uint
-	Content string
+	Content   string
+}
+
+type ApiComments []ApiComment
+type ApiComment struct {
+	Comment
+	UserName string
 }

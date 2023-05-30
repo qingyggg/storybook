@@ -3,12 +3,8 @@ export const alertInfoAttach = <T>(
   api: T,
   sucInfo: string,
   errInfo: string,
-): apiI<T> => {
-  return { api, sucInfo, errInfo };
+): apiType<T> => {
+  return [api, sucInfo, errInfo];
 };
 
-export interface apiI<T> {
-  api: T;
-  sucInfo: string;
-  errInfo: string;
-}
+export type apiType<T> = [T, string, string];

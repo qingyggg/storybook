@@ -1,39 +1,14 @@
-import {
-  LIKE,
-  LIKE_ERR,
-  COMMENT,
-  COMMENT_ERR,
-  COMMENT_DELETE,
-  COMMENT_DELETE_ERR,
-  COMMENT_EDIT,
-} from './../../constants/messages/comment';
-import { alertInfoAttach } from '../../util/alert';
 import { likeI, commentI, commentDeleteI, commentEditI } from './reqTypes';
 import { post, get } from '../../util/request';
-export const postLike = (like: likeI) => {
-  return alertInfoAttach(() => post('/comment/like', like), LIKE, LIKE_ERR);
-};
+import { commentListT } from './resTypes';
+export const postLike = (like: likeI) => () => post('/comment/like', like);
+export const postHate = (like: likeI) => () => post('/comment/dislike', like);
+export const postCommentApi = (comment: commentI) => () =>
+  post('/comment/create', comment);
+export const postCommentEditApi = (comment: commentEditI) => () =>
+  post('/comment/edit', comment);
+export const postCommentDeleteApi = (comment: commentDeleteI) => () =>
+  post('/comment/delete', comment);
 
-export const postComment = (comment: commentI) => {
-  return alertInfoAttach(
-    () => post('/comment/create', comment),
-    COMMENT,
-    COMMENT_ERR,
-  );
-};
-
-export const postCommentEdit = (comment: commentEditI) => {
-  return alertInfoAttach(
-    () => post('/comment/edit', comment),
-    COMMENT_EDIT,
-    COMMENT_DELETE_ERR,
-  );
-};
-
-export const postCommentDelete = (comment: commentDeleteI) => {
-  return alertInfoAttach(
-    () => post('/comment/delete', comment),
-    COMMENT_DELETE,
-    COMMENT_DELETE_ERR,
-  );
-};
+export const getCommentListApi = (ArticleId: number) => () =>
+  get<commentListT>('/comment/list?ArticleId=' + ArticleId);

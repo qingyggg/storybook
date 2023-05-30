@@ -1,31 +1,48 @@
 package services
 
 import (
+	cst "github.com/qingyggg/storybook/server/constants"
 	"github.com/qingyggg/storybook/server/db/models"
 	"github.com/qingyggg/storybook/server/dto"
 	"github.com/qingyggg/storybook/server/util"
 	"gorm.io/gorm"
+	"strconv"
 )
 
 type Auth struct {
 	DB *gorm.DB
 }
 
-// modify password
-func (a *Auth) Modify(authDto *dto.AuthDtoForModify) bool {
+func (a *Auth) BeforeModify(authDto *dto.AuthDtoForModify) (bool, string) {
+	ds := new(util.DbRes)
 	auth := &models.User{
 		ID:       authDto.ID,
-		Email:    authDto.Email,
-		Password: authDto.Password,
+		Password: authDto.OldPassword,
 	}
-	result := a.DB.Model(&models.User{}).Updates(auth)
-	return util.CrudJudgement(result)
+	results := a.DB.Find(&models.User{}, auth)
+	//id is unavailable(its impossible unless user modify user id param according url on chrome) or password is incorrect
+	return ds.AssignResults(results).DistinguishSqlErrType().AssignIsErr([]uint{1, 0}).AssignMessage([]string{"", cst.OLD_PASSWORD_ERR}).ReturnInfo()
 }
 
-// forRegister false is bool zero value
-func (a *Auth) Login(authDto *dto.AuthDto, forRegister bool) bool {
+// modify password
+//
+//results:modify okay or internal
+func (a *Auth) Modify(authDto *dto.AuthDtoForModify) (bool, string) {
+	ds := new(util.DbRes)
+	auth := &models.User{
+		ID:       authDto.ID,
+		Password: authDto.Password,
+	}
+	result := a.DB.Model(&models.User{}).Where("id = ?", auth.ID).Updates(auth)
+	return ds.AssignResults(result).DistinguishSqlErrType().AssignMessage([]string{cst.MODIFY, cst.SERVER_ERR}).AssignDefaultsIsErr().ReturnInfo()
+}
+
+// Login forRegisterAuth:whether used for register auth or only used for login
+func (a *Auth) Login(authDto *dto.AuthDto, forRegisterAuth bool) (bool, string, string) {
 	var auth *models.User
-	if forRegister {
+	var auth2 = new(models.User)
+	ds := new(util.DbRes)
+	if forRegisterAuth {
 		auth = &models.User{
 			Email: authDto.Email,
 		}
@@ -36,14 +53,18 @@ func (a *Auth) Login(authDto *dto.AuthDto, forRegister bool) bool {
 			Password: authDto.Password,
 		}
 	}
-	result := a.DB.Model(&models.User{}).Find(auth)
-	//according rows.affected to judge whether user login success
-	return util.CrudJudgement(result)
+	results := a.DB.Where(auth).Find(auth2) //excute sql
+
+	//tackle sql results for response body
+	ds.AssignResults(results).DistinguishSqlErrType().AssignMessage([]string{cst.LOGIN, cst.ACCOUNT_REPEAT_OR_ERROR_PASSWORD}).AssignIsErr([]uint{1, 0})
+	c, b := ds.ReturnInfo()
+	return c, b, strconv.Itoa(int(auth2.ID))
 }
 
-// before call Register,controller should call login,
+// Register before call Register,controller should call login,
 // to ensure this user was not exists
 func (a *Auth) Register(authDto *dto.AuthDto) bool {
+
 	auth := &models.User{
 		Email:    authDto.Email,
 		Password: authDto.Password,

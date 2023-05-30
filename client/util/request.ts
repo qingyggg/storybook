@@ -1,12 +1,10 @@
 import { AxiosResponse } from 'axios';
 import { instance } from './http';
 
-//TODO:add base response type-->baseRes<T>
-//{"message":string,"isError":bool,"data":T}
-interface baseRes<T> {
+export interface baseRes<T> {
   message: string;
   isError: boolean;
-  data: T;
+  data: T[];
 }
 
 export const get = <T>(

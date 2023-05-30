@@ -11,7 +11,7 @@ export const PROFILE = 'get profile successfully';
 export const PROFILE_ERR = 'get profile failed';
 
 export const PROFILE_CREATE = 'create profile successfully';
-export const PROFILE_CREATE_ERR = 'create3 profile failed';
+export const PROFILE_CREATE_ERR = 'create profile failed';
 
 export const PROFILE_EDIT = 'update profile successfully';
 export const PROFILE_EDIT_ERR = 'update profile failed';

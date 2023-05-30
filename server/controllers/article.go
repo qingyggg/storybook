@@ -14,32 +14,37 @@ func ArticleController() {
 	as := services.Article{DB: db.GetDataBase()}
 
 	article.GET("/list", func(ctx *gin.Context) {
-		ok, list := as.List(util.StringConvertToUint(ctx.Query("offset"))) //url:/list?offset=25
-		util.Response(ctx, ok, list)
+		offset := util.QueryDefaultAssigner(ctx, "offset", "0")
+		isErr, list := as.List(util.StringConvertToUint(offset)) //url:/list?offset=25
+		util.Response(ctx, !isErr, list)
 	})
 
 	article.GET("/detail", func(ctx *gin.Context) {
-		ok, detail := as.Detail(util.StringConvertToUint("articleID"))
+		articleId := util.QueryDefaultAssigner(ctx, "articleID", "0")
+		ok, detail := as.Detail(util.StringConvertToUint(articleId))
 		util.Response(ctx, ok, detail)
 	})
 
 	article.POST("/create", func(ctx *gin.Context) {
+		newRes := new(util.ResPayload)
 		// using BindJson method to serialize body with struct
 		aBody := &dto.ArticleDto{}
 		util.AssignBodyJson(ctx, aBody) //get request body and assign to aBody
-		ok := as.Create(aBody)
-		util.Response(ctx, ok)
+		isErr, msg := as.Create(aBody)
+		newRes.SetMessage(msg).SetIsError(isErr).Response(ctx)
 	})
 	article.POST("/edit", func(ctx *gin.Context) {
+		newRes := new(util.ResPayload)
 		aBody := &dto.ArticleDtoForEdit{}
 		util.AssignBodyJson(ctx, aBody)
-		ok := as.Edit(aBody)
-		util.Response(ctx, ok)
+		isErr, msg := as.Edit(aBody)
+		newRes.SetMessage(msg).SetIsError(isErr).Response(ctx)
 	})
 	article.POST("/delete", func(ctx *gin.Context) {
+		newRes := new(util.ResPayload)
 		aBody := &dto.ArticleDtoForDelete{}
 		util.AssignBodyJson(ctx, aBody)
-		ok := as.Delete(aBody)
-		util.Response(ctx, ok)
+		isErr, msg := as.Delete(aBody)
+		newRes.SetMessage(msg).SetIsError(isErr).Response(ctx)
 	})
 }

@@ -1,26 +1,24 @@
 package dto
 
-type CommentDtoForCreate struct{
-	UserID uint
+type CommentDtoForCreate struct {
+	UserID    uint
 	ArticleID uint
-	Content string
+	Content   string
 }
 
-type CommentDtoForEdit struct{
+type CommentDtoForEdit struct {
 	ID uint
 	CommentDtoForCreate
 }
 
-type CommentDtoForDelete struct{
-	ID uint 
+type CommentDtoForDelete struct {
+	ID        uint
 	ArticleID uint
 }
 
-type LikeDto struct{
+type LikeDto struct {
 	ArticleID uint
-	UserID uint
+	UserID    uint
 }
 
-type DisLikeDto struct{
-	ID uint
-}
+type LikesDto = []LikeDto

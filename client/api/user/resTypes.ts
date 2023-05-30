@@ -1,5 +1,5 @@
 export interface showProfileI {
-  ID: number;
+  ID?: number;
   Name: string;
   Age: number;
   Avatar: any[];

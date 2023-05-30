@@ -1,6 +1,7 @@
 package services
 
 import (
+	cst "github.com/qingyggg/storybook/server/constants"
 	"github.com/qingyggg/storybook/server/db/models"
 	"github.com/qingyggg/storybook/server/dto"
 	"github.com/qingyggg/storybook/server/util"
@@ -11,24 +12,24 @@ type Article struct {
 	DB *gorm.DB
 }
 
-//TODO: label,keyword will add later
-
+// List TODO: label,keyword will add later=
 func (a *Article) List(offset uint) (bool, *models.ApiArticleList) {
+	ds := new(util.DbRes)
 	//NOTE: except title,description field,other field will be returned zero value
 	articles := new(models.ApiArticleList)
-	//default limits:25
 	result := a.DB.Model(&models.Article{}).Limit(10).Offset(int(offset)).Find(articles)
-	return util.CrudJudgement(result), articles
+	isErr, _ := ds.AssignResults(result).DistinguishSqlErrType().AssignIsErr([]uint{1, 1}).ReturnInfo()
+	return isErr, articles
 }
 
 func (a *Article) Detail(articleID uint) (bool, *models.Article) {
-	//NOTE:will return all field about this struct,none zero value fields
 	article := new(models.Article)
 	result := a.DB.First(article, "ID = ?", articleID) //default model is First()'s first argument
 	return util.CrudJudgement(result), article
 }
 
-func (a *Article) Create(articleDto *dto.ArticleDto) bool {
+func (a *Article) Create(articleDto *dto.ArticleDto) (isError bool, message string) {
+	ds := new(util.DbRes)
 	article := &models.Article{
 		UserID:      articleDto.UserID,
 		Title:       articleDto.Title,
@@ -36,10 +37,11 @@ func (a *Article) Create(articleDto *dto.ArticleDto) bool {
 		Content:     articleDto.Content,
 	}
 	result := a.DB.Create(article) //if insert error,gorm will log the error
-	return util.CrudJudgement(result)
+	return ds.AssignResults(result).DistinguishSqlErrType().AssignDefaultsIsErr().AssignDefaultMessage(cst.ARTICLE_CREATE).ReturnInfo()
 }
 
-func (a *Article) Edit(articleDto *dto.ArticleDtoForEdit) bool {
+func (a *Article) Edit(articleDto *dto.ArticleDtoForEdit) (isError bool, message string) {
+	ds := new(util.DbRes)
 	article := &models.Article{
 		ID:          articleDto.ArticleID,
 		UserID:      articleDto.UserID,
@@ -50,11 +52,12 @@ func (a *Article) Edit(articleDto *dto.ArticleDtoForEdit) bool {
 	// 根据 `struct` 更新属性，只会更新非零值的字段
 	//update() for single row,updates() for multiple row(use struct or map)
 	result := a.DB.Model(&models.Article{ID: article.ID}).Updates(article)
-	return util.CrudJudgement(result)
+	return ds.AssignResults(result).DistinguishSqlErrType().AssignDefaultsIsErr().AssignDefaultMessage(cst.ARTICLE_EDIT).ReturnInfo()
 }
 
-func (a *Article) Delete(articleDto *dto.ArticleDtoForDelete) bool {
+func (a *Article) Delete(articleDto *dto.ArticleDtoForDelete) (isError bool, message string) {
+	ds := new(util.DbRes)
 	article := &models.Article{ID: articleDto.ArticleID}
 	result := a.DB.Delete(article)
-	return util.CrudJudgement(result)
+	return ds.AssignResults(result).DistinguishSqlErrType().AssignDefaultsIsErr().AssignDefaultMessage(cst.ARTICLE_DELETE).ReturnInfo()
 }

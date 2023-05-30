@@ -11,21 +11,16 @@ import (
 
 func ProfileController() {
 	profile := router.GetAppRouter().Group("/profile")
-	ps:=services.Profile{DB: db.GetDataBase()}
+	ps := services.Profile{DB: db.GetDataBase()}
 	profile.GET("/show", func(ctx *gin.Context) {
-		ok,profile:=ps.Show(util.StringConvertToUint(ctx.Query("userId")))
-		util.Response(ctx,ok,profile)
+		ok, profile := ps.Show(util.StringConvertToUint(ctx.Query("userId")))
+		util.Response(ctx, ok, profile)
 	})
 	profile.POST("/edit", func(ctx *gin.Context) {
+		newRes := new(util.ResPayload)
 		pBody := &dto.UserProfileDtoForEdit{}
 		util.AssignBodyJson(ctx, pBody)
-		ok:=ps.Edit(pBody)//* get value, & get address,*int type
-		util.Response(ctx,ok)
-	})
-	profile.POST("/create", func(ctx *gin.Context) {	
-		pBody := &dto.UserProfileDto{}
-		util.AssignBodyJson(ctx, pBody)
-		ok:=ps.Create(pBody)//* get value, & get address,*int type
-		util.Response(ctx,ok)
+		ok := ps.Edit(pBody)
+		newRes.SetDefault(!ok, nil).Response(ctx)
 	})
 }
