@@ -98,7 +98,7 @@ export default function MenuAppBar() {
               <MenuItem
                 onClick={() => {
                   handleClose();
-                  router.push('/');
+                  router.push('/myArticles');
                 }}
               >
                 my articles
@@ -106,7 +106,7 @@ export default function MenuAppBar() {
               <MenuItem
                 onClick={() => {
                   handleClose();
-                  router.push('/');
+                  router.push('/myComments');
                 }}
               >
                 my comments

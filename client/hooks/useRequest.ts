@@ -36,7 +36,7 @@ export const useRequest = <T>(
     } catch (err: any) {
       e && e(err); //exe error callback
       console.log(err);
-      if (err.response.status === 404) {
+      if (err.code === 'ERR_NETWORK') {
         //404
         setAlsState({ info: 'error', message: 'network 404', open: true });
       } else {

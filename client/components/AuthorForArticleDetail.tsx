@@ -1,17 +1,16 @@
 import { Avatar, Button } from '@mui/material';
 import { deepPurple } from '@mui/material/colors';
 import React, { useState } from 'react';
-import AddCommentIcon from '@mui/icons-material/AddComment';
-import CommentDialog from './CommentDialog';
 import { useRequest } from '../hooks/useRequest';
 import { postCommentApi } from '../api/comment';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import AddCommentDialog from './AddCommentDialog';
 
 export default function AuthorForArticleDetail(props: propsI) {
   const { UserID, ArticleID, setCommentIsAdd } = props;
-  const [comment, setComment] = useState<string>('');
+  const [Comment, setComment] = useState<string>('');
   const addCommentReq = useRequest(
-    postCommentApi({ UserID, ArticleID, Content: comment }),
+    postCommentApi({ UserID, ArticleID, Content: Comment }),
     () => {
       setCommentIsAdd(true);
     },
@@ -26,14 +25,10 @@ export default function AuthorForArticleDetail(props: propsI) {
         <span className='text-xl'>Marisa Author</span>
       </div>
       <div>
-        <CommentDialog
+        <AddCommentDialog
           callback={addComment}
-          dialogTitle='add comment'
-          dialogContent='please write your comment'
-          dialogButton='add comment'
-          Content={comment}
-          onContentChange={(e) => setComment(e.target.value)}
-          ButtonIcon={<AddCommentIcon />}
+          Comment={Comment}
+          onCommentChange={(e) => setComment(e.target.value)}
         />
       </div>
       <FavoriteIcon fontSize='large' />

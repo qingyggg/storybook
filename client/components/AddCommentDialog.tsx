@@ -1,48 +1,62 @@
+import { ChangeEvent, useState } from 'react';
 import {
   Button,
   Dialog,
-  DialogTitle,
+  DialogActions,
   DialogContent,
   DialogContentText,
+  DialogTitle,
   TextField,
-  DialogActions,
 } from '@mui/material';
-import React from 'react';
 
-export default function AddCommentDialog({
-  handleClickClose,
-  handleClickOpen,
-  open,
-}: propTypes) {
+export default function AddCommentDialog(props: propsI) {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (isCancel: boolean) => {
+    setOpen(false);
+    if (!isCancel) {
+      props.callback();
+    }
+  };
+
   return (
     <div>
-      <Dialog open={open} onClose={handleClickClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+      <Button variant='outlined' onClick={handleClickOpen}>
+        comment
+      </Button>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>comment</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
-          </DialogContentText>
+          <DialogContentText>please input your comment</DialogContentText>
           <TextField
             autoFocus
             margin='dense'
-            id='name'
-            label='Email Address'
-            type='email'
+            id='title'
+            label='title'
+            type='text'
             fullWidth
             variant='standard'
+            value={props.Comment}
+            onChange={props.onCommentChange}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClickClose}>Cancel</Button>
-          <Button onClick={handleClickClose}>Subscribe</Button>
+          <Button onClick={() => handleClose(true)}>Cancel</Button>
+          <Button onClick={() => handleClose(false)}>submit</Button>
         </DialogActions>
       </Dialog>
     </div>
   );
 }
-interface propTypes {
-  open: boolean;
-  handleClickClose: () => any;
-  handleClickOpen: () => any;
+
+interface propsI {
+  callback: () => any;
+  Comment: string;
+  onCommentChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => any;
 }

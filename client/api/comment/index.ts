@@ -9,6 +9,7 @@ export const postCommentEditApi = (comment: commentEditI) => () =>
   post('/comment/edit', comment);
 export const postCommentDeleteApi = (comment: commentDeleteI) => () =>
   post('/comment/delete', comment);
-
 export const getCommentListApi = (ArticleId: number) => () =>
   get<commentListT>('/comment/list?ArticleId=' + ArticleId);
+export const getMyCommentListApi = (userId: string) => () =>
+  get<commentListT>('/comment/mylist?userId=' + userId);

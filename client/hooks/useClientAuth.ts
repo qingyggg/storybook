@@ -11,19 +11,20 @@ const useClientAuth = () => {
   let blackList: string[] = [];
   //when token expired
   //profile->routerAttach success->request->authentication failed->login->profile->routerAttach failed->login
+  //recoil set router pathname,and write plus version of router.push
   //TODO:test this
-  useEffect(() => {
-    blackList.forEach((e) => {
-      const regex = new RegExp(e);
-      const b = regex.test(router.pathname);
-      if (b) {
-        //authentication according userId.whether userId===''
-        if (userId() === '') {
-          router.push('/login');
-        }
-      }
-    });
-  }, [router.pathname]);
+  // useEffect(() => {
+  //   blackList.forEach((e) => {
+  //     const regex = new RegExp(e);
+  //     const b = regex.test(router.pathname);
+  //     if (b) {
+  //       //authentication according userId.whether userId===''
+  //       if (userId() === '') {
+  //         router.push('/login');
+  //       }
+  //     }
+  //   });
+  // }, [router.pathname]);
   const routerAttach = (rs: string[]) => {
     blackList = rs;
   };

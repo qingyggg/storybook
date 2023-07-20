@@ -34,6 +34,7 @@ export default function Detail() {
   useMemo(() => {
     if (commentIsAdd) {
       getCommentLists();
+      setCommentIsAdd(false);
     }
   }, [commentIsAdd]);
   useEffect(() => {
@@ -45,7 +46,7 @@ export default function Detail() {
   }, [ad]);
   return (
     <div className='w-full flex-row flex'>
-      <div className='w-4/5 flex-col flex items-center bg-cyan-200'>
+      <div className='w-4/5 flex-col flex items-center'>
         <h1 className='text-4xl'>i am the tileuhuu</h1>
         <div>
           <article className='prose lg:prose-xl'>
