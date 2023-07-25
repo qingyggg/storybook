@@ -1,7 +1,6 @@
 package services
 
 import (
-	"fmt"
 	"github.com/qingyggg/storybook/server/db/models"
 	"github.com/qingyggg/storybook/server/dto"
 	"github.com/qingyggg/storybook/server/util"
@@ -29,12 +28,11 @@ func (p *Profile) Edit(profileDto *dto.UserProfileDtoForEdit) (ok bool) {
 		Twitter:     profileDto.Twitter,
 	}
 	result := p.DB.Model(&models.UserProfile{}).Where("user_id=?", profileDto.UserId).Updates(profile)
-	fmt.Println(result.Error)
 	ok = util.CrudJudgement(result)
 	return
 }
 
-// one user only call this once after register
+// Create one user only call this once after register
 func (p *Profile) Create(profileDto *dto.UserProfileDto, authDto *dto.AuthDto) (ok bool) {
 	userInfo := &models.User{}
 	results := p.DB.Where(&models.User{Email: authDto.Email, Password: authDto.Password}).First(userInfo)
@@ -49,8 +47,6 @@ func (p *Profile) Create(profileDto *dto.UserProfileDto, authDto *dto.AuthDto) (
 			Github:      profileDto.Github,
 			Twitter:     profileDto.Twitter,
 		}
-		//find user id,
-		//please use sql procedure in 2.0 version,instead of two sql statements in one service,its may make an effect on performance!!!!
 		result := p.DB.Create(profile)
 		ok = util.CrudJudgement(result)
 	} else {

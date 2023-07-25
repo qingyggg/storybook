@@ -5,8 +5,6 @@ import { registerApi } from '../../api/user';
 import { useRequest } from '../../hooks/useRequest';
 import { usePassword } from '../../hooks/usePassword';
 import { useRouter } from 'next/router';
-import useToken from '../../hooks/useToken';
-import useLocalStorage from '../../hooks/useLocalStorage';
 import useStatelessStorage from '../../hooks/useStatelessStorage';
 import { useRecoilState } from 'recoil';
 import { authState } from '../../store/auth';
@@ -16,7 +14,7 @@ export default function Register() {
   const [Email, setEmail] = useState('');
   const [Password, setPassword, cryptedPwdByMd5] = usePassword();
   const [, setUserId] = useStatelessStorage('userId');
-  const { generateToken } = useToken();
+
   const [auth, setAuth] = useRecoilState(authState);
   useEffect(() => {
     setEmail(auth.Email);
@@ -26,9 +24,6 @@ export default function Register() {
     registerApi({ Email, Password: cryptedPwdByMd5 }),
     async (ud) => {
       setUserId(ud!);
-      await (
-        await generateToken
-      )();
       router.push('/profileEdit/' + ud);
     },
   );

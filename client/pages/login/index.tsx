@@ -5,8 +5,6 @@ import { useRouter } from 'next/router';
 import { loginApi } from '../../api/user';
 import { usePassword } from '../../hooks/usePassword';
 import { useRequest } from '../../hooks/useRequest';
-import useLocalStorage from '../../hooks/useLocalStorage';
-import useToken from '../../hooks/useToken';
 import { useRecoilState } from 'recoil';
 import { authState } from '../../store/auth';
 import useStatelessStorage from '../../hooks/useStatelessStorage';
@@ -17,7 +15,6 @@ function Login() {
   const [Password, setPassword, cryptedPwdByMd5] = usePassword();
   const [, setUserId] = useStatelessStorage('userId');
   const [auth, setAuth] = useRecoilState(authState);
-  const { generateToken } = useToken();
   //synchronize atom state to this component state
   useEffect(() => {
     setEmail(auth.Email);
@@ -25,11 +22,8 @@ function Login() {
   }, []);
   const loginReq = useRequest(
     loginApi({ Email, Password: cryptedPwdByMd5 }),
-    async (ud: string) => {
-      setUserId(ud);
-      await (
-        await generateToken
-      )();
+    (ud) => {
+      setUserId(ud!);
       router.push('/');
     },
   );

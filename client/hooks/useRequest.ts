@@ -24,10 +24,17 @@ export const useRequest = <T>(
   return async () => {
     try {
       let { data } = await api();
-      if (data.data) {
-        s && s(data.data[0]); //data.data=T[]
-      } else {
-        s && s(null);
+      //success callback logical
+      if (s) {
+        if (data.data) {
+          if (typeof data.data === 'string') {
+            s(data.data);
+          } else {
+            s(data.data[0]); //data.data=T[]
+          }
+        } else {
+          s(null);
+        }
       }
 
       if (!forbidSetAlsStateWhenSuccess) {
@@ -36,7 +43,7 @@ export const useRequest = <T>(
     } catch (err: any) {
       e && e(err); //exe error callback
       console.log(err);
-      if (err.response.status === 404) {
+      if (err.code === 'ERR_NETWORK') {
         //404
         setAlsState({ info: 'error', message: 'network 404', open: true });
       } else {
@@ -50,6 +57,6 @@ export const useRequest = <T>(
   };
 };
 
-type apiType<T> = (p?: any) => Promise<AxiosResponse<baseRes<T>, any>>;
+type apiType<T> = () => Promise<AxiosResponse<baseRes<T>, any>>;
 type sucCb<T> = (data: T | null) => any;
 type errCb = (err: any) => any;

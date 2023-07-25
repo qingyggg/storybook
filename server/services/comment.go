@@ -14,9 +14,24 @@ type Comment struct {
 }
 
 func (c *Comment) List(ad uint) (bool, *models.ApiComments) {
+	return c.baseList("list", ad)
+}
+
+func (c *Comment) MyList(ud uint) (bool, *models.ApiComments) {
+	return c.baseList("mylist", ud)
+}
+
+func (c *Comment) baseList(forWhat string, payload uint) (bool, *models.ApiComments) {
 	ds := new(util.DbRes)
 	comments := &models.ApiComments{}
-	result := c.DB.Table("comments").Select("comments.id, comments.content,user_profiles.name user_name,user_profiles.user_id").Joins("left join user_profiles  on user_profiles.user_id = comments.user_id").Where("article_id = ?", ad).Scan(comments)
+	semiSqlClause := c.DB.Table("comments").Select("comments.id, comments.content,user_profiles.name user_name,user_profiles.user_id").Joins("left join user_profiles  on user_profiles.user_id = comments.user_id")
+	var result *gorm.DB
+	if forWhat == "mylist" {
+		result = semiSqlClause.Where("user_profiles.user_id = ?", payload).Scan(comments)
+	} else {
+		//for list
+		result = semiSqlClause.Where("article_id = ?", payload).Scan(comments)
+	}
 	isSqlErr := ds.AssignResults(result).DistinguishSqlErrType().AssignIsErr([]uint{1, 1}).GetIsErr()
 	return isSqlErr, comments
 }
@@ -31,12 +46,12 @@ func (c *Comment) Create(commentDto *dto.CommentDtoForCreate) bool {
 	return util.CrudJudgement(result)
 }
 
-// jwt-->article owner,comment user
+// Delete jwt-->article owner,comment user
 func (c *Comment) Delete(commentDto *dto.CommentDtoForDelete) bool {
 	comment := &models.Comment{
 		ID: commentDto.ID,
 	}
-	result := c.DB.Delete(comment)
+	result := c.DB.Unscoped().Delete(comment)
 	return util.CrudJudgement(result)
 }
 
@@ -114,7 +129,7 @@ func (c *Comment) CommentNumberModify(articleID uint, signal string) bool {
 		} else if signal == "delete" {
 			payload.CommentNumber -= 1
 		}
-		results2 := c.DB.Model(payload).Updates(payload)
+		results2 := c.DB.Save(payload)
 		return util.CrudJudgement(results2)
 	} else {
 		return false

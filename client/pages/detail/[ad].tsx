@@ -9,19 +9,46 @@ import { getArticleDetailApi } from '../../api/article';
 import { getCommentListApi } from '../../api/comment';
 import { commentListT } from '../../api/comment/resTypes';
 import CommentList from '../../components/CommentList';
-import useLocalStorage from '../../hooks/useLocalStorage';
+import { showProfileI } from '../../api/user/resTypes';
+import { showProfileApi } from '../../api/user';
+import { articleDetailI } from '../../api/article/resTypes';
+import moment from 'moment';
 
 export default function Detail() {
-  const [markdown, setMarkdown] = useState<string>('');
+  const [detail, setDetail] = useState<articleDetailI>({
+    CommentNumber: 0,
+    Comments: [],
+    Content: '',
+    Description: '',
+    ID: 0,
+    LikeNumber: 0,
+    Title: '',
+    UserID: 0,
+    CreatedAt: '',
+    UpdatedAt: '',
+  });
   const [cmList, setCmList] = useState<commentListT>([]);
   const [commentIsAdd, setCommentIsAdd] = useState<boolean>(false);
   const router = useRouter();
   const { ad } = router.query;
-  const [ud] = useLocalStorage('userId');
+  const [authorId, setAuthorId] = useState<number>(0);
+  const [authorInfo, setAuthorInfo] = useState<showProfileI>({
+    Age: 0,
+    Avatar: [],
+    Description: 'im Marisa,you discover me tho,where is the real author?',
+    Github: '',
+    ID: 0,
+    Name: 'Marisa',
+    Twitter: '',
+  });
+  const authorShowReq = useRequest(showProfileApi(authorId), (data) =>
+    setAuthorInfo(data!),
+  );
   const getArticleDetail = useRequest(
     getArticleDetailApi(idTransform(ad)),
     (res) => {
-      setMarkdown(res!.Content);
+      setDetail(res!);
+      setAuthorId(res?.UserID!);
     },
   );
   const getCommentLists = useRequest(
@@ -34,8 +61,14 @@ export default function Detail() {
   useMemo(() => {
     if (commentIsAdd) {
       getCommentLists();
+      setCommentIsAdd(false);
     }
   }, [commentIsAdd]);
+  useMemo(() => {
+    if (authorId !== 0) {
+      authorShowReq();
+    }
+  }, [authorId]);
   useEffect(() => {
     if (idTransform(ad) === 0) {
       return;
@@ -45,12 +78,22 @@ export default function Detail() {
   }, [ad]);
   return (
     <div className='w-full flex-row flex'>
-      <div className='w-4/5 flex-col flex items-center bg-cyan-200'>
-        <h1 className='text-4xl'>i am the tileuhuu</h1>
+      <div className='w-4/5 flex-col flex items-center'>
+        <div className='w-1/2'>
+          <h1 className='text-6xl my-6 '>{detail.Title}</h1>
+          <div className='text-gray-400 flex pb-6 border-b-2'>
+            <p>
+              created
+              {moment(detail.CreatedAt).format('MMMM Do YYYY, h:mm:ss a')}
+            </p>
+            <div className='mx-10'></div>
+            <p>latest update:{detail.UpdatedAt}</p>
+          </div>
+        </div>
         <div>
           <article className='prose lg:prose-xl'>
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
-              {markdown}
+              {detail.Content}
             </ReactMarkdown>
           </article>
         </div>
@@ -59,8 +102,9 @@ export default function Detail() {
       <div className='fixed top-28 right-8'>
         <AuthorForArticleDetail
           ArticleID={idTransform(ad)}
-          UserID={idTransform(ud)}
+          UserID={authorId}
           setCommentIsAdd={setCommentIsAdd}
+          authorInfo={authorInfo}
         />
       </div>
     </div>

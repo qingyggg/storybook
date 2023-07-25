@@ -6,6 +6,10 @@ export const getArticleListApi = (offset: number) => {
   return () => get<articleListType>('/article/list?offset=' + offset);
 };
 
+export const getMyArticleApi = (uid: string) => {
+  return () => get<articleListType>('/article/mylist?uid=' + uid);
+};
+
 export const getArticleDetailApi = (articleID: number) => {
   return () => get<articleDetailI>('/article/detail?articleID=' + articleID);
 };

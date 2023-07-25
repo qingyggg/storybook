@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/qingyggg/storybook/server/util"
 	"net/http"
+	"os"
 	"regexp"
 )
 
@@ -46,7 +47,7 @@ func JwtAuth() gin.HandlerFunc {
 		for i := 0; i < len(util.BlackList); i++ {
 			match, _ := regexp.MatchString(util.BlackList[i], ctx.FullPath())
 			if match {
-				util.VerifyJwt(ctx)
+				util.VerifyJwt(ctx, os.Getenv("SECRET_KEY"))
 				break
 			}
 		}

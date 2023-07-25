@@ -26,5 +26,5 @@ export default function ArticleList(props: PropI) {
 }
 interface PropI {
   list: articleListType;
-  likesStatus: likesStatus;
+  // likesStatus: likesStatus;
 }
