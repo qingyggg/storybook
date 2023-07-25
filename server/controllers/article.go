@@ -18,7 +18,11 @@ func ArticleController() {
 		isErr, list := as.List(util.StringConvertToUint(offset)) //url:/list?offset=25
 		util.Response(ctx, !isErr, list)
 	})
-
+	article.GET("/mylist", func(ctx *gin.Context) {
+		uid := util.QueryDefaultAssigner(ctx, "uid", "0")
+		isErr, list := as.MyList(util.StringConvertToUint(uid)) //url:/list?offset=25
+		util.Response(ctx, !isErr, list)
+	})
 	article.GET("/detail", func(ctx *gin.Context) {
 		articleId := util.QueryDefaultAssigner(ctx, "articleID", "0")
 		ok, detail := as.Detail(util.StringConvertToUint(articleId))

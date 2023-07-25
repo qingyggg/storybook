@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { commentListT } from '../../api/comment/resTypes';
 import CommentCardForEdit from '../../components/CommentCardForEdit';
 import { useRequest } from '../../hooks/useRequest';
-import { getMyCommentListApi, postCommentDeleteApi } from '../../api/comment';
+import {
+  getMyCommentListApi,
+} from '../../api/comment';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 function Index() {
   const [comments, setComments] = useState<commentListT>([]);
-  const cmtReq = useRequest(getMyCommentListApi('6'), (v) => {
+  const [userId] = useLocalStorage('userId', () => cmtReq(), true);
+  const cmtReq = useRequest(getMyCommentListApi(userId), (v) => {
     setComments(v!);
   });
-  useEffect(() => {
-    cmtReq();
-  }, []);
+
   return (
     <div className='flex flex-col items-center mt-6'>
       <h1 className='text-blue-600 text-4xl hover:cursor-pointer'>

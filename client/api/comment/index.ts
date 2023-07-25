@@ -12,4 +12,4 @@ export const postCommentDeleteApi = (comment: commentDeleteI) => () =>
 export const getCommentListApi = (ArticleId: number) => () =>
   get<commentListT>('/comment/list?ArticleId=' + ArticleId);
 export const getMyCommentListApi = (userId: string) => () =>
-  get<commentListT>('/comment/mylist?userId=' + userId);
+  get<commentListT>('/comment/mylist?UserId=' + userId);

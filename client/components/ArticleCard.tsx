@@ -1,12 +1,11 @@
 import React from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
-import StarRateIcon from '@mui/icons-material/StarRate';
-import { articleItemForListI, articleListType } from '../api/article/resTypes';
+import { articleItemForListI } from '../api/article/resTypes';
 import Link from 'next/link';
 export default function ArticleCard(props: propI) {
   return (
-    <div className='h-48 w-full bg-gray-200 p-4 flex justify-between  hover:shadow-xl'>
+    <div className='h-48 w-full bg-gray-200 p-4 flex justify-between  hover:shadow-xl rounded-lg'>
       <div className='flex flex-col'>
         <Link
           href={'/detail/' + props.ID}
@@ -18,18 +17,23 @@ export default function ArticleCard(props: propI) {
           {props.Description}
         </span>
       </div>
-      <div className='w-36 h-36 flex flex-col justify-between'>
-        <div>
-          <FavoriteIcon fontSize='large' />
-          <span>{props.LikeNumber}</span>
+      <div className='flex'>
+        <div className='w-36 h-36 flex flex-col justify-between'>
+          <div>
+            <FavoriteIcon fontSize='large' />
+            <span>{props.LikeNumber}</span>
+          </div>
+          <div>
+            <CommentIcon fontSize='large' />
+            <span>{props.CommentNumber}</span>
+          </div>
         </div>
-        <div>
-          <CommentIcon fontSize='large' />
-          <span>{props.CommentNumber}</span>
-        </div>
+        {props.editMode && <div className='mx-10'></div>}
       </div>
     </div>
   );
 }
 
-interface propI extends articleItemForListI {}
+interface propI extends articleItemForListI {
+  editMode?: boolean;
+}

@@ -1,6 +1,7 @@
 package services
 
 import (
+	"fmt"
 	cst "github.com/qingyggg/storybook/server/constants"
 	"github.com/qingyggg/storybook/server/db/models"
 	"github.com/qingyggg/storybook/server/dto"
@@ -18,6 +19,15 @@ func (a *Article) List(offset uint) (bool, *models.ApiArticleList) {
 	//NOTE: except title,description field,other field will be returned zero value
 	articles := new(models.ApiArticleList)
 	result := a.DB.Model(&models.Article{}).Limit(10).Offset(int(offset)).Find(articles)
+	isErr, _ := ds.AssignResults(result).DistinguishSqlErrType().AssignIsErr([]uint{1, 1}).ReturnInfo()
+	return isErr, articles
+}
+
+func (a *Article) MyList(uid uint) (bool, *models.ApiArticleList) {
+	ds := new(util.DbRes)
+	//NOTE: except title,description field,other field will be returned zero value
+	articles := new(models.ApiArticleList)
+	result := a.DB.Model(&models.Article{}).Where("user_id=?", uid).Find(articles)
 	isErr, _ := ds.AssignResults(result).DistinguishSqlErrType().AssignIsErr([]uint{1, 1}).ReturnInfo()
 	return isErr, articles
 }
@@ -56,8 +66,24 @@ func (a *Article) Edit(articleDto *dto.ArticleDtoForEdit) (isError bool, message
 }
 
 func (a *Article) Delete(articleDto *dto.ArticleDtoForDelete) (isError bool, message string) {
-	ds := new(util.DbRes)
 	article := &models.Article{ID: articleDto.ArticleID}
-	result := a.DB.Delete(article)
-	return ds.AssignResults(result).DistinguishSqlErrType().AssignDefaultsIsErr().AssignDefaultMessage(cst.ARTICLE_DELETE).ReturnInfo()
+	//start transaction
+	err := a.DB.Transaction(func(tx *gorm.DB) error {
+		// 在事务中执行一些 db 操作（从这里开始，您应该使用 'tx' 而不是 'db'）
+		if err := tx.Unscoped().Where("article_id = ?", articleDto.ArticleID).Delete(&models.Comment{}).Error; err != nil {
+			return err
+		}
+		if err := tx.Unscoped().Delete(article).Error; err != nil {
+			// 返回任何错误都会回滚事务
+			return err
+		}
+		// 返回 nil 提交事务
+		return nil
+	})
+	if err == nil {
+		return false, cst.ARTICLE_DELETE
+	} else {
+		fmt.Println(err, 4678)
+		return true, cst.SERVER_ERR
+	}
 }

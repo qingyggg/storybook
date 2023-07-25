@@ -9,7 +9,7 @@ import {
   TextField,
 } from '@mui/material';
 
-export default function AddCommentDialog(props: propsI) {
+export default function CommentDialog(props: propsI) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -20,23 +20,26 @@ export default function AddCommentDialog(props: propsI) {
     setOpen(false);
     if (!isCancel) {
       props.callback();
+    } else if (props.cancerCallBack) {
+      props.cancerCallBack();
     }
   };
 
   return (
     <div>
       <Button variant='outlined' onClick={handleClickOpen}>
-        comment
+        {props.forEdit && 'edit'}
+        {!props.forEdit && 'comment'}
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>comment</DialogTitle>
+        <DialogTitle>{props.forEdit && 'edit '}comment</DialogTitle>
         <DialogContent>
           <DialogContentText>please input your comment</DialogContentText>
           <TextField
             autoFocus
             margin='dense'
             id='title'
-            label='title'
+            label='comment'
             type='text'
             fullWidth
             variant='standard'
@@ -55,8 +58,10 @@ export default function AddCommentDialog(props: propsI) {
 
 interface propsI {
   callback: () => any;
+  cancerCallBack?: () => any;
   Comment: string;
   onCommentChange: (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => any;
+  forEdit?: boolean;
 }

@@ -17,4 +17,6 @@ export interface articleDetailI {
   Comments: any[];
   LikeNumber: number;
   CommentNumber: number;
+  CreatedAt: string;
+  UpdatedAt: string;
 }

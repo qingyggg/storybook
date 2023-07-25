@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 export default function useLocalStorage(
   storageKey: string,
   callback?: () => any,
+  defaultValNeedCb?: boolean,
 ): [string, (v: string) => void] {
   const [value, setValue] = useState<string>('empty value');
   const [isFirst, setIsFirst] = useState<boolean>(true);
@@ -18,15 +19,17 @@ export default function useLocalStorage(
     setIsDefaultVal(true);
   }, []);
   useEffect(() => {
-    return () => {
-      if (!isFirst) {
-        localStorage.setItem(storageKey, value);
-        //only call when user call setPlusValue
-        if (!isDefaultVal) {
+    if (!isFirst) {
+      localStorage.setItem(storageKey, value);
+      //only call when user call setPlusValue
+      if (!isDefaultVal) {
+        callback && callback();
+      } else {
+        if (defaultValNeedCb) {
           callback && callback();
         }
       }
-    };
+    }
   }, [value, isFirst, isDefaultVal]);
   const setPlusValue = (v: string) => {
     isFirst && setIsFirst(false);

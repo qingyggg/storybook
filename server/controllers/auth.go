@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	cst "github.com/qingyggg/storybook/server/constants"
 	"github.com/qingyggg/storybook/server/db"
@@ -17,16 +16,25 @@ func AuthController() {
 	pus := services.Profile{DB: db.GetDataBase()}
 	auth.POST("/login", func(ctx *gin.Context) {
 		newRes := new(util.ResPayload)
-		auBody := &dto.AuthDto{}                                               //get request template
-		util.AssignBodyJson(ctx, auBody)                                       //get request body
-		isErr, msg, userId := aus.Login(auBody, false)                         //invoke  service fuc
-		newRes.SetIsError(isErr).SetMessage(msg).SetData(userId).Response(ctx) //set response body and response to client
+		auBody := &dto.AuthDto{}                       //get request template
+		util.AssignBodyJson(ctx, auBody)               //get request body
+		isErr, msg, userId := aus.Login(auBody, false) //invoke  service fuc
+		if !isErr {
+			nc, err := util.TokenHandler(userId, ctx)
+			if err != nil {
+				newRes.SetIsError(true).SetMessage(cst.SERVER_ERR).SetData(nil).Response(ctx)
+			} else {
+				newRes.SetIsError(false).SetMessage(cst.LOGIN).SetData(userId).Response(nc)
+			}
+		} else {
+			newRes.SetIsError(isErr).SetMessage(msg).SetData(nil).Response(ctx) //set response body and response to client
+		}
 	})
 	auth.POST("/register", func(ctx *gin.Context) {
 		newRes := new(util.ResPayload)
 		auBody := &dto.AuthDto{}
 		util.AssignBodyJson(ctx, auBody)
-		isErr, msg, userId := aus.Login(auBody, true)
+		isErr, msg, _ := aus.Login(auBody, true)
 		//sql error
 		if msg == cst.SERVER_ERR {
 			newRes.SetDefaultMsg(true).Response(ctx)
@@ -41,7 +49,18 @@ func AuthController() {
 				//set Original user profile
 				ok1 := pus.Create(&dto.UserProfileDto{}, auBody)
 				if ok1 {
-					newRes.SetIsError(false).SetMessage(cst.REGISTER).SetData(userId).Response(ctx)
+					isErr2, _, userId := aus.Login(auBody, true)
+					if !isErr2 {
+						nc, err := util.TokenHandler(userId, ctx)
+						if err != nil {
+							newRes.SetIsError(true).SetMessage(cst.SERVER_ERR).SetData(nil).Response(ctx)
+						} else {
+							newRes.SetIsError(false).SetMessage(cst.REGISTER).SetData(userId).Response(nc)
+						}
+					} else {
+						newRes.SetIsError(true).SetMessage(cst.SERVER_ERR).SetData(nil).Response(ctx)
+					}
+
 				} else {
 					newRes.SetIsError(true).SetMessage(cst.SERVER_ERR).Response(ctx)
 				}
@@ -62,29 +81,4 @@ func AuthController() {
 			newRes.SetMessage(message).SetIsError(isErr).Response(ctx)
 		}
 	})
-	auth.POST("/updateToken", func(ctx *gin.Context) {
-		newRes := new(util.ResPayload)
-		util.VerifyJwt(ctx)
-		userId, err := util.ExtractClaims(ctx)
-		if err != nil {
-			newRes.SetDefault(true, nil).Response(ctx)
-		}
-		resToken(ctx, userId, newRes)
-	})
-	auth.POST("/generateNewToken", func(ctx *gin.Context) {
-		newRes := new(util.ResPayload)
-		auBody := &dto.AuthDtoJWT{}
-		util.AssignBodyJson(ctx, auBody)
-		fmt.Println("generate token," + auBody.UserId)
-		resToken(ctx, auBody.UserId, newRes)
-	})
-}
-
-func resToken(ctx *gin.Context, userId string, newRes *util.ResPayload) {
-	token, err := util.GenerateJWT(userId)
-	if err != nil {
-		newRes.SetDefault(true, nil).Response(ctx)
-	} else {
-		newRes.SetDefault(false, token).Response(ctx)
-	}
 }

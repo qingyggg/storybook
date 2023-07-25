@@ -18,6 +18,11 @@ func CommentController() {
 		isErr, list := cs.List(util.StringConvertToUint(articleId))
 		util.Response(ctx, !isErr, list)
 	})
+	comment.GET("/mylist", func(ctx *gin.Context) {
+		userId := util.QueryDefaultAssigner(ctx, "UserId", "0")
+		isErr, list := cs.MyList(util.StringConvertToUint(userId))
+		util.Response(ctx, !isErr, list)
+	})
 	comment.POST("/create", func(ctx *gin.Context) {
 		var ok bool
 		newRes := new(util.ResPayload)
@@ -31,24 +36,24 @@ func CommentController() {
 		newRes.SetIsError(!ok).SetMessage2(cst.COMMENT_CREATE).Response(ctx)
 	})
 	comment.POST("/delete", func(ctx *gin.Context) {
-		var isErr *bool
+		var isErr bool
 		newRes := new(util.ResPayload)
 		cBody := &dto.CommentDtoForDelete{}
 		util.AssignBodyJson(ctx, cBody)
 		if cs.Delete(cBody) && cs.CommentNumberModify(cBody.ArticleID, "delete") {
 			//*type *get value  &get address
-			*isErr = false
+			isErr = false
 		} else {
-			*isErr = true
+			isErr = true
 		}
-		newRes.SetIsError(*isErr).SetMessage2(cst.COMMENT_DELETE).Response(ctx)
+		newRes.SetIsError(isErr).SetMessage2(cst.COMMENT_DELETE).Response(ctx)
 	})
 	comment.POST("/edit", func(ctx *gin.Context) {
 		newRes := new(util.ResPayload)
 		cBody := &dto.CommentDtoForEdit{}
 		util.AssignBodyJson(ctx, cBody)
 		ok := cs.Edit(cBody)
-		newRes.SetIsError(ok).SetMessage2(cst.COMMENT_EDIT).Response(ctx)
+		newRes.SetIsError(!ok).SetMessage2(cst.COMMENT_EDIT).Response(ctx)
 	})
 	comment.POST("/like", func(ctx *gin.Context) {
 		var isErr bool
