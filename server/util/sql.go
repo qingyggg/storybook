@@ -31,7 +31,11 @@ type sqlResults struct {
 
 func (dr *DbRes) AssignResults(res *gorm.DB) *DbRes {
 	if res.Error != nil {
-		dr.ctx.isSqlErr = true
+		if res.Error.Error() != "record not found" {
+			dr.ctx.isSqlErr = true
+		} else {
+			dr.ctx.isSqlErr = false
+		}
 	} else {
 		dr.ctx.isSqlErr = false
 	}

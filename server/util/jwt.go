@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-var BlackList = []string{"/article/create", "/article/edit", "/article/delete", "/auth/modifyPwd", "/comment/create", "/comment/delete", "/comment/like", "/profile/show", "/profile/edit"}
+var BlackList = []string{"/article/create", "/article/edit", "/article/delete", "/auth/modifyPwd", "/comment/create", "/comment/delete", "/comment/like", "/profile/edit"}
 
 type User struct {
 	UserId               string `json:"username"`
@@ -35,7 +35,7 @@ func GenerateJWT(userId string, secretKey string) (string, error) {
 
 func VerifyJwt(ctx *gin.Context, secretKey string) {
 	data, err := ctx.Cookie("token")
-	if err != nil {
+	if err == nil {
 		t, err := jwt.ParseWithClaims(data, &User{}, func(token *jwt.Token) (interface{}, error) {
 			return []byte(secretKey), nil
 		})
@@ -63,6 +63,7 @@ func VerifyJwt(ctx *gin.Context, secretKey string) {
 
 func errResponseByAuthorization(ctx *gin.Context) {
 	ctx.JSON(http.StatusUnauthorized, gin.H{"message": cst.AUTHENTICATION_FAILED, "isError": true, "data": nil})
+	ctx.Abort()
 }
 
 func TokenHandler(userId string, c *gin.Context) (*gin.Context, error) {
@@ -70,7 +71,8 @@ func TokenHandler(userId string, c *gin.Context) (*gin.Context, error) {
 	if err != nil {
 		return nil, errors.New("generate new token false")
 	} else {
-		c.SetCookie("token", token, 60*60*24*5, "/", "localhost", false, true)
+		c.SetSameSite(4)
+		c.SetCookie("token", token, 60*60*24*5, "/", "http://localhost:3000", true, true)
 		return c, nil
 	}
 }

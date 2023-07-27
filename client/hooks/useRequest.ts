@@ -27,10 +27,11 @@ export const useRequest = <T>(
       //success callback logical
       if (s) {
         if (data.data) {
-          if (typeof data.data === 'string') {
-            s(data.data);
-          } else {
+          if (Array.isArray(data.data)) {
+            //<----golang struct
             s(data.data[0]); //data.data=T[]
+          } else {
+            s(data.data); //<----golang map,string,boolean
           }
         } else {
           s(null);
@@ -50,6 +51,11 @@ export const useRequest = <T>(
         alertSet(err);
         if (err.response.status === 401) {
           router.push('/login');
+          setAlsState({
+            info: 'warning',
+            message: 'please login or register your account at first',
+            open: true,
+          });
           logout();
         }
       }

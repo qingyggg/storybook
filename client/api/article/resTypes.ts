@@ -1,5 +1,5 @@
 export interface articleItemForListI {
-  ID: string;
+  ID: number;
   Title: string;
   Description: string;
   LikeNumber: number;

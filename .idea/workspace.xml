@@ -4,7 +4,36 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32486ade-7097-4794-8fdf-bc3b2c3c2163" name="Changes" comment="1.connect comment api&#10;(except like)&#10;2.fix some bugs,and optimize some code" />
+    <list default="true" id="32486ade-7097-4794-8fdf-bc3b2c3c2163" name="Changes" comment="1.wrong push(need to be discover issue)">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/api/article/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/article/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/api/article/resTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/article/resTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/api/auth/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/api/auth/reqTypes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/api/auth/resTypes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/api/comment/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/comment/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/ArticleCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/ArticleCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/ArticleCardForEdit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/ArticleCardForEdit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/AuthorForArticleDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/AuthorForArticleDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/MolsBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/MolsBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/hooks/useRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/hooks/useRequest.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/articleCreate/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/articleCreate/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/detail/[ad].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/detail/[ad].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/myArticles/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/myArticles/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/myComments/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/myComments/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/profileEdit/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/profileEdit/[id].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/util/common.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/util/common.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/util/http.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/util/http.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/article.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/comment.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/comment.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/router/bootstrap.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/router/bootstrap.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/services/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/services/article.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/services/comment.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/services/comment.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/util/jwt.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/util/jwt.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/util/sql.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/util/sql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-demand.txt" beforeDir="false" afterPath="$PROJECT_DIR$/storybook-demand.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,6 +66,9 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2POugAPbxx3BZ6GV9hWckii6yMs" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -56,18 +88,29 @@
     &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;20.0.0&quot;,
     &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.0.0&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/alice/Desktop/storybook&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_interpreter_path&quot;: &quot;/home/alice/.nvm/versions/node/v20.0.0/bin/node&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/alice/.local/share/JetBrains/Toolbox/apps/Goland/ch-0/231.9011.34/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/alice/Desktop/storybook/client/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mariadb&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
@@ -75,7 +118,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.format">
+  <component name="RunManager">
     <configuration name="storybook server" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
       <module name="storybook" />
       <working_directory value="$PROJECT_DIR$/server" />
@@ -117,20 +160,6 @@
       <envs />
       <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="Go Build.storybook server" />
-      <item itemvalue="HTTP Request.rest-api | #1" />
-      <item itemvalue="npm.dev" />
-      <item itemvalue="npm.format" />
-      <item itemvalue="npm.lint" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="npm.format" />
-        <item itemvalue="Go Build.storybook server" />
-        <item itemvalue="npm.dev" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -142,6 +171,8 @@
       <updated>1683372272292</updated>
       <workItem from="1683372273767" duration="38000" />
       <workItem from="1683372356526" duration="7000" />
+      <workItem from="1690290028822" duration="590000" />
+      <workItem from="1690343570368" duration="56000" />
     </task>
     <servers />
   </component>
@@ -167,9 +198,17 @@
     <MESSAGE value="article api bug fixed" />
     <MESSAGE value="1.fix useLocalStorage bug&#10;2.connect all article api" />
     <MESSAGE value="1.connect comment api&#10;(except like)&#10;2.fix some bugs,and optimize some code" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.connect comment api&#10;(except like)&#10;2.fix some bugs,and optimize some code" />
+    <MESSAGE value="1.wrong push(need to be discover issue)" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.wrong push(need to be discover issue)" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="GoApplicationRunConfiguration">
+        <watch expression="err" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

@@ -33,6 +33,16 @@ const ArticleCreate: React.FC = () => {
       router.push('/');
     },
   );
+  //for develop
+  const testCreate = async () => {
+    let i = 15;
+    while (i > 0) {
+      await (
+        await createReq
+      )();
+      i--;
+    }
+  };
   const create = async () => {
     await (
       await createReq

@@ -13,12 +13,20 @@ type Article struct {
 	DB *gorm.DB
 }
 
+func (a *Article) Count() (bool, int64) {
+	ds := new(util.DbRes)
+	var count int64
+	result := a.DB.Model(&models.Article{}).Count(&count)
+	isErr, _ := ds.AssignResults(result).DistinguishSqlErrType().AssignIsErr([]uint{1, 1}).ReturnInfo()
+	return isErr, count
+}
+
 // List TODO: label,keyword will add later=
 func (a *Article) List(offset uint) (bool, *models.ApiArticleList) {
 	ds := new(util.DbRes)
 	//NOTE: except title,description field,other field will be returned zero value
 	articles := new(models.ApiArticleList)
-	result := a.DB.Model(&models.Article{}).Limit(10).Offset(int(offset)).Find(articles)
+	result := a.DB.Model(&models.Article{}).Limit(15).Offset(int(offset)).Find(articles)
 	isErr, _ := ds.AssignResults(result).DistinguishSqlErrType().AssignIsErr([]uint{1, 1}).ReturnInfo()
 	return isErr, articles
 }
@@ -73,7 +81,7 @@ func (a *Article) Delete(articleDto *dto.ArticleDtoForDelete) (isError bool, mes
 		if err := tx.Unscoped().Where("article_id = ?", articleDto.ArticleID).Delete(&models.Comment{}).Error; err != nil {
 			return err
 		}
-		if err := tx.Unscoped().Delete(article).Error; err != nil {
+		if err := tx.Unscoped().Where("id = ?", articleDto.ArticleID).Delete(article).Error; err != nil {
 			// 返回任何错误都会回滚事务
 			return err
 		}

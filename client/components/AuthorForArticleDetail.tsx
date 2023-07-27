@@ -1,17 +1,19 @@
-import { Avatar } from '@mui/material';
+import { Avatar, Button } from '@mui/material';
 import { deepPurple } from '@mui/material/colors';
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { useRequest } from '../hooks/useRequest';
 import { postCommentApi } from '../api/comment';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentDialog from './CommentDialog';
 import { showProfileI } from '../api/user/resTypes';
+import { FavoriteBorder } from '@mui/icons-material';
 
 export default function AuthorForArticleDetail(props: propsI) {
-  const { UserID, ArticleID, setCommentIsAdd } = props;
+  const { ReaderID, ArticleID, setCommentIsAdd, likeStatus, onClickForLike } =
+    props;
   const [Comment, setComment] = useState<string>('');
   const addCommentReq = useRequest(
-    postCommentApi({ UserID, ArticleID, Content: Comment }),
+    postCommentApi({ UserID: ReaderID, ArticleID, Content: Comment }),
     () => {
       setCommentIsAdd(true);
     },
@@ -33,13 +35,30 @@ export default function AuthorForArticleDetail(props: propsI) {
           onCommentChange={(e) => setComment(e.target.value)}
         />
       </div>
-      <FavoriteIcon fontSize='large' />
+      <Button
+        onClick={onClickForLike}
+        variant='outlined'
+        size='medium'
+        color={likeStatus ? 'secondary' : 'primary'}
+        startIcon={
+          likeStatus ? (
+            <FavoriteIcon fontSize='large' className='bg-inherit' />
+          ) : (
+            <FavoriteBorder fontSize='large' />
+          )
+        }
+      >
+        &nbsp;&nbsp;{likeStatus ? 'liked' : 'like'}&nbsp; &nbsp;
+      </Button>
     </div>
   );
 }
 interface propsI {
-  UserID: number;
+  AuthorID: number;
   ArticleID: number;
+  likeStatus: boolean;
+  onClickForLike: () => any;
   setCommentIsAdd: React.Dispatch<React.SetStateAction<boolean>>;
   authorInfo: showProfileI;
+  ReaderID: number;
 }

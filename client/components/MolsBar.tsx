@@ -82,6 +82,14 @@ export default function MenuAppBar() {
               <MenuItem
                 onClick={() => {
                   handleClose();
+                  router.push('/profileEdit/' + ud());
+                }}
+              >
+                edit profile
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
                   router.push('/modify/' + ud());
                 }}
               >

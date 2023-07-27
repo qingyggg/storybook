@@ -6,15 +6,20 @@ import { idTransform } from '../../util/common';
 import { useRouter } from 'next/router';
 import { useRequest } from '../../hooks/useRequest';
 import { getArticleDetailApi } from '../../api/article';
-import { getCommentListApi } from '../../api/comment';
+import { getCommentListApi, postLike, postLikeStatus } from '../../api/comment';
 import { commentListT } from '../../api/comment/resTypes';
 import CommentList from '../../components/CommentList';
 import { showProfileI } from '../../api/user/resTypes';
 import { showProfileApi } from '../../api/user';
 import { articleDetailI } from '../../api/article/resTypes';
 import moment from 'moment';
+import useLocalStorage from '../../hooks/useLocalStorage';
+import { likeI } from '../../api/comment/reqTypes';
+import { useDebounceFn } from 'ahooks';
 
 export default function Detail() {
+  //state hook
+  const router = useRouter();
   const [detail, setDetail] = useState<articleDetailI>({
     CommentNumber: 0,
     Comments: [],
@@ -29,35 +34,60 @@ export default function Detail() {
   });
   const [cmList, setCmList] = useState<commentListT>([]);
   const [commentIsAdd, setCommentIsAdd] = useState<boolean>(false);
-  const router = useRouter();
+  const [authorId, setAuthorId] = useState<number>(-1);
   const { ad } = router.query;
-  const [authorId, setAuthorId] = useState<number>(0);
+  const [readerId] = useLocalStorage('userId');
+  const likePayload: likeI = useMemo(() => {
+    return { ArticleID: idTransform(ad), UserID: idTransform(readerId) };
+  }, [ad, readerId]);
+  const [readerIsLike, setReaderIsLike] = useState<boolean>(false);
   const [authorInfo, setAuthorInfo] = useState<showProfileI>({
     Age: 0,
     Avatar: [],
     Description: 'im Marisa,you discover me tho,where is the real author?',
     Github: '',
-    ID: 0,
+    ID: -1,
     Name: 'Marisa',
     Twitter: '',
   });
+
+  //root comment->second comment->replyed second comment
+
+  //request hook
+  const likeStatusReq = useRequest(postLikeStatus(likePayload), (v) => {
+    setReaderIsLike(v?.isLike!);
+  },()=>{},true);
+  const likeReq = useRequest(postLike(likePayload), (v) => {
+    //set final like status(correct)
+    setReaderIsLike(v?.isLike!);
+  });
+
   const authorShowReq = useRequest(showProfileApi(authorId), (data) =>
-    setAuthorInfo(data!),
+    setAuthorInfo(data!),()=>{},true
   );
   const getArticleDetail = useRequest(
     getArticleDetailApi(idTransform(ad)),
     (res) => {
       setDetail(res!);
       setAuthorId(res?.UserID!);
-    },
+    },()=>{},true
   );
   const getCommentLists = useRequest(
     getCommentListApi(idTransform(ad)),
     (res) => {
       setCmList(res!);
       setCommentIsAdd(false);
-    },
+    },()=>{},true
   );
+
+  //custom function
+  const likeReqDebounced = useDebounceFn(likeReq, { wait: 500 });
+  const likeHandler = () => {
+    setReaderIsLike(!readerIsLike);
+    likeReqDebounced.run();
+  };
+
+  //memo hook
   useMemo(() => {
     if (commentIsAdd) {
       getCommentLists();
@@ -65,17 +95,24 @@ export default function Detail() {
     }
   }, [commentIsAdd]);
   useMemo(() => {
-    if (authorId !== 0) {
+    if (authorId !== -1) {
       authorShowReq();
     }
   }, [authorId]);
+
+  //effect
   useEffect(() => {
-    if (idTransform(ad) === 0) {
+    if (idTransform(ad) === -1) {
       return;
     }
     getArticleDetail();
     getCommentLists();
   }, [ad]);
+  useEffect(() => {
+    if (likePayload.UserID != -1 && likePayload.ArticleID != -1) {
+      likeStatusReq();
+    }
+  }, [likePayload]);
   return (
     <div className='w-full flex-row flex'>
       <div className='w-4/5 flex-col flex items-center'>
@@ -102,9 +139,12 @@ export default function Detail() {
       <div className='fixed top-28 right-8'>
         <AuthorForArticleDetail
           ArticleID={idTransform(ad)}
-          UserID={authorId}
+          AuthorID={authorId}
+          ReaderID={likePayload.UserID}
           setCommentIsAdd={setCommentIsAdd}
           authorInfo={authorInfo}
+          likeStatus={readerIsLike}
+          onClickForLike={likeHandler}
         />
       </div>
     </div>

@@ -1,7 +1,7 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { articleListType } from '../../api/article/resTypes';
 import { useRequest } from '../../hooks/useRequest';
-import {  getMyArticleApi } from '../../api/article';
+import { getMyArticleApi } from '../../api/article';
 import ArticleCardForEdit from '../../components/ArticleCardForEdit';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
@@ -10,7 +10,7 @@ function MyArticles() {
   const [ud] = useLocalStorage('userId', () => articleReq(), true);
   const articleReq = useRequest(getMyArticleApi(ud), (res) => {
     setArticleL(res!);
-  });
+  },()=>{},true);
   return (
     <div className='flex flex-col items-center mt-6 w-full'>
       <h1 className='text-blue-600 text-4xl hover:cursor-pointer'>

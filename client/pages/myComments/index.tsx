@@ -1,10 +1,8 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { commentListT } from '../../api/comment/resTypes';
 import CommentCardForEdit from '../../components/CommentCardForEdit';
 import { useRequest } from '../../hooks/useRequest';
-import {
-  getMyCommentListApi,
-} from '../../api/comment';
+import { getMyCommentListApi } from '../../api/comment';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
 function Index() {
@@ -12,7 +10,7 @@ function Index() {
   const [userId] = useLocalStorage('userId', () => cmtReq(), true);
   const cmtReq = useRequest(getMyCommentListApi(userId), (v) => {
     setComments(v!);
-  });
+  },()=>{},true);
 
   return (
     <div className='flex flex-col items-center mt-6'>

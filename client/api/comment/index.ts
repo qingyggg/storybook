@@ -1,8 +1,10 @@
 import { likeI, commentI, commentDeleteI, commentEditI } from './reqTypes';
 import { post, get } from '../../util/request';
-import { commentListT } from './resTypes';
-export const postLike = (like: likeI) => () => post('/comment/like', like);
-export const postHate = (like: likeI) => () => post('/comment/dislike', like);
+import { commentListT, likesStatus, likeStatus } from './resTypes';
+export const postLike = (like: likeI) => () =>
+  post<likeStatus>('/comment/like', like);
+export const postLikeStatus = (like: likeI) => () =>
+  post<likeStatus>('/comment/likeStatus', like);
 export const postCommentApi = (comment: commentI) => () =>
   post('/comment/create', comment);
 export const postCommentEditApi = (comment: commentEditI) => () =>

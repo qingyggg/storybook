@@ -1,28 +1,20 @@
-long-plan:
-2.deploy logical(finish it before bishe show)
-3.improve ui
-6.improve auth logical
-7.add seo,server-side redering(comment,article page),add swr fetch(for example:fetch article List page in serverside,and memoized data in recoil)
-8.set .env file(token set on env)
-9.go websocket+redis for chat room
-
-now:
-1.
-
-imporve UI:
-0:like logical(before 7.31)
-4.add article,comment search usage
-5.comments be liked,reply usage
-7.avatar upload
-8.add dark mode
-9.get user name and avatar in article detail(for <AuthorForArticleDetail/>)
-10.tag system
-11.comment list  in index page
-12.cache control
-13.notification system
-
+now(version 0.1 developing):
+0:pagination in article list,try avatar upload(before 7.31)
+1.add article,comment search usage?(before 8.31)
+2.comments be liked,reply usage(before 9.31)
+3.avatar upload,add dark mode(before 10.31)
+4.tag system(before 12.31)
+6.notification system(before 2024.2.1)
+7.publish
 
 version 0.1-->basic blog system
-version 0.2-->ssr,dark mode,search input
-version 0.3-->tag system
-version 0.3-->chat room
+version 0.2-->ssr/ssg optimization,dark mode
+version 0.3-->use rich text edit replace to markdown editor,and drawing panel,xmind
+
+
+experimental needing:
+1.draft(草稿)
+2.collect(收藏article) list
+3.小记(story),todolist
+4.chat room
+5.knowledge base

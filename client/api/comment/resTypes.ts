@@ -7,6 +7,7 @@ export interface commentItemI {
 }
 
 export type commentListT = Array<commentItemI>;
-
-//whether the user  like this article
+export interface likeStatus {
+  isLike: boolean;
+}
 export type likesStatus = Array<boolean>;

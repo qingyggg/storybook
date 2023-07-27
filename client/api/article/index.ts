@@ -2,6 +2,10 @@ import { articleI, articleEditI, articleDeleteI } from './reqTypes';
 import { articleDetailI, articleListType } from './resTypes';
 import { get, post } from '../../util/request';
 
+export const getArticleCount = () => {
+  return () => get<number>('/article/count');
+};
+
 export const getArticleListApi = (offset: number) => {
   return () => get<articleListType>('/article/list?offset=' + offset);
 };
