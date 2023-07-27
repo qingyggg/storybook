@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-var BlackList = []string{"/article/create", "/article/edit", "/article/delete", "/auth/modifyPwd", "/comment/create", "/comment/delete", "/comment/like", "/profile/show", "/profile/edit"}
+var BlackList = []string{"/article/create", "/article/edit", "/article/delete", "/auth/modifyPwd", "/comment/create", "/comment/delete", "/comment/like", "/profile/edit"}
 
 type User struct {
 	UserId               string `json:"username"`
@@ -63,6 +63,7 @@ func VerifyJwt(ctx *gin.Context, secretKey string) {
 
 func errResponseByAuthorization(ctx *gin.Context) {
 	ctx.JSON(http.StatusUnauthorized, gin.H{"message": cst.AUTHENTICATION_FAILED, "isError": true, "data": nil})
+	ctx.Abort()
 }
 
 func TokenHandler(userId string, c *gin.Context) (*gin.Context, error) {

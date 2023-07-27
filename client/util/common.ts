@@ -1,7 +1,12 @@
 export const idTransform = (id: string | string[] | undefined) => {
   if (typeof id === 'string') {
-    return parseInt(id);
+    let transformedId = parseInt(id);
+    if (isNaN(transformedId)) {
+      return -1;
+    } else {
+      return transformedId;
+    }
   } else {
-    return 0;
+    return -1;
   }
 };

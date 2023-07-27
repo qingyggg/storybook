@@ -50,6 +50,11 @@ export const useRequest = <T>(
         alertSet(err);
         if (err.response.status === 401) {
           router.push('/login');
+          setAlsState({
+            info: 'warning',
+            message: 'please login or register your account at first',
+            open: true,
+          });
           logout();
         }
       }

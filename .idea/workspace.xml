@@ -4,7 +4,27 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32486ade-7097-4794-8fdf-bc3b2c3c2163" name="Changes" comment="1.connect comment api&#10;(except like)&#10;2.fix some bugs,and optimize some code" />
+    <list default="true" id="32486ade-7097-4794-8fdf-bc3b2c3c2163" name="Changes" comment="1.wrong push(need to be discover issue)">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/api/comment/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/comment/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/api/comment/resTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/comment/resTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/AuthorForArticleDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/AuthorForArticleDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/Footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/hooks/useRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/hooks/useRequest.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/detail/[ad].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/detail/[ad].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/myArticles/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/myArticles/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/myComments/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/myComments/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/tailwind.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/util/common.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/util/common.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/util/http.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/util/http.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/constants/comment.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/constants/comment.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/comment.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/comment.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/router/bootstrap.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/router/bootstrap.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/services/comment.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/services/comment.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/util/jwt.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/util/jwt.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-demand.txt" beforeDir="false" afterPath="$PROJECT_DIR$/storybook-demand.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,6 +57,10 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: -1
+}</component>
   <component name="ProjectId" id="2POugAPbxx3BZ6GV9hWckii6yMs" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -45,37 +69,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;RunOnceActivity.OpenDatabaseViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;20.0.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.0.0&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/alice/Desktop/storybook&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;/home/alice/.nvm/versions/node/v20.0.0/bin/node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/alice/.local/share/JetBrains/Toolbox/apps/Goland/ch-0/231.9011.34/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultGoTemplateProperty": "Go File",
+    "RunOnceActivity.OpenDatabaseViewOnStart": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "full.screen.before.presentation.mode": "false",
+    "git-widget-placeholder": "main",
+    "go.import.settings.migrated": "true",
+    "javascript.nodejs.core.library.configured.version": "20.0.0",
+    "javascript.nodejs.core.library.typings.version": "20.0.0",
+    "last_opened_file_path": "/home/alice/Desktop/storybook",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "/home/alice/.nvm/versions/node/v20.0.0/bin/node",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
+    "ts.external.directory.path": "/home/alice/Desktop/storybook/client/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.format">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="storybook server" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
       <module name="storybook" />
       <working_directory value="$PROJECT_DIR$/server" />
@@ -126,9 +156,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.format" />
-        <item itemvalue="Go Build.storybook server" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="Go Build.storybook server" />
+        <item itemvalue="npm.format" />
       </list>
     </recent_temporary>
   </component>
@@ -142,6 +172,8 @@
       <updated>1683372272292</updated>
       <workItem from="1683372273767" duration="38000" />
       <workItem from="1683372356526" duration="7000" />
+      <workItem from="1690290028822" duration="590000" />
+      <workItem from="1690343570368" duration="56000" />
     </task>
     <servers />
   </component>
@@ -167,9 +199,26 @@
     <MESSAGE value="article api bug fixed" />
     <MESSAGE value="1.fix useLocalStorage bug&#10;2.connect all article api" />
     <MESSAGE value="1.connect comment api&#10;(except like)&#10;2.fix some bugs,and optimize some code" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.connect comment api&#10;(except like)&#10;2.fix some bugs,and optimize some code" />
+    <MESSAGE value="1.wrong push(need to be discover issue)" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.wrong push(need to be discover issue)" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/server/controllers/comment.go</url>
+          <line>87</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="GoApplicationRunConfiguration">
+        <watch expression="err" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

@@ -84,37 +84,54 @@ func (c *Comment) LikeStatusShow(likeDto *dto.LikeDto) (ok bool, isLike bool) {
 	return
 }
 
-func (c *Comment) Like(likeDto *dto.LikeDto) bool {
+func (c *Comment) Like(likeDto *dto.LikeDto, signal string) bool {
 	like := &models.Like{
 		ArticleID: likeDto.ArticleID,
 		UserID:    likeDto.UserID,
 	}
-	result := c.DB.Create(like)
-	return util.CrudJudgement(result)
-}
+	//start transaction
+	err := c.DB.Transaction(func(tx *gorm.DB) error {
+		var ctx *gorm.DB
+		// 在事务中执行一些 db 操作（从这里开始，您应该使用 'tx' 而不是 'db'）
+		if signal == "add" {
+			ctx = tx.Create(like)
+		} else {
+			ctx = tx.Delete(like)
+		}
+		if err := ctx.Error; err != nil {
+			// 返回任何错误都会回滚事务
+			return err
+		}
 
-func (c *Comment) DisLike(likeDto *dto.LikeDto) bool {
-	like := &models.Like{
-		ArticleID: likeDto.ArticleID,
-		UserID:    likeDto.UserID,
+		if err := likeNumberModify(tx, likeDto.ArticleID, signal); err != nil {
+			return err
+		}
+
+		// 返回 nil 提交事务
+		return nil
+	})
+	if err != nil {
+		return false
+	} else {
+		return true
 	}
-	result := c.DB.Delete(like)
-	return util.CrudJudgement(result)
 }
 
-func (c *Comment) LikeNumberModify(articleID uint, signal string) bool {
-	var payload *models.ApiArticleLikesAndCommentsAmount
-	results := c.DB.Where(&models.Article{ID: articleID}).Find(&payload)
+func likeNumberModify(db *gorm.DB, articleID uint, signal string) error {
+	payload := &models.Article{
+		ID: articleID,
+	}
+	results := db.Where(&models.Article{ID: articleID}).Find(&payload)
 	if util.CrudJudgement(results) {
 		if signal == "add" {
 			payload.LikeNumber += 1
 		} else if signal == "delete" {
 			payload.LikeNumber -= 1
 		}
-		results2 := c.DB.Model(&models.Article{ID: articleID}).Updates(payload)
-		return util.CrudJudgement(results2)
+		results2 := db.Model(&models.Article{ID: articleID}).Updates(payload)
+		return results2.Error
 	} else {
-		return false
+		return results.Error
 	}
 }
 

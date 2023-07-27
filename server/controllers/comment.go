@@ -57,29 +57,33 @@ func CommentController() {
 	})
 	comment.POST("/like", func(ctx *gin.Context) {
 		var isErr bool
+		var signal string
+		var sucMsg string
 		lBody := &dto.LikeDto{}
 		util.AssignBodyJson(ctx, lBody)
 		newRes := new(util.ResPayload)
-		if cs.Like(lBody) && cs.LikeNumberModify(lBody.ArticleID, "add") {
+		isErr, msg := cs.LikeShow(lBody)
+		if isErr {
+			//sql err->server error to client
+			newRes.SetDefault(true, nil).Response(ctx)
+			return
+		} else {
+			if msg == cst.LIKE_RECORD {
+				signal = "delete"
+				sucMsg = cst.ARTICLE_DISLIKE
+			} else if msg == cst.LIKE_NO_RECORD {
+				signal = "add"
+				sucMsg = cst.ARTICLE_LIKE
+			}
+		}
+		if cs.Like(lBody, signal) {
 			isErr = false
 		} else {
 			isErr = true
 		}
-		newRes.SetIsError(isErr).SetMessage2(cst.ARTICLE_LIKE).Response(ctx)
+		newRes.SetIsError(isErr).SetMessage2(sucMsg).Response(ctx)
 	})
-	comment.POST("/dislike", func(ctx *gin.Context) {
-		var isErr bool
-		lBody := &dto.LikeDto{}
-		util.AssignBodyJson(ctx, lBody)
-		newRes := new(util.ResPayload)
-		if cs.Like(lBody) && cs.LikeNumberModify(lBody.ArticleID, "add") {
-			isErr = false
-		} else {
-			isErr = true
-		}
-		newRes.SetIsError(isErr).SetMessage2(cst.ARTICLE_DISLIKE).Response(ctx)
-	})
-	comment.POST("/LikeStatus", func(ctx *gin.Context) {
+	comment.POST("/likeStatus", func(ctx *gin.Context) {
 		var status bool
 		lBody := &dto.LikeDto{}
 		util.AssignBodyJson(ctx, lBody)
@@ -90,7 +94,7 @@ func CommentController() {
 		} else {
 			status = false
 		}
-		newRes.SetDefaultMsg(isErr).SetData(status).Response(ctx)
+		newRes.SetDefaultMsg(isErr).SetData(map[string]bool{"isLike": status}).Response(ctx)
 	})
 	comment.POST("/BatchLikeStatus", func(ctx *gin.Context) {
 		newRes := new(util.ResPayload)
@@ -99,4 +103,5 @@ func CommentController() {
 		isErr, statusArr := cs.LikesShow(lsBody)
 		newRes.SetDefaultMsg(isErr).SetData(statusArr).Response(ctx)
 	})
+	//post:reply comment,like,dislike comment
 }
