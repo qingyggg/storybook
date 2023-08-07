@@ -1,5 +1,4 @@
 now(version 0.1 developing):
-0:pagination in article list,try avatar upload(before 7.31)
 1.add article,comment search usage?(before 8.31)
 2.comments be liked,reply usage(before 9.31)
 3.avatar upload,add dark mode(before 10.31)
@@ -13,6 +12,11 @@ version 0.3-->use rich text edit replace to markdown editor,and drawing panel,xm
 
 
 experimental needing:
+prev:
+->optimize my comments(which article i had commented?)
+->optimize form,use formik in profile edit
+->avatar upload(force write)
+
 1.draft(草稿)
 2.collect(收藏article) list
 3.小记(story),todolist

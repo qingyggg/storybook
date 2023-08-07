@@ -1,21 +1,21 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import AuthorForArticleDetail from '../../components/AuthorForArticleDetail';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { idTransform } from '../../util/common';
-import { useRouter } from 'next/router';
-import { useRequest } from '../../hooks/useRequest';
-import { getArticleDetailApi } from '../../api/article';
-import { getCommentListApi, postLike, postLikeStatus } from '../../api/comment';
-import { commentListT } from '../../api/comment/resTypes';
+import {idTransform} from '../../util/common';
+import {useRouter} from 'next/router';
+import {useRequest} from '../../hooks/useRequest';
+import {getArticleDetailApi} from '../../api/article';
+import {getCommentListApi, postLike, postLikeStatus} from '../../api/comment';
+import {commentListT} from '../../api/comment/resTypes';
 import CommentList from '../../components/CommentList';
-import { showProfileI } from '../../api/user/resTypes';
-import { showProfileApi } from '../../api/user';
-import { articleDetailI } from '../../api/article/resTypes';
+import {showProfileI} from '../../api/user/resTypes';
+import {showProfileApi} from '../../api/user';
+import {articleDetailI} from '../../api/article/resTypes';
 import moment from 'moment';
 import useLocalStorage from '../../hooks/useLocalStorage';
-import { likeI } from '../../api/comment/reqTypes';
-import { useDebounceFn } from 'ahooks';
+import {likeI} from '../../api/comment/reqTypes';
+import {useDebounceFn} from 'ahooks';
 
 export default function Detail() {
   //state hook
@@ -124,7 +124,7 @@ export default function Detail() {
               {moment(detail.CreatedAt).format('MMMM Do YYYY, h:mm:ss a')}
             </p>
             <div className='mx-10'></div>
-            <p>latest update:{detail.UpdatedAt}</p>
+            <p>latest update:{moment(detail.CreatedAt).format('MMMM Do YYYY, h:mm:ss a')}</p>
           </div>
         </div>
         <div>

@@ -4,34 +4,25 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32486ade-7097-4794-8fdf-bc3b2c3c2163" name="Changes" comment="1.wrong push(need to be discover issue)">
+    <list default="true" id="32486ade-7097-4794-8fdf-bc3b2c3c2163" name="Changes" comment="1.add progress line">
+      <change afterPath="$PROJECT_DIR$/client/store/progress.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/api/article/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/article/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/api/article/resTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/article/resTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/api/auth/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/api/auth/reqTypes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/api/auth/resTypes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/api/comment/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/comment/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/ArticleCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/ArticleCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/ArticleCardForEdit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/ArticleCardForEdit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/AuthorForArticleDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/AuthorForArticleDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/api/user/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/user/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/AliceSpeedDial.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/AvatarUpload.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/components/MolsBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/MolsBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/constants/messages/article.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/constants/messages/comment.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/constants/messages/user.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/hooks/useLogout.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/hooks/useLogout.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/hooks/useRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/hooks/useRequest.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/hooks/useStatelessStorage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/hooks/useStatelessStorage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/pages/articleCreate/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/articleCreate/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/articleCreate/test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/util/testData.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/pages/detail/[ad].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/detail/[ad].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/myArticles/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/myArticles/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/myComments/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/myComments/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/profileEdit/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/profileEdit/[id].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/util/common.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/util/common.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/util/http.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/util/http.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/article.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/comment.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/comment.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/router/bootstrap.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/router/bootstrap.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/services/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/services/article.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/services/comment.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/services/comment.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/util/jwt.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/util/jwt.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/util/sql.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/util/sql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/util/alert.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/storybook-demand.txt" beforeDir="false" afterPath="$PROJECT_DIR$/storybook-demand.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,9 +33,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="Go File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -117,8 +108,11 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/util" />
+    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.start">
     <configuration name="storybook server" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
       <module name="storybook" />
       <working_directory value="$PROJECT_DIR$/server" />
@@ -127,7 +121,14 @@
       <filePath value="$PROJECT_DIR$/server/main.go" />
       <method v="2" />
     </configuration>
-    <configuration name="rest-api | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/rest-api.http" requestIdentifier="#1" runType="Run single request">
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/client/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -135,16 +136,6 @@
       <command value="run" />
       <scripts>
         <script value="dev" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="format" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/client/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="format" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -160,6 +151,24 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/client/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.start" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="Go Build.storybook server" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -199,7 +208,9 @@
     <MESSAGE value="1.fix useLocalStorage bug&#10;2.connect all article api" />
     <MESSAGE value="1.connect comment api&#10;(except like)&#10;2.fix some bugs,and optimize some code" />
     <MESSAGE value="1.wrong push(need to be discover issue)" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.wrong push(need to be discover issue)" />
+    <MESSAGE value="1.bug fix&#10;2.article like&#10;3.pagination &#10;4.cookie for token(lead to force https)" />
+    <MESSAGE value="1.add progress line" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.add progress line" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
