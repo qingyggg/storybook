@@ -1,21 +1,21 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import AuthorForArticleDetail from '../../components/AuthorForArticleDetail';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { idTransform } from '../../util/common';
-import { useRouter } from 'next/router';
-import { useRequest } from '../../hooks/useRequest';
-import { getArticleDetailApi } from '../../api/article';
-import { getCommentListApi, postLike, postLikeStatus } from '../../api/comment';
-import { commentListT } from '../../api/comment/resTypes';
+import {idTransform} from '../../util/common';
+import {useRouter} from 'next/router';
+import {useRequest} from '../../hooks/useRequest';
+import {getArticleDetailApi} from '../../api/article';
+import {getCommentListApi, postLike, postLikeStatus} from '../../api/comment';
+import {commentListT} from '../../api/comment/resTypes';
 import CommentList from '../../components/CommentList';
-import { showProfileI } from '../../api/user/resTypes';
-import { showProfileApi } from '../../api/user';
-import { articleDetailI } from '../../api/article/resTypes';
+import {showProfileI} from '../../api/user/resTypes';
+import {showProfileApi} from '../../api/user';
+import {articleDetailI} from '../../api/article/resTypes';
 import moment from 'moment';
 import useLocalStorage from '../../hooks/useLocalStorage';
-import { likeI } from '../../api/comment/reqTypes';
-import {useDebounceFn } from 'ahooks';
+import {likeI} from '../../api/comment/reqTypes';
+import {useDebounceFn} from 'ahooks';
 
 export default function Detail() {
   //state hook
@@ -38,7 +38,6 @@ export default function Detail() {
   const { ad } = router.query;
   const [readerId] = useLocalStorage('userId');
   const likePayload: likeI = useMemo(() => {
-    console.log({ ArticleID: idTransform(ad), UserID: idTransform(readerId) })
     return { ArticleID: idTransform(ad), UserID: idTransform(readerId) };
   }, [ad, readerId]);
   const [readerIsLike, setReaderIsLike] = useState<boolean>(false);
@@ -52,34 +51,39 @@ export default function Detail() {
     Twitter: '',
   });
 
+  //root comment->second comment->replyed second comment
+
   //request hook
-  const likeStatusReq = useRequest(postLikeStatus(likePayload), (v) =>
-    setReaderIsLike(v?.isLike!),
-  );
-  const likeReq = useRequest(postLike(likePayload));
-  const likeReqDebounced = useDebounceFn(likeReq, { wait: 500 });
+  const likeStatusReq = useRequest(postLikeStatus(likePayload), (v) => {
+    setReaderIsLike(v?.isLike!);
+  },()=>{},true);
+  const likeReq = useRequest(postLike(likePayload), (v) => {
+    //set final like status(correct)
+    setReaderIsLike(v?.isLike!);
+  });
+
   const authorShowReq = useRequest(showProfileApi(authorId), (data) =>
-    setAuthorInfo(data!),
+    setAuthorInfo(data!),()=>{},true
   );
   const getArticleDetail = useRequest(
     getArticleDetailApi(idTransform(ad)),
     (res) => {
       setDetail(res!);
       setAuthorId(res?.UserID!);
-    },
+    },()=>{},true
   );
   const getCommentLists = useRequest(
     getCommentListApi(idTransform(ad)),
     (res) => {
       setCmList(res!);
       setCommentIsAdd(false);
-    },
+    },()=>{},true
   );
 
   //custom function
+  const likeReqDebounced = useDebounceFn(likeReq, { wait: 500 });
   const likeHandler = () => {
-    console.log(777)
-    setReaderIsLike(!readerIsLike)
+    setReaderIsLike(!readerIsLike);
     likeReqDebounced.run();
   };
 
@@ -120,7 +124,7 @@ export default function Detail() {
               {moment(detail.CreatedAt).format('MMMM Do YYYY, h:mm:ss a')}
             </p>
             <div className='mx-10'></div>
-            <p>latest update:{detail.UpdatedAt}</p>
+            <p>latest update:{moment(detail.CreatedAt).format('MMMM Do YYYY, h:mm:ss a')}</p>
           </div>
         </div>
         <div>
@@ -136,6 +140,7 @@ export default function Detail() {
         <AuthorForArticleDetail
           ArticleID={idTransform(ad)}
           AuthorID={authorId}
+          ReaderID={likePayload.UserID}
           setCommentIsAdd={setCommentIsAdd}
           authorInfo={authorInfo}
           likeStatus={readerIsLike}

@@ -5,12 +5,13 @@ import { articleItemForListI } from '../api/article/resTypes';
 import { useRequest } from '../hooks/useRequest';
 import { postArticleDeleteApi } from '../api/article';
 import { idTransform } from '../util/common';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { articleDeleteI } from '../api/article/reqTypes';
 
 export default function ArticleCardForEdit(props: articleItemForListI) {
   const [isDied, setIsDied] = useState<boolean>(false);
   const delArticleReq = useRequest(
-    postArticleDeleteApi({ ArticleID: idTransform(props.ID) }),
+    postArticleDeleteApi({ ArticleID: props.ID }),
   );
   const deleleArticle = () => {
     delArticleReq();

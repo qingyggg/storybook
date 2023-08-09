@@ -9,10 +9,11 @@ import { showProfileI } from '../api/user/resTypes';
 import { FavoriteBorder } from '@mui/icons-material';
 
 export default function AuthorForArticleDetail(props: propsI) {
-  const { AuthorID, ArticleID, setCommentIsAdd, likeStatus ,onClickForLike} = props;
+  const { ReaderID, ArticleID, setCommentIsAdd, likeStatus, onClickForLike } =
+    props;
   const [Comment, setComment] = useState<string>('');
   const addCommentReq = useRequest(
-    postCommentApi({ UserID: AuthorID, ArticleID, Content: Comment }),
+    postCommentApi({ UserID: ReaderID, ArticleID, Content: Comment }),
     () => {
       setCommentIsAdd(true);
     },
@@ -59,4 +60,5 @@ interface propsI {
   onClickForLike: () => any;
   setCommentIsAdd: React.Dispatch<React.SetStateAction<boolean>>;
   authorInfo: showProfileI;
+  ReaderID: number;
 }

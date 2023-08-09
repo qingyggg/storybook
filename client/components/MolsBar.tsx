@@ -9,16 +9,20 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import useClientAuth from '../hooks/useClientAuth';
-import { useRouter } from 'next/router';
+import {useRouter} from 'next/router';
 import Link from 'next/dist/client/link';
 import useStatelessStorage from '../hooks/useStatelessStorage';
 import useLogout from '../hooks/useLogout';
+import LinearProgress from '@mui/material/LinearProgress';
+import {useRecoilState} from "recoil";
+import {progressState} from "../store/progress";
 
 export default function MenuAppBar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const { onClientAuth } = useClientAuth();
   const router = useRouter();
   const [ud] = useStatelessStorage('userId');
+  const [isShowProgress,]=useRecoilState(progressState)
   const logout = useLogout();
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     onClientAuth(() => {
@@ -30,7 +34,7 @@ export default function MenuAppBar() {
     setAnchorEl(null);
   };
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 ,width: '100%'}}>
       <AppBar position='static'>
         <Toolbar>
           <IconButton
@@ -82,6 +86,14 @@ export default function MenuAppBar() {
               <MenuItem
                 onClick={() => {
                   handleClose();
+                  router.push('/profileEdit/' + ud());
+                }}
+              >
+                edit profile
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
                   router.push('/modify/' + ud());
                 }}
               >
@@ -123,6 +135,7 @@ export default function MenuAppBar() {
           </div>
         </Toolbar>
       </AppBar>
+      {isShowProgress && <LinearProgress color="secondary"/>}
     </Box>
   );
 }

@@ -3,6 +3,7 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/qingyggg/storybook/server/util"
+	"log"
 	"net/http"
 	"os"
 	"regexp"
@@ -16,9 +17,9 @@ func Bootstrap(routes ...func()) {
 	r.Use(JwtAuth())
 	//register controller
 	RegRoutes(routes)
-	err := r.Run()
+	err := r.RunTLS(":8080", "/home/alice/localhost.pem", "/home/alice/localhost-key.pem")
 	if err != nil {
-		return
+		log.Fatal(err)
 	} // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 

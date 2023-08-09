@@ -15,16 +15,16 @@ export default function ProfileEdit() {
   const editProfileReq = useRequest(editProfileApi(Profile), (res) =>
     router.push('/'),
   );
+  const profileShowReq=useRequest(showProfileApi(idTransform(id)),(res)=>{setProfile(res!)},()=>{},true)
   const editProfile = async () => {
-    console.log(Profile);
     (await editProfileReq)();
   };
   useEffect(() => {
-    if (idTransform(id) === 0) {
+    if (idTransform(id) === -1) {
       // return "cnm ,react!!!"
       return;
     }
-    setProfile((p) => ({ ...p, UserId: idTransform(id) }));
+    profileShowReq()
   }, [id]);
   return (
     <Auth>

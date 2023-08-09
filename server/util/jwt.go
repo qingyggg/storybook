@@ -35,7 +35,7 @@ func GenerateJWT(userId string, secretKey string) (string, error) {
 
 func VerifyJwt(ctx *gin.Context, secretKey string) {
 	data, err := ctx.Cookie("token")
-	if err != nil {
+	if err == nil {
 		t, err := jwt.ParseWithClaims(data, &User{}, func(token *jwt.Token) (interface{}, error) {
 			return []byte(secretKey), nil
 		})
@@ -71,7 +71,8 @@ func TokenHandler(userId string, c *gin.Context) (*gin.Context, error) {
 	if err != nil {
 		return nil, errors.New("generate new token false")
 	} else {
-		c.SetCookie("token", token, 60*60*24*5, "/", "localhost", false, true)
+		c.SetSameSite(4)
+		c.SetCookie("token", token, 60*60*24*5, "/", "http://localhost:3000", true, true)
 		return c, nil
 	}
 }

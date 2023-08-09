@@ -3,9 +3,21 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
 import { articleItemForListI } from '../api/article/resTypes';
 import Link from 'next/link';
+
+const extraStyle =
+  'hover:transition-all  duration-500 ease-in-out hover:-translate-x-16 hover:rotate-1 hover:bg-indigo-100 hover:border-dashed';
+const basicClassnames =
+  'h-48 w-full border-2 border-indigo-500/100 p-4 flex justify-between  hover:shadow-xl rounded-lg';
 export default function ArticleCard(props: propI) {
+  const cardStyle = () => {
+    if (props.editMode) {
+      return basicClassnames;
+    } else {
+      return basicClassnames + ' ' + extraStyle;
+    }
+  };
   return (
-    <div className='h-48 w-full bg-gray-200 p-4 flex justify-between  hover:shadow-xl rounded-lg'>
+    <div className={cardStyle()}>
       <div className='flex flex-col'>
         <Link
           href={'/detail/' + props.ID}
@@ -13,9 +25,14 @@ export default function ArticleCard(props: propI) {
         >
           <h1 className='text-2xl'>{props.Title}</h1>
         </Link>
-        <span className='text-ellipsis overflow-hidden'>
-          {props.Description}
-        </span>
+        <Link
+          href={'/detail/' + props.ID}
+          className='hover:italic hover:text-violet-600'
+        >
+          <span className='text-ellipsis overflow-hidden'>
+            {props.Description}
+          </span>
+        </Link>
       </div>
       <div className='flex'>
         <div className='w-36 h-36 flex flex-col justify-between'>

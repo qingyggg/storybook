@@ -12,7 +12,10 @@ import (
 func ArticleController() {
 	article := router.GetAppRouter().Group("/article")
 	as := services.Article{DB: db.GetDataBase()}
-
+	article.GET("/count", func(ctx *gin.Context) {
+		isErr, count := as.Count()
+		util.Response(ctx, !isErr, count)
+	})
 	article.GET("/list", func(ctx *gin.Context) {
 		offset := util.QueryDefaultAssigner(ctx, "offset", "0")
 		isErr, list := as.List(util.StringConvertToUint(offset)) //url:/list?offset=25

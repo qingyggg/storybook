@@ -59,6 +59,7 @@ func CommentController() {
 		var isErr bool
 		var signal string
 		var sucMsg string
+		var islike bool
 		lBody := &dto.LikeDto{}
 		util.AssignBodyJson(ctx, lBody)
 		newRes := new(util.ResPayload)
@@ -71,9 +72,11 @@ func CommentController() {
 			if msg == cst.LIKE_RECORD {
 				signal = "delete"
 				sucMsg = cst.ARTICLE_DISLIKE
+				islike = false
 			} else if msg == cst.LIKE_NO_RECORD {
 				signal = "add"
 				sucMsg = cst.ARTICLE_LIKE
+				islike = true
 			}
 		}
 		if cs.Like(lBody, signal) {
@@ -81,7 +84,7 @@ func CommentController() {
 		} else {
 			isErr = true
 		}
-		newRes.SetIsError(isErr).SetMessage2(sucMsg).Response(ctx)
+		newRes.SetIsError(isErr).SetMessage2(sucMsg).SetData(map[string]bool{"isLike": islike}).Response(ctx)
 	})
 	comment.POST("/likeStatus", func(ctx *gin.Context) {
 		var status bool

@@ -96,7 +96,7 @@ func (c *Comment) Like(likeDto *dto.LikeDto, signal string) bool {
 		if signal == "add" {
 			ctx = tx.Create(like)
 		} else {
-			ctx = tx.Delete(like)
+			ctx = tx.Unscoped().Where(like).Delete(&models.Like{})
 		}
 		if err := ctx.Error; err != nil {
 			// 返回任何错误都会回滚事务

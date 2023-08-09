@@ -10,7 +10,7 @@ function Index() {
   const [userId] = useLocalStorage('userId', () => cmtReq(), true);
   const cmtReq = useRequest(getMyCommentListApi(userId), (v) => {
     setComments(v!);
-  });
+  },()=>{},true);
 
   return (
     <div className='flex flex-col items-center mt-6'>

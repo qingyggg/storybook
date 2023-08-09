@@ -1,7 +1,8 @@
 import { likeI, commentI, commentDeleteI, commentEditI } from './reqTypes';
 import { post, get } from '../../util/request';
 import { commentListT, likesStatus, likeStatus } from './resTypes';
-export const postLike = (like: likeI) => () => post('/comment/like', like);
+export const postLike = (like: likeI) => () =>
+  post<likeStatus>('/comment/like', like);
 export const postLikeStatus = (like: likeI) => () =>
   post<likeStatus>('/comment/likeStatus', like);
 export const postCommentApi = (comment: commentI) => () =>
