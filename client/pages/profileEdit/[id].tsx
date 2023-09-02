@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { editProfileApi, loginApi, showProfileApi } from '../../api/user';
 import Auth from '../../components/Auth';
-import { usePassword } from '../../hooks/usePassword';
 import { useRequest } from '../../hooks/useRequest';
 import { editProfileI, profileI } from '../../api/user/reqTypes';
 import { idTransform } from '../../util/common';
@@ -24,7 +23,7 @@ export default function ProfileEdit() {
       // return "cnm ,react!!!"
       return;
     }
-    profileShowReq()
+    setProfile({UserId:idTransform(id)})
   }, [id]);
   return (
     <Auth>

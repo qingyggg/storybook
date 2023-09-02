@@ -5,6 +5,7 @@ now(version 0.1 developing):
 4.tag system(before 12.31)
 6.notification system(before 2024.2.1)
 7.publish
+8.lable system
 
 version 0.1-->basic blog system
 version 0.2-->ssr/ssg optimization,dark mode
@@ -12,10 +13,11 @@ version 0.3-->use rich text edit replace to markdown editor,and drawing panel,xm
 
 
 experimental needing:
+...
 prev:
-->optimize my comments(which article i had commented?)
-->optimize form,use formik in profile edit
-->avatar upload(force write)
+-->docker deploy logical and test
+-->write readme for project starting
+->public a version
 
 1.draft(草稿)
 2.collect(收藏article) list

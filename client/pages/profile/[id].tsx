@@ -20,7 +20,7 @@ export default function Profile() {
     true,
   );
   useEffect(() => {
-    if (idTransform(id) === 0) {
+    if (idTransform(id) === -1) {
       // return "cnm ,react!!!"
       return;
     }

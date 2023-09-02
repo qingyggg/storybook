@@ -17,7 +17,7 @@ func Bootstrap(routes ...func()) {
 	r.Use(JwtAuth())
 	//register controller
 	RegRoutes(routes)
-	err := r.RunTLS(":8080", "/home/alice/localhost.pem", "/home/alice/localhost-key.pem")
+	err := r.RunTLS(":8080", os.Getenv("CERT_PATH"), os.Getenv("KEY_PATH"))
 	if err != nil {
 		log.Fatal(err)
 	} // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")

@@ -5,24 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32486ade-7097-4794-8fdf-bc3b2c3c2163" name="Changes" comment="1.add progress line">
-      <change afterPath="$PROJECT_DIR$/client/store/progress.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/pnpm-lock.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/api/user/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/user/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/AliceSpeedDial.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/AvatarUpload.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/MolsBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/MolsBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/constants/messages/article.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/constants/messages/comment.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/constants/messages/user.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/hooks/useLogout.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/hooks/useLogout.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/hooks/useRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/hooks/useRequest.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/hooks/useStatelessStorage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/hooks/useStatelessStorage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/api/comment/resTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/comment/resTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/ArticleList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/ArticleList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/Auth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/Auth.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/CommentCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/CommentCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/CommentCardForEdit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/CommentCardForEdit.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/articleCreate/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/articleCreate/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/articleCreate/test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/util/testData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/_app.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/pages/detail/[ad].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/detail/[ad].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/util/alert.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/profile/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/profile/[id].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/profileEdit/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/profileEdit/[id].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/register/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/register/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/tailwind.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.env" beforeDir="false" afterPath="$PROJECT_DIR$/server/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/db/connection.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/db/connection.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/server/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/router/bootstrap.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/router/bootstrap.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/services/comment.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/services/comment.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storybook-demand.txt" beforeDir="false" afterPath="$PROJECT_DIR$/storybook-demand.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,11 +41,11 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file:///opt/go" />
+  <component name="GOROOT" url="file://$USER_HOME$/.gvm/gos/go1.19" />
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="develop" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -77,25 +79,28 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;20.0.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.0.0&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/alice/Desktop/storybook&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.17.1&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.17.1&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/alice&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;/home/alice/.nvm/versions/node/v20.0.0/bin/node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;/home/alice/.nvm/versions/node/v18.17.1/bin/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/alice/Desktop/storybook/client/node_modules/typescript/lib&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;http.proxy&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/alice/GolandProjects/storybook/client/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -112,13 +117,33 @@
       <recent name="$PROJECT_DIR$/client/util" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="Go Build.storybook server">
+    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="storybook" />
+      <working_directory value="$PROJECT_DIR$" />
+      <go_parameters value="-i" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <configuration name="storybook server" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
       <module name="storybook" />
       <working_directory value="$PROJECT_DIR$/server" />
       <kind value="FILE" />
+      <package value="github.com/qingyggg/storybook/server" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$/server/main.go" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
+      <module name="storybook" />
+      <working_directory value="$PROJECT_DIR$" />
+      <go_parameters value="-i" />
+      <kind value="DIRECTORY" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
       <method v="2" />
     </configuration>
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -161,12 +186,19 @@
       <envs />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Go Build.storybook server" />
+      <item itemvalue="npm.build" />
+      <item itemvalue="npm.dev" />
+      <item itemvalue="npm.lint" />
+      <item itemvalue="npm.start" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.storybook server" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.dev" />
-        <item itemvalue="Go Build.storybook server" />
       </list>
     </recent_temporary>
   </component>
@@ -187,6 +219,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

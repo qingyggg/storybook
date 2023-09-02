@@ -16,6 +16,7 @@ import moment from 'moment';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import {likeI} from '../../api/comment/reqTypes';
 import {useDebounceFn} from 'ahooks';
+import { FloatButton } from 'antd';
 
 export default function Detail() {
   //state hook
@@ -147,6 +148,7 @@ export default function Detail() {
           onClickForLike={likeHandler}
         />
       </div>
+      <FloatButton.BackTop      type="primary" style={{transform: 'scale(1.5)',right:65,bottom:70}}/>
     </div>
   );
 }

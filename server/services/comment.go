@@ -24,7 +24,7 @@ func (c *Comment) MyList(ud uint) (bool, *models.ApiComments) {
 func (c *Comment) baseList(forWhat string, payload uint) (bool, *models.ApiComments) {
 	ds := new(util.DbRes)
 	comments := &models.ApiComments{}
-	semiSqlClause := c.DB.Table("comments").Select("comments.id, comments.content,user_profiles.name user_name,user_profiles.user_id").Joins("left join user_profiles  on user_profiles.user_id = comments.user_id")
+	semiSqlClause := c.DB.Table("comments").Select("comments.id, comments.content,comments.article_id,user_profiles.name user_name,user_profiles.user_id").Joins("left join user_profiles  on user_profiles.user_id = comments.user_id")
 	var result *gorm.DB
 	if forWhat == "mylist" {
 		result = semiSqlClause.Where("user_profiles.user_id = ?", payload).Scan(comments)

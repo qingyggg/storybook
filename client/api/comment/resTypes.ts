@@ -3,7 +3,7 @@ export interface commentItemI {
   ID: number;
   Content: string;
   UserID: number;
-  ArticleId: number;
+  ArticleID: number;
 }
 
 export type commentListT = Array<commentItemI>;

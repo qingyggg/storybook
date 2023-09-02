@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import Auth from '../../components/Auth';
-import { Button, TextField } from '@mui/material';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import {
+  Button,
+  Form,
+  Input,
+} from 'antd';
 import { registerApi } from '../../api/user';
 import { useRequest } from '../../hooks/useRequest';
 import { usePassword } from '../../hooks/usePassword';
@@ -8,67 +11,129 @@ import { useRouter } from 'next/router';
 import useStatelessStorage from '../../hooks/useStatelessStorage';
 import { useRecoilState } from 'recoil';
 import { authState } from '../../store/auth';
+import Auth from '../../components/Auth';
+import {Stack, Typography} from "@mui/material";
+import Link from "next/link";
+import {registerI} from "../../api/user/reqTypes";
 
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 8 },
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 16 },
+  },
+};
+
+const tailFormItemLayout = {
+  wrapperCol: {
+    xs: {
+      span: 24,
+      offset: 0,
+    },
+    sm: {
+      span: 16,
+      offset: 8,
+    },
+  },
+};
 export default function Register() {
   const router = useRouter();
-  const [Email, setEmail] = useState('');
-  const [Password, setPassword, cryptedPwdByMd5] = usePassword();
   const [, setUserId] = useStatelessStorage('userId');
-
-  const [auth, setAuth] = useRecoilState(authState);
-  useEffect(() => {
-    setEmail(auth.Email);
-    setPassword(auth.Password);
-  }, []);
+  const [auth,setAuth]=useRecoilState(authState)
+  const [register,setRegister]=useState(false)
   const registerReq = useRequest(
-    registerApi({ Email, Password: cryptedPwdByMd5 }),
+    registerApi(auth),
     async (ud) => {
       setUserId(ud!);
       router.push('/profileEdit/' + ud);
     },
   );
-  const register = async () => {
-    (await registerReq)();
+  useMemo(()=>{
+    if(register){
+      registerReq()
+    }
+  },[register])
+  const [form] = Form.useForm();
+  const onFinish = (values: registerI) => {
+    setAuth({...values})
+    setRegister(true)
   };
   return (
-    <Auth>
-      <>
-        <h1 className='text-4xl mb-3 '>register</h1>
-        <TextField
-          id='standard-basic'
-          label='email'
-          variant='outlined'
-          margin='dense'
-          value={Email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextField
-          id='standard-password-input'
-          label='Password'
-          type='password'
-          autoComplete='current-password'
-          variant='outlined'
-          margin='dense'
-          value={Password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <div className='my-1'></div>
-        <div className='flex flex-row'>
-          <Button variant='outlined' onClick={register}>
-            register
-          </Button>
-          <div className='mr-10'></div>
-          <Button
-            variant='outlined'
-            onClick={() => {
-              setAuth({ Email, Password });
-              router.push('/login');
-            }}
+      <Stack spacing={2} alignItems="center">
+        <Typography variant="h1">register</Typography>
+        <Form
+          {...formItemLayout}
+          form={form}
+          name="register"
+          onFinish={onFinish}
+          style={{ minWidth:600 }}
+          scrollToFirstError
+        >
+          <Form.Item
+            name="Email"
+            label="E-mail"
+            rules={[
+              {
+                type: 'email',
+                message: 'The input is not valid E-mail!',
+              },
+              {
+                required: true,
+                message: 'Please input your E-mail!',
+              },
+            ]}
           >
-            login
-          </Button>
-        </div>
-      </>
-    </Auth>
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="Password"
+            label="Password"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your password!',
+              },
+            ]}
+            hasFeedback
+          >
+            <Input.Password />
+          </Form.Item>
+
+          <Form.Item
+            name="confirm"
+            label="Confirm Password"
+            dependencies={['password']}
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: 'Please confirm your password!',
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('Password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error('The new password that you entered do not match!'));
+                },
+              }),
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
+          <Form.Item {...tailFormItemLayout}>
+            <Button htmlType="submit" >
+              Register
+            </Button>
+            <Link href='/login'>
+              <span className='italic'>&nbsp;&nbsp;you have an account ?please login it</span>
+            </Link>
+          </Form.Item>
+        </Form>
+      </Stack>
   );
 }
