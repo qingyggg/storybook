@@ -4,28 +4,17 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32486ade-7097-4794-8fdf-bc3b2c3c2163" name="Changes" comment="1.add progress line">
-      <change afterPath="$PROJECT_DIR$/client/pnpm-lock.yaml" afterDir="false" />
+    <list default="true" id="32486ade-7097-4794-8fdf-bc3b2c3c2163" name="Changes" comment="1.fix profile edit bug&#10;2.add skeleton on article list page&#10;3.add comment style,comment card border will be red if this comment is this reader(after login)&#10;4.add authentication(email format) on log on page&#10;5.">
+      <change afterPath="$PROJECT_DIR$/ca/localhost-key.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ca/localhost.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/envs/common.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/envs/prod.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/util/environment.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/api/comment/resTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/comment/resTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/ArticleList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/ArticleList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/Auth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/Auth.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/CommentCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/CommentCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/CommentCardForEdit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/CommentCardForEdit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/detail/[ad].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/detail/[ad].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/profile/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/profile/[id].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/profileEdit/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/profileEdit/[id].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/register/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/register/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/tailwind.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.env" beforeDir="false" afterPath="$PROJECT_DIR$/server/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/db/connection.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/db/connection.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/server/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/router/bootstrap.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/router/bootstrap.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/services/comment.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/services/comment.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storybook-demand.txt" beforeDir="false" afterPath="$PROJECT_DIR$/storybook-demand.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.env" beforeDir="false" afterPath="$PROJECT_DIR$/server/envs/dev.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/server/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,9 +24,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Go File" />
         <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="Go File" />
       </list>
     </option>
   </component>
@@ -114,6 +103,8 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/server/envs" />
+      <recent name="$PROJECT_DIR$/server" />
       <recent name="$PROJECT_DIR$/client/util" />
     </key>
   </component>
@@ -146,14 +137,19 @@
       <framework value="gotest" />
       <method v="2" />
     </configuration>
-    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/client/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="build" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="server/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="containerName" value="storybook_server" />
+          <option name="sourceFilePath" value="server/Dockerfile" />
+        </settings>
+      </deployment>
       <method v="2" />
     </configuration>
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -187,8 +183,8 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Docker.server/Dockerfile" />
       <item itemvalue="Go Build.storybook server" />
-      <item itemvalue="npm.build" />
       <item itemvalue="npm.dev" />
       <item itemvalue="npm.lint" />
       <item itemvalue="npm.start" />
@@ -196,9 +192,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Go Build.storybook server" />
+        <item itemvalue="Docker.server/Dockerfile" />
+        <item itemvalue="npm.lint" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
   </component>
@@ -245,7 +242,8 @@
     <MESSAGE value="1.wrong push(need to be discover issue)" />
     <MESSAGE value="1.bug fix&#10;2.article like&#10;3.pagination &#10;4.cookie for token(lead to force https)" />
     <MESSAGE value="1.add progress line" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.add progress line" />
+    <MESSAGE value="1.fix profile edit bug&#10;2.add skeleton on article list page&#10;3.add comment style,comment card border will be red if this comment is this reader(after login)&#10;4.add authentication(email format) on log on page&#10;5." />
+    <option name="LAST_COMMIT_MESSAGE" value="1.fix profile edit bug&#10;2.add skeleton on article list page&#10;3.add comment style,comment card border will be red if this comment is this reader(after login)&#10;4.add authentication(email format) on log on page&#10;5." />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

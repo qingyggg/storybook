@@ -1,11 +1,10 @@
 package main
 
 import (
-	"github.com/joho/godotenv"
-	controllers "github.com/qingyggg/storybook/server/controllers"
-	db "github.com/qingyggg/storybook/server/db"
-	router "github.com/qingyggg/storybook/server/router"
-	"log"
+	"github.com/qingyggg/storybook/server/controllers"
+	"github.com/qingyggg/storybook/server/db"
+	"github.com/qingyggg/storybook/server/router"
+	"github.com/qingyggg/storybook/server/util"
 )
 
 func main() {
@@ -20,10 +19,5 @@ func main() {
 	)
 }
 func init() {
-	//load env
-	err := godotenv.Load(".env")
-
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	util.EnvInit()
 }
