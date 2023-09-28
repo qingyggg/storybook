@@ -15,6 +15,7 @@ import Auth from '../../components/Auth';
 import {Stack, Typography} from "@mui/material";
 import Link from "next/link";
 import {registerI} from "../../api/user/reqTypes";
+import md5 from "md5";
 
 const formItemLayout = {
   labelCol: {
@@ -58,7 +59,7 @@ export default function Register() {
   },[register])
   const [form] = Form.useForm();
   const onFinish = (values: registerI) => {
-    setAuth({...values})
+    setAuth({Email:values.Email,Password:md5(values.Password)})
     setRegister(true)
   };
   return (

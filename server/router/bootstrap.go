@@ -12,6 +12,9 @@ import (
 var r *gin.Engine
 
 func Bootstrap(routes ...func()) {
+	if os.Getenv("FOO_ENV") == "production" {
+		gin.SetMode(gin.ReleaseMode)
+	}
 	r = gin.Default() //initialize gin
 	r.Use(Cors())
 	r.Use(JwtAuth())

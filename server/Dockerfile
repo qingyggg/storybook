@@ -1,42 +1,36 @@
-# syntax=docker/dockerfile:1.4
-FROM --platform=$BUILDPLATFORM golang:1.18-alpine AS builder
+FROM golang:1.19 as builder
 
-WORKDIR /code
+# 配置模块代理
+ENV GO111MODULE=on
+ENV GOPROXY=https://goproxy.cn,direct
 
-ENV CGO_ENABLED 0
-ENV GOPATH /go
-ENV GOCACHE /go-build
-ENV GIN_MODE=release
+#工作目录
+WORKDIR /app
+ADD .  /app
 
-COPY go.mod go.sum ./
-RUN --mount=type=cache,target=/go/pkg/mod/cache \
-    go mod download
+#在Docker工作目录下执行命令
+RUN go build -o main
 
-COPY . .
+FROM ubuntu:22.04 as runner
 
-RUN --mount=type=cache,target=/go/pkg/mod/cache \
-    --mount=type=cache,target=/go-build \
-    go build -o bin/server main.go
+#作者信息
+MAINTAINER "alice"
 
-CMD ["/code/bin/server"]
+ENV FOO_ENV=production
 
-FROM builder AS dev-envs
+WORKDIR /app
+RUN mkdir ca
+RUN mkdir envs
 
-RUN <<EOF
-apk update
-apk add git
-EOF
+COPY --from=builder /app/ca/ ./ca
+COPY --from=builder /app/envs/ ./envs
+COPY --from=builder /app/main ./
 
-RUN <<EOF
-addgroup -S docker
-adduser -S --shell /bin/bash --ingroup docker vscode
-EOF
+#暴露端口
+EXPOSE 8080
 
-# install Docker tools (cli, buildx, compose)
-COPY --from=gloursdocker/docker / /
+#执行项目的命令
+CMD ["/app/main"]
 
-CMD ["go", "run", "main.go"]
 
-FROM scratch
-COPY --from=builder /code/bin/server /usr/local/bin/server
-CMD ["/usr/local/bin/server"]
+

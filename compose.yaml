@@ -1,29 +1,35 @@
-services:
+networks:
   backend:
-    build:
-      context: server
-      target: builder
-    secrets:
-      - db-password
-    depends_on:
-      db:
-        condition: service_healthy
+    driver: bridge
+
+services:
   client:
     build:
       context: client
-      target: development
-    ports:
-      - 3000:3000
-    volumes:
-      - ./client/src:/code/src
-      - /code/node_modules
+      dockerfile: Dockerfile
     depends_on:
       - backend
+      - db
+    networks:
+      - backend
+    ports:
+      - 3000:3000
+  backend:
+    build:
+      context: server
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - backend
+    ports:
+      - 8080:8080
   db:
     # We use a mariadb image which supports both amd64 & arm64 architecture
-    image: mariadb:10-focal
+#    image: mariadb:10-focal
     # If you really want to use MySQL, uncomment the following line
-    #image: mysql:8
+    image: mysql:8
     command: '--default-authentication-plugin=mysql_native_password'
     restart: always
     healthcheck:
@@ -38,19 +44,7 @@ services:
     environment:
       - MYSQL_DATABASE=storybook
       - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
-    expose:
-      - 3306
-
-  proxy:
-    image: nginx
-    volumes:
-      - type: bind
-        source: ./proxy/nginx.conf
-        target: /etc/nginx/conf.d/default.conf
-        read_only: true
-    ports:
-      - 8080:80
-    depends_on:
+    networks:
       - backend
 
 volumes:
@@ -59,4 +53,5 @@ volumes:
 secrets:
   db-password:
     file: db/password.txt
+
 
