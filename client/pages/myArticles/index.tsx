@@ -8,9 +8,14 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 function MyArticles() {
   const [articleL, setArticleL] = useState<articleListType>([]);
   const [ud] = useLocalStorage('userId', () => articleReq(), true);
-  const articleReq = useRequest(getMyArticleApi(ud), (res) => {
-    setArticleL(res!);
-  },()=>{},true);
+  const articleReq = useRequest(
+    getMyArticleApi(ud),
+    (res) => {
+      setArticleL(res!);
+    },
+    () => {},
+    true,
+  );
   return (
     <div className='flex flex-col items-center mt-6 w-full'>
       <h1 className='text-blue-600 text-4xl hover:cursor-pointer'>

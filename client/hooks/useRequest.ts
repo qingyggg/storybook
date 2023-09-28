@@ -1,10 +1,10 @@
-import {AxiosResponse} from 'axios';
-import {baseRes} from '../util/request';
-import {useRecoilState} from 'recoil';
-import {alertState} from '../store/alert';
-import {useRouter} from 'next/router';
+import { AxiosResponse } from 'axios';
+import { baseRes } from '../util/request';
+import { useRecoilState } from 'recoil';
+import { alertState } from '../store/alert';
+import { useRouter } from 'next/router';
 import useLogout from './useLogout';
-import {progressState} from "../store/progress";
+import { progressState } from '../store/progress';
 
 export const useRequest = <T>(
   api: apiType<T>,
@@ -24,8 +24,9 @@ export const useRequest = <T>(
     });
   };
   return () => {
-    setProgress(true)
-      api().then(({data})=>{
+    setProgress(true);
+    api()
+      .then(({ data }) => {
         //success callback logical
         if (s) {
           if (data.data) {
@@ -43,7 +44,8 @@ export const useRequest = <T>(
         if (!forbidSetAlsStateWhenSuccess) {
           setAlsState({ info: 'success', message: data.message, open: true });
         }
-      }).catch((err)=>{
+      })
+      .catch((err) => {
         e && e(err); //exe error callback
         console.log(err);
         if (err.code === 'ERR_NETWORK') {
@@ -61,9 +63,10 @@ export const useRequest = <T>(
             logout();
           }
         }
-      }).finally(()=>{
-        setProgress(false)
       })
+      .finally(() => {
+        setProgress(false);
+      });
   };
 };
 

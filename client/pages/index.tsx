@@ -11,23 +11,34 @@ export default function Home() {
   const [articleL, setArticleL] = useState<articleListType>([]);
   const [curOffset, setCurOffset] = useState<number>(0);
   const [pageCount, setPageCount] = useState<number>(0);
-  const [listIsLoading,setListIsLoading]=useState(false)
-  const articleReq = useRequest(getArticleListApi(curOffset), (res) => {
-    setListIsLoading(false)
-    setArticleL(res!);
-  },()=>{},true);
-  const articleCountReq = useRequest(getArticleCount(), (res) => {
-    if (res) {
-      setPageCount(Math.ceil(res / 15));
-    }
-  },()=>{},true);
+  const [listIsLoading, setListIsLoading] = useState(false);
+  const articleReq = useRequest(
+    getArticleListApi(curOffset),
+    (res) => {
+      setListIsLoading(false);
+      setArticleL(res!);
+    },
+    () => {},
+    true,
+  );
+  const articleCountReq = useRequest(
+    getArticleCount(),
+    (res) => {
+      if (res) {
+        setPageCount(Math.ceil(res / 15));
+      }
+    },
+    () => {},
+    true,
+  );
   useEffect(() => {
     articleCountReq();
   }, []);
   useEffect(() => {
-    setListIsLoading(true)
+    setListIsLoading(true);
     articleReq();
-    if (typeof window === 'object') window.scrollTo({ top: 0, behavior: 'smooth' })
+    if (typeof window === 'object')
+      window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [curOffset]);
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -38,7 +49,7 @@ export default function Home() {
 
   return (
     <div className='flex  flex-col items-center mt-6 w-full'>
-      <ArticleList list={articleL} isLoading={listIsLoading}/>
+      <ArticleList list={articleL} isLoading={listIsLoading} />
       {pageCount !== 0 && (
         <Stack spacing={2}>
           <Pagination

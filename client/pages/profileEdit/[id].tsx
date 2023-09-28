@@ -14,7 +14,14 @@ export default function ProfileEdit() {
   const editProfileReq = useRequest(editProfileApi(Profile), (res) =>
     router.push('/'),
   );
-  const profileShowReq=useRequest(showProfileApi(idTransform(id)),(res)=>{setProfile(res!)},()=>{},true)
+  const profileShowReq = useRequest(
+    showProfileApi(idTransform(id)),
+    (res) => {
+      setProfile(res!);
+    },
+    () => {},
+    true,
+  );
   const editProfile = async () => {
     (await editProfileReq)();
   };
@@ -23,7 +30,7 @@ export default function ProfileEdit() {
       // return "cnm ,react!!!"
       return;
     }
-    setProfile({UserId:idTransform(id)})
+    setProfile({ UserId: idTransform(id) });
   }, [id]);
   return (
     <Auth>

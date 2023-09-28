@@ -12,6 +12,9 @@ import (
 var r *gin.Engine
 
 func Bootstrap(routes ...func()) {
+	if os.Getenv("FOO_ENV") == "production" {
+		gin.SetMode(gin.ReleaseMode)
+	}
 	r = gin.Default() //initialize gin
 	r.Use(Cors())
 	r.Use(JwtAuth())
@@ -30,7 +33,7 @@ func GetAppRouter() *gin.Engine {
 func Cors() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		method := ctx.Request.Method
-
+		//ctx.Request.Host
 		ctx.Header("Access-Control-Allow-Origin", "http://localhost:3000")
 		ctx.Header("Access-Control-Allow-Headers", "Content-Type,AccessToken,X-CSRF-Token, Authorization, Token, x-token")
 		ctx.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PATCH, PUT")

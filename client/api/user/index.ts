@@ -1,6 +1,6 @@
-import {get, post} from '../../util/request';
-import {editProfileI, loginI, modifyT, registerI, userIdT,} from './reqTypes';
-import {showProfileI} from './resTypes';
+import { get, post } from '../../util/request';
+import { editProfileI, loginI, modifyT, registerI, userIdT } from './reqTypes';
+import { showProfileI } from './resTypes';
 
 export const loginApi = (auth: loginI) => {
   return () => post<string>('/auth/login', auth);

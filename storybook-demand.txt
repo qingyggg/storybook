@@ -15,8 +15,7 @@ version 0.3-->use rich text edit replace to markdown editor,and drawing panel,xm
 experimental needing:
 ...
 prev:
--->docker deploy logical and test
--->write readme for project starting
+-->ssroptimization,replace some client request to server request(use pageRouter)
 ->public a version
 
 1.draft(草稿)

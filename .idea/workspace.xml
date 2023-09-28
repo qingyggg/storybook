@@ -4,17 +4,31 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32486ade-7097-4794-8fdf-bc3b2c3c2163" name="Changes" comment="1.fix profile edit bug&#10;2.add skeleton on article list page&#10;3.add comment style,comment card border will be red if this comment is this reader(after login)&#10;4.add authentication(email format) on log on page&#10;5.">
-      <change afterPath="$PROJECT_DIR$/ca/localhost-key.pem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca/localhost.pem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/envs/common.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/envs/prod.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/util/environment.go" afterDir="false" />
+    <list default="true" id="32486ade-7097-4794-8fdf-bc3b2c3c2163" name="Changes" comment="1.fix register bug&#10;2.deploy logical">
+      <change afterPath="$PROJECT_DIR$/cmd/deploy_linux.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmd/develop_linux.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.env" beforeDir="false" afterPath="$PROJECT_DIR$/server/envs/dev.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/server/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/api/user/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/user/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/ArticleList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/ArticleList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/CommentCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/CommentCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/CommentCardForEdit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/CommentCardForEdit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/MolsBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/MolsBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/hooks/useLogout.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/hooks/useLogout.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/hooks/useRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/hooks/useRequest.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/articleCreate/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/articleCreate/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/detail/[ad].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/detail/[ad].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/myArticles/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/myArticles/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/myComments/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/myComments/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/profileEdit/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/profileEdit/[id].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/register/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/register/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/store/progress.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/store/progress.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/router/bootstrap.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/router/bootstrap.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-demand.txt" beforeDir="false" afterPath="$PROJECT_DIR$/storybook-demand.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,12 +117,12 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/server/envs" />
       <recent name="$PROJECT_DIR$/server" />
+      <recent name="$PROJECT_DIR$/server/envs" />
       <recent name="$PROJECT_DIR$/client/util" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.storybook server">
+  <component name="RunManager" selected="npm.format">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="storybook" />
       <working_directory value="$PROJECT_DIR$" />
@@ -137,19 +151,34 @@
       <framework value="gotest" />
       <method v="2" />
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
       <deployment type="dockerfile">
         <settings />
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="server/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+    <configuration name="client/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
       <deployment type="dockerfile">
         <settings>
-          <option name="containerName" value="storybook_server" />
-          <option name="sourceFilePath" value="server/Dockerfile" />
+          <option name="sourceFilePath" value="client/Dockerfile" />
         </settings>
       </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/client/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -162,40 +191,30 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="lint" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="format" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/client/package.json" />
       <command value="run" />
       <scripts>
-        <script value="lint" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/client/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="start" />
+        <script value="format" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Docker.server/Dockerfile" />
+      <item itemvalue="Docker.client/Dockerfile" />
       <item itemvalue="Go Build.storybook server" />
+      <item itemvalue="npm.format" />
+      <item itemvalue="npm.build" />
       <item itemvalue="npm.dev" />
-      <item itemvalue="npm.lint" />
-      <item itemvalue="npm.start" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.storybook server" />
-        <item itemvalue="Docker.server/Dockerfile" />
-        <item itemvalue="npm.lint" />
+        <item itemvalue="npm.format" />
         <item itemvalue="npm.dev" />
-        <item itemvalue="npm.start" />
+        <item itemvalue="Go Build.storybook server" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="Docker.client/Dockerfile" />
       </list>
     </recent_temporary>
   </component>
@@ -243,7 +262,9 @@
     <MESSAGE value="1.bug fix&#10;2.article like&#10;3.pagination &#10;4.cookie for token(lead to force https)" />
     <MESSAGE value="1.add progress line" />
     <MESSAGE value="1.fix profile edit bug&#10;2.add skeleton on article list page&#10;3.add comment style,comment card border will be red if this comment is this reader(after login)&#10;4.add authentication(email format) on log on page&#10;5." />
-    <option name="LAST_COMMIT_MESSAGE" value="1.fix profile edit bug&#10;2.add skeleton on article list page&#10;3.add comment style,comment card border will be red if this comment is this reader(after login)&#10;4.add authentication(email format) on log on page&#10;5." />
+    <MESSAGE value="1.upgrade env loading" />
+    <MESSAGE value="1.fix register bug&#10;2.deploy logical" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.fix register bug&#10;2.deploy logical" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

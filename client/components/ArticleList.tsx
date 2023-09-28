@@ -6,9 +6,11 @@ import { Skeleton } from 'antd';
 
 export default function ArticleList(props: PropI) {
   const renderList = () => {
-    if(props.isLoading){
-      return Array.apply(null, Array(10)).map((v,k)=><Skeleton key={k} avatar paragraph={{ rows: 4 }} active/>)
-    }else{
+    if (props.isLoading) {
+      return Array.apply(null, Array(10)).map((v, k) => (
+        <Skeleton key={k} avatar paragraph={{ rows: 4 }} active />
+      ));
+    } else {
       if (props.list.length === 0) {
         return (
           <h1 className='text-2xl'>
@@ -22,10 +24,10 @@ export default function ArticleList(props: PropI) {
               <ArticleCard {...v} key={v.ID} />
             ))}
           </>
-          );
-        }
+        );
       }
     }
+  };
 
   return (
     <div className='w-8/12 space-y-6'>
@@ -36,5 +38,5 @@ export default function ArticleList(props: PropI) {
 }
 interface PropI {
   list: articleListType;
-  isLoading?:boolean
+  isLoading?: boolean;
 }

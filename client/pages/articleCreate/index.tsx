@@ -1,11 +1,11 @@
-import {Box, TextField} from '@mui/material';
-import React, {useEffect, useMemo, useState} from 'react';
+import { Box, TextField } from '@mui/material';
+import React, { useEffect, useMemo, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import {test_markdown} from '../../util/testData';
-import {useRequest} from '../../hooks/useRequest';
-import {postArticleCreateApi} from '../../api/article';
-import {useRouter} from 'next/router';
+import { test_markdown } from '../../util/testData';
+import { useRequest } from '../../hooks/useRequest';
+import { postArticleCreateApi } from '../../api/article';
+import { useRouter } from 'next/router';
 import ArticleDialog from '../../components/articleDialog';
 import useLocalStorage from '../../hooks/useLocalStorage';
 

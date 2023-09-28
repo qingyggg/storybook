@@ -8,9 +8,14 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 function Index() {
   const [comments, setComments] = useState<commentListT>([]);
   const [userId] = useLocalStorage('userId', () => cmtReq(), true);
-  const cmtReq = useRequest(getMyCommentListApi(userId), (v) => {
-    setComments(v!);
-  },()=>{},true);
+  const cmtReq = useRequest(
+    getMyCommentListApi(userId),
+    (v) => {
+      setComments(v!);
+    },
+    () => {},
+    true,
+  );
 
   return (
     <div className='flex flex-col items-center mt-6'>
