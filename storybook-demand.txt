@@ -2,7 +2,7 @@ now(version 0.1 developing):
 1.add article,comment search usage?(before 8.31)
 2.comments be liked,reply usage(before 9.31)
 3.avatar upload,add dark mode(before 10.31)
-4.tag system(before 12.31)
+4.tag/topic system(before 12.31)
 6.notification system(before 2024.2.1)
 7.publish
 8.lable system
@@ -12,11 +12,14 @@ version 0.2-->ssr/ssg optimization,dark mode
 version 0.3-->use rich text edit replace to markdown editor,and drawing panel,xmind
 
 
-experimental needing:
 ...
-prev:
--->ssroptimization,replace some client request to server request(use pageRouter)
-->public a version
+current:
+-->ssr
+->fix logout bug,cookie didnt deleted
+->following,followed
+->collect article-->shoucang
+-->update profile(juejin style),login,register ui
+---->comments be liked,reply usage
 
 1.draft(草稿)
 2.collect(收藏article) list

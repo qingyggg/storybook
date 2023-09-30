@@ -2,15 +2,16 @@
 build
 .next
 package-lock.json
+pnpm-lock.yaml
 package.json
-postcss.config.js 
+postcss.config.js
 tailwind.config.js
-tsconfig.json 
+tsconfig.json
 .eslintrc.json
-.prettierrc.js 
+.prettierrc.js
 next-env.d.ts
-next.config.js 
-README.md 
+next.config.js
+README.md
 
 # Ignore all HTML files:
 *.html

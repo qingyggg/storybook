@@ -81,4 +81,7 @@ func AuthController() {
 			newRes.SetMessage(message).SetIsError(isErr).Response(ctx)
 		}
 	})
+	auth.POST("/logout", func(ctx *gin.Context) {
+		//ctx.SetCookie()
+	})
 }

@@ -5,29 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32486ade-7097-4794-8fdf-bc3b2c3c2163" name="Changes" comment="1.fix register bug&#10;2.deploy logical">
-      <change afterPath="$PROJECT_DIR$/cmd/deploy_linux.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmd/develop_linux.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/api/user/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/user/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/ArticleList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/ArticleList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/CommentCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/CommentCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/CommentCardForEdit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/CommentCardForEdit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/MolsBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/MolsBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/hooks/useLogout.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/hooks/useLogout.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/hooks/useRequest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/hooks/useRequest.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/articleCreate/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/articleCreate/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/detail/[ad].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/detail/[ad].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/myArticles/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/myArticles/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/myComments/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/myComments/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/profileEdit/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/profileEdit/[id].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/register/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/register/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.prettierignore" beforeDir="false" afterPath="$PROJECT_DIR$/client/.prettierignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.prettierrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/.prettierrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/profile/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/profile/[id].tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/store/progress.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/store/progress.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/router/bootstrap.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/router/bootstrap.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/util/common.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/util/common.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/util/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/util/request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/auth.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storybook-demand.txt" beforeDir="false" afterPath="$PROJECT_DIR$/storybook-demand.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,45 +64,47 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;RunOnceActivity.OpenDatabaseViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.17.1&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.17.1&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/alice&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;/home/alice/.nvm/versions/node/v18.17.1/bin/node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;http.proxy&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/alice/GolandProjects/storybook/client/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultGoTemplateProperty": "Go File",
+    "RunOnceActivity.OpenDatabaseViewOnStart": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "full.screen.before.presentation.mode": "false",
+    "git-widget-placeholder": "develop",
+    "go.import.settings.migrated": "true",
+    "javascript.nodejs.core.library.configured.version": "18.17.1",
+    "javascript.nodejs.core.library.typings.version": "18.17.1",
+    "js.linters.configure.manually.selectedeslint": "true",
+    "last_opened_file_path": "/home/alice/GolandProjects/storybook/client",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "/home/alice/.nvm/versions/node/v18.17.1/bin/node",
+    "nodejs_package_manager_path": "pnpm",
+    "prettierjs.PrettierConfiguration.Package": "/home/alice/GolandProjects/storybook/client/node_modules/prettier",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.sourceCode.JavaScript",
+    "ts.external.directory.path": "/home/alice/GolandProjects/storybook/client/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mariadb&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mariadb"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -122,7 +115,7 @@
       <recent name="$PROJECT_DIR$/client/util" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.format">
+  <component name="RunManager" selected="npm.dev">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="storybook" />
       <working_directory value="$PROJECT_DIR$" />
@@ -163,14 +156,6 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="client/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
-      <deployment type="dockerfile">
-        <settings>
-          <option name="sourceFilePath" value="client/Dockerfile" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/client/package.json" />
       <command value="run" />
@@ -191,30 +176,40 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="format" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="prepare" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/client/package.json" />
       <command value="run" />
       <scripts>
-        <script value="format" />
+        <script value="prepare" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/client/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Docker.client/Dockerfile" />
       <item itemvalue="Go Build.storybook server" />
-      <item itemvalue="npm.format" />
       <item itemvalue="npm.build" />
+      <item itemvalue="npm.start" />
+      <item itemvalue="npm.prepare" />
       <item itemvalue="npm.dev" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.format" />
         <item itemvalue="npm.dev" />
         <item itemvalue="Go Build.storybook server" />
         <item itemvalue="npm.build" />
-        <item itemvalue="Docker.client/Dockerfile" />
+        <item itemvalue="npm.start" />
+        <item itemvalue="npm.prepare" />
       </list>
     </recent_temporary>
   </component>
