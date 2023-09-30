@@ -20,7 +20,7 @@ export const getServerSideProps = (async (context) => {
   const { data } = await showProfileApi(idTransform(uid))();
   console.log(data);
   const profile = dataConsumer(data);
-  return { props: { profile: nullProfile } };
+  return { props: { profile: profile! } };
 }) satisfies GetServerSideProps<{
   profile: editProfileI;
 }>;
