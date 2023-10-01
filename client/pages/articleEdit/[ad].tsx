@@ -7,12 +7,11 @@ import {
   getArticleDetailApi,
   postArticleCreateApi,
   postArticleEditApi,
-} from '../../api/article';
+} from '@/api/article';
 import { useRouter } from 'next/router';
 import useStatelessStorage from '../../hooks/useStatelessStorage';
 import ArticleDialog from '../../components/articleDialog';
 import { idTransform } from '../../util/common';
-import { articleDetailI } from '../../api/article/resTypes';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
 const ArticleEdit: React.FC = () => {

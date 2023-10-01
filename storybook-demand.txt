@@ -14,7 +14,7 @@ version 0.3-->use rich text edit replace to markdown editor,and drawing panel,xm
 
 ...
 current:
--->ssr
+-->ssr-->
 ->fix logout bug,cookie didnt deleted
 ->following,followed
 ->collect article-->shoucang

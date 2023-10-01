@@ -26,15 +26,16 @@ export const useRequest = <T>(
   return () => {
     setProgress(true);
     api()
-      .then(({ data }) => {
+      .then((res) => {
+        const resVal = res.data;
         //success callback logical
         if (s) {
-          if (data.data) {
-            if (Array.isArray(data.data)) {
+          if (resVal.data) {
+            if (Array.isArray(resVal.data)) {
               //<----golang struct
-              s(data.data[0]); //data.data=T[]
+              s(resVal.data[0]); //data.data=T[]
             } else {
-              s(data.data); //<----golang map,string,boolean
+              s(resVal.data); //<----golang map,string,boolean
             }
           } else {
             s(null);
@@ -42,7 +43,7 @@ export const useRequest = <T>(
         }
 
         if (!forbidSetAlsStateWhenSuccess) {
-          setAlsState({ info: 'success', message: data.message, open: true });
+          setAlsState({ info: 'success', message: resVal.message, open: true });
         }
       })
       .catch((err) => {
@@ -52,7 +53,6 @@ export const useRequest = <T>(
           //404
           setAlsState({ info: 'error', message: 'network 404', open: true });
         } else {
-          alertSet(err);
           if (err.response.status === 401) {
             router.push('/login');
             setAlsState({
@@ -61,6 +61,8 @@ export const useRequest = <T>(
               open: true,
             });
             logout();
+          } else {
+            alertSet(err);
           }
         }
       })

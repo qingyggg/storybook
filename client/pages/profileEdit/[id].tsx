@@ -1,10 +1,10 @@
 import { TextField, Button } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
-import { editProfileApi, loginApi, showProfileApi } from '../../api/user';
+import { editProfileApi, loginApi, showProfileApi } from '@/api/user';
 import Auth from '../../components/Auth';
 import { useRequest } from '../../hooks/useRequest';
-import { editProfileI, profileI } from '../../api/user/reqTypes';
+import { editProfileI, profileI } from '@/api/user/reqTypes';
 import { idTransform } from '../../util/common';
 
 export default function ProfileEdit() {

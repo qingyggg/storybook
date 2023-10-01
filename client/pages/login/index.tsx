@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Auth from '../../components/Auth';
 import { Button, TextField } from '@mui/material';
 import { useRouter } from 'next/router';
-import { loginApi } from '../../api/user';
+import { loginApi } from '@/api/user';
 import { usePassword } from '../../hooks/usePassword';
 import { useRequest } from '../../hooks/useRequest';
 import { useRecoilState } from 'recoil';

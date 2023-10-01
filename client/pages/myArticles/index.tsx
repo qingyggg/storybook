@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { articleListType } from '../../api/article/resTypes';
+import { articleListType } from '@/api/article/resTypes';
 import { useRequest } from '../../hooks/useRequest';
-import { getMyArticleApi } from '../../api/article';
+import { getMyArticleApi } from '@/api/article';
 import ArticleCardForEdit from '../../components/ArticleCardForEdit';
 import useLocalStorage from '../../hooks/useLocalStorage';
 

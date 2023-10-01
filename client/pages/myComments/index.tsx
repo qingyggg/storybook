@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { commentListT } from '../../api/comment/resTypes';
+import { commentListT } from '@/api/comment/resTypes';
 import CommentCardForEdit from '../../components/CommentCardForEdit';
 import { useRequest } from '../../hooks/useRequest';
-import { getMyCommentListApi } from '../../api/comment';
+import { getMyCommentListApi } from '@/api/comment';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
 function Index() {

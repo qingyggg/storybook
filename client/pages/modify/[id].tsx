@@ -1,8 +1,8 @@
 import { TextField, Button, FormControl, useFormControl } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import Auth from '../../components/Auth';
+import Auth from 'components/Auth';
 import { useRouter } from 'next/router';
-import { modifyApi } from '../../api/user';
+import { modifyApi } from '@/api/user';
 import { usePassword } from '../../hooks/usePassword';
 import { useRequest } from '../../hooks/useRequest';
 import { useRecoilState } from 'recoil';

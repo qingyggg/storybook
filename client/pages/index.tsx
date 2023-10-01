@@ -1,8 +1,8 @@
 import ArticleList from '../components/ArticleList';
 import { useEffect, useMemo, useState } from 'react';
-import { articleListType } from '../api/article/resTypes';
+import { articleListType } from '@/api/article/resTypes';
 import { useRequest } from '../hooks/useRequest';
-import { getArticleCount, getArticleListApi } from '../api/article';
+import { getArticleCount, getArticleListApi } from '@/api/article';
 import { Pagination, Stack } from '@mui/material';
 import { Skeleton } from 'antd';
 

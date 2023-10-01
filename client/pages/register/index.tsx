@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button, Form, Input } from 'antd';
-import { registerApi } from '../../api/user';
+import { registerApi } from '@/api/user';
 import { useRequest } from '../../hooks/useRequest';
 import { usePassword } from '../../hooks/usePassword';
 import { useRouter } from 'next/router';
@@ -10,7 +10,7 @@ import { authState } from '../../store/auth';
 import Auth from '../../components/Auth';
 import { Stack, Typography } from '@mui/material';
 import Link from 'next/link';
-import { registerI } from '../../api/user/reqTypes';
+import { registerI } from '@/api/user/reqTypes';
 import md5 from 'md5';
 
 const formItemLayout = {
