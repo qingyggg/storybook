@@ -47,7 +47,7 @@ func VerifyJwt(ctx *gin.Context, secretKey string) {
 				difference := claims.RegisteredClaims.ExpiresAt.Sub(time.Now())
 				if diffDays := int64(difference.Hours() / 24); diffDays <= 2 {
 					//set token in cookie,ctx is pointer
-					_, err := TokenHandler(claims.UserId, ctx)
+					_, err := TokenHandler(claims.UserId, ctx, false)
 					if err != nil {
 						Response(ctx, false, nil)
 					}
@@ -66,13 +66,20 @@ func errResponseByAuthorization(ctx *gin.Context) {
 	ctx.Abort()
 }
 
-func TokenHandler(userId string, c *gin.Context) (*gin.Context, error) {
+func TokenHandler(userId string, c *gin.Context, isCookieDel bool) (*gin.Context, error) {
+	var maxAge int
+	if isCookieDel == true {
+		//0 is session cookie,-1 is cookie destroy
+		maxAge = -1
+	} else {
+		maxAge = 60 * 60 * 24 * 5
+	}
 	token, err := GenerateJWT(userId, os.Getenv("SECRET_KEY"))
 	if err != nil {
 		return nil, errors.New("generate new token false")
 	} else {
 		c.SetSameSite(4)
-		c.SetCookie("token", token, 60*60*24*5, "/", "http://localhost:3000", true, true)
+		c.SetCookie("token", token, maxAge, "/", "http://localhost:3000", true, true)
 		return c, nil
 	}
 }

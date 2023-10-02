@@ -6,7 +6,7 @@ import { alertState } from '../store/alert';
 export const MolsAlert: React.FC = () => {
   const [alS, setAls] = useRecoilState(alertState);
   const handleClose = () => {
-    setAls({ info: 'info', message: '', open: false });
+    setAls((oV) => ({ ...oV, open: false }));
   };
   return (
     <Snackbar open={alS.open} autoHideDuration={3000} onClose={handleClose}>

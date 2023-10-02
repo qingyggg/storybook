@@ -26,3 +26,7 @@ export interface profileI {
 export interface editProfileI extends profileI {
   UserId?: number;
 }
+
+export interface AuthJwt {
+  UserId: string;
+}

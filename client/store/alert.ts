@@ -1,6 +1,6 @@
 import { atom, selector } from 'recoil';
 
-export const alertState = atom<stateI>({
+export const alertState = atom<aleStateI>({
   key: 'alertState',
   default: { info: 'info', message: '', open: false },
 });
@@ -13,7 +13,7 @@ export const alertOpenState = selector({
   },
 });
 
-interface stateI {
+export interface aleStateI {
   info: 'error' | 'warning' | 'info' | 'success';
   message: string;
   open: boolean;

@@ -20,7 +20,7 @@ func AuthController() {
 		util.AssignBodyJson(ctx, auBody)               //get request body
 		isErr, msg, userId := aus.Login(auBody, false) //invoke  service fuc
 		if !isErr {
-			nc, err := util.TokenHandler(userId, ctx)
+			nc, err := util.TokenHandler(userId, ctx, false)
 			if err != nil {
 				newRes.SetIsError(true).SetMessage(cst.SERVER_ERR).SetData(nil).Response(ctx)
 			} else {
@@ -51,7 +51,7 @@ func AuthController() {
 				if ok1 {
 					isErr2, _, userId := aus.Login(auBody, true)
 					if !isErr2 {
-						nc, err := util.TokenHandler(userId, ctx)
+						nc, err := util.TokenHandler(userId, ctx, false)
 						if err != nil {
 							newRes.SetIsError(true).SetMessage(cst.SERVER_ERR).SetData(nil).Response(ctx)
 						} else {
@@ -82,6 +82,15 @@ func AuthController() {
 		}
 	})
 	auth.POST("/logout", func(ctx *gin.Context) {
-		//ctx.SetCookie()
+		newRes := new(util.ResPayload)
+		auth := &dto.AuthDtoJWT{}
+
+		util.AssignBodyJson(ctx, auth)
+		nc, err := util.TokenHandler(auth.UserId, ctx, true)
+		if err != nil {
+			newRes.SetIsError(true).SetMessage(cst.SERVER_ERR).Response(ctx)
+		} else {
+			newRes.SetIsError(false).SetMessage(cst.LOGOUT).Response(nc)
+		}
 	})
 }

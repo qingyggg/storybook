@@ -4,22 +4,21 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32486ade-7097-4794-8fdf-bc3b2c3c2163" name="Changes" comment="1.fix register bug&#10;2.deploy logical">
-      <change afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="32486ade-7097-4794-8fdf-bc3b2c3c2163" name="Changes" comment="1.add getSeverSideProps render support on profile page">
+      <change afterPath="$PROJECT_DIR$/client/hooks/useAlert.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.prettierignore" beforeDir="false" afterPath="$PROJECT_DIR$/client/.prettierignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.prettierrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/.prettierrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/api/user/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/user/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/api/user/reqTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/user/reqTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/MolsAlert.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/MolsAlert.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/hooks/useLogout.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/hooks/useLogout.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/profile/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/profile/[id].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/detail/[ad].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/detail/[ad].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/modify/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/modify/[id].tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/util/common.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/util/common.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/util/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/util/request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/store/alert.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/store/alert.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/constants/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/constants/auth.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/controllers/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/auth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storybook-demand.txt" beforeDir="false" afterPath="$PROJECT_DIR$/storybook-demand.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/util/jwt.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/util/jwt.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +29,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript JSX File" />
-        <option value="TypeScript File" />
         <option value="Go File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -39,7 +38,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="fead0be397ec98a7fb553f336239c0cd4ca2efd8" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -95,7 +94,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.sourceCode.JavaScript",
+    "settings.editor.selected.configurable": "go.autoimport",
     "ts.external.directory.path": "/home/alice/GolandProjects/storybook/client/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   },
@@ -115,7 +114,7 @@
       <recent name="$PROJECT_DIR$/client/util" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.build">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="storybook" />
       <working_directory value="$PROJECT_DIR$" />
@@ -205,11 +204,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
         <item itemvalue="Go Build.storybook server" />
-        <item itemvalue="npm.build" />
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.prepare" />
+        <item itemvalue="npm.start" />
       </list>
     </recent_temporary>
   </component>
