@@ -8,11 +8,13 @@ type Article struct {
 	Title         string
 	Description   string
 	Content       string
-	UserID        uint
+	UserID        uint      //author id
 	Comments      []Comment `gorm:"foreignKey:ArticleID"`
 	Likes         []Like    `gorm:"foreignKey:ArticleID"`
+	Collects      []Collect `gorm:"foreignKey:ArticleID"`
 	LikeNumber    uint
 	CommentNumber uint
+	CollectNumber uint
 }
 
 type ApiArticleListForItem struct {
@@ -21,12 +23,14 @@ type ApiArticleListForItem struct {
 	Description   string
 	LikeNumber    uint
 	CommentNumber uint
+	CollectNumber uint
 }
 
 type ApiArticleLikesAndCommentsAmount struct {
 	ArticleID     uint
 	LikeNumber    uint
 	CommentNumber uint
+	CollectNumber uint
 }
 
 type ApiArticleList = []ApiArticleListForItem

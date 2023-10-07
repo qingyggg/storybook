@@ -8,6 +8,7 @@ import {
   DialogTitle,
   TextField,
 } from '@mui/material';
+import { AddCommentRounded } from '@mui/icons-material';
 
 export default function CommentDialog(props: propsI) {
   const [open, setOpen] = useState(false);
@@ -27,7 +28,12 @@ export default function CommentDialog(props: propsI) {
 
   return (
     <div>
-      <Button variant='outlined' onClick={handleClickOpen}>
+      <Button
+        variant='outlined'
+        size='medium'
+        startIcon={<AddCommentRounded fontSize='large' />}
+        onClick={handleClickOpen}
+      >
         {props.forEdit && 'edit'}
         {!props.forEdit && 'comment'}
       </Button>

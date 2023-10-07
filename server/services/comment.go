@@ -37,6 +37,7 @@ func (c *Comment) baseList(forWhat string, payload uint) (bool, *models.ApiComme
 }
 
 func (c *Comment) Create(commentDto *dto.CommentDtoForCreate) bool {
+	//TODO: add reply
 	comment := &models.Comment{
 		UserID:    commentDto.UserID,
 		ArticleID: commentDto.ArticleID,

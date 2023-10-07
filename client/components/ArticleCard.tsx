@@ -3,6 +3,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
 import { articleItemForListI } from '../api/article/resTypes';
 import Link from 'next/link';
+import { StarRateRounded } from '@mui/icons-material';
 
 const extraStyle =
   'hover:transition-all  duration-500 ease-in-out hover:-translate-x-16 hover:rotate-1 hover:bg-indigo-100 hover:border-dashed';
@@ -43,6 +44,10 @@ export default function ArticleCard(props: propI) {
           <div>
             <CommentIcon fontSize='large' />
             <span>{props.CommentNumber}</span>
+          </div>
+          <div>
+            <StarRateRounded fontSize='large' />
+            <span>{props.CollectNumber}</span>
           </div>
         </div>
         {props.editMode && <div className='mx-10'></div>}

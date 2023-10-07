@@ -11,3 +11,7 @@ export interface likeStatus {
   isLike: boolean;
 }
 export type likesStatus = Array<boolean>;
+
+export interface collectStatus {
+  isCollect: boolean;
+}

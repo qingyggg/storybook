@@ -33,18 +33,32 @@ export default function Profile() {
   //complete before 4pm
   return (
     <div className='w-full flex flex-col items-center mt-5'>
-      <h1 className='text-5xl'>user profile</h1>
-      <div className='flex flex-col text-2xl'>
-        <p>name:{Profile.Name}</p>
-        <p>age:{Profile.Age}</p>
-        <p>Description:{Profile.Description}</p>
+      <h1 className='text-8xl mb-10 hover:cursor-pointer'>
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
+        {Profile.Name}'s profile
+      </h1>
+      <div className='space-y-16 w-4/12 text-4xl'>
+        <p>
+          <span className='font-bold '>name:</span>
+          {Profile.Name}
+        </p>
+        <p>
+          <span className='font-bold '>age:</span>
+          {Profile.Age}
+        </p>
+        <p>
+          <span className='font-bold '>Description:</span>
+          <span className='text-xl'>{Profile.Description}</span>
+        </p>
         <div className='flex flex-row'>
+          <span className='font-bold '>Contact:</span>
+          <div className='px-5'></div>
           <Link href={Profile.Github} underline='none'>
-            <GitHubIcon fontSize='large' />
+            <GitHubIcon fontSize='large' className='scale-150' />
           </Link>
           <div className='mx-8'></div>
           <Link href={Profile.Twitter} underline='none'>
-            <TwitterIcon fontSize='large'></TwitterIcon>
+            <TwitterIcon fontSize='large' className='scale-150'></TwitterIcon>
           </Link>
         </div>
       </div>

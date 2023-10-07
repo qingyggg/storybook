@@ -1,7 +1,6 @@
 package services
 
 import (
-	"fmt"
 	cst "github.com/qingyggg/storybook/server/constants"
 	"github.com/qingyggg/storybook/server/db/models"
 	"github.com/qingyggg/storybook/server/dto"
@@ -81,6 +80,12 @@ func (a *Article) Delete(articleDto *dto.ArticleDtoForDelete) (isError bool, mes
 		if err := tx.Unscoped().Where("article_id = ?", articleDto.ArticleID).Delete(&models.Comment{}).Error; err != nil {
 			return err
 		}
+		if err := tx.Unscoped().Where("article_id = ?", articleDto.ArticleID).Delete(&models.Collect{}).Error; err != nil {
+			return err
+		}
+		if err := tx.Unscoped().Where("article_id = ?", articleDto.ArticleID).Delete(&models.Like{}).Error; err != nil {
+			return err
+		}
 		if err := tx.Unscoped().Where("id = ?", articleDto.ArticleID).Delete(article).Error; err != nil {
 			// 返回任何错误都会回滚事务
 			return err
@@ -91,7 +96,6 @@ func (a *Article) Delete(articleDto *dto.ArticleDtoForDelete) (isError bool, mes
 	if err == nil {
 		return false, cst.ARTICLE_DELETE
 	} else {
-		fmt.Println(err, 4678)
 		return true, cst.SERVER_ERR
 	}
 }

@@ -4,6 +4,7 @@ export interface articleItemForListI {
   Description: string;
   LikeNumber: number;
   CommentNumber: number;
+  CollectNumber: number;
 }
 
 export type articleListType = articleItemForListI[];
@@ -16,6 +17,7 @@ export interface articleDetailI {
   UserID: number;
   Comments: any[];
   LikeNumber: number;
+  CollectNumber: number;
   CommentNumber: number;
   CreatedAt: string;
   UpdatedAt: string;

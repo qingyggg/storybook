@@ -126,6 +126,14 @@ export default function MenuAppBar() {
               <MenuItem
                 onClick={() => {
                   handleClose();
+                  router.push('/myCollects');
+                }}
+              >
+                my collects
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
                   logout();
                 }}
               >

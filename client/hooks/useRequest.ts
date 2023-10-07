@@ -29,15 +29,11 @@ export const useRequest = <T>(
       .then(({ data }) => {
         //success callback logical
         if (s) {
-          if (data.data) {
-            if (Array.isArray(data.data)) {
-              //<----golang struct
-              s(data.data[0]); //data.data=T[]
-            } else {
-              s(data.data); //<----golang map,string,boolean
-            }
+          if (Array.isArray(data.data)) {
+            //<----golang struct
+            s(data.data[0]); //data.data=T[]
           } else {
-            s(null);
+            s(data.data); //<----golang map,string,boolean
           }
         }
 
@@ -60,7 +56,7 @@ export const useRequest = <T>(
               message: 'please login or register your account at first',
               open: true,
             });
-            logout();
+            // logout();
           }
         }
       })

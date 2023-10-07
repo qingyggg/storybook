@@ -101,18 +101,20 @@ func (dr *DbRes) AssignDefaultsIsErr() *DbRes {
 	return dr
 }
 
-// [1,0],[0,1]-->0 is error,1 is correct for per errType
+// AssignIsErr [1,0],[0,1]-->0 is error,1 is correct for per errType
+// ->first item of the array decide wheter sql results is error when sql has records
+// ->second item of the array decide wheter sql results is error when sql has no records
 func (dr *DbRes) AssignIsErr(arr []uint) *DbRes {
 	switch dr.errType {
 	case 0:
 		dr.isError = true
-	case 1:
+	case 1: //decide whether sql is error when the condition is sql result has record
 		if dr.errType == arr[0] {
 			dr.isError = false
 		} else {
 			dr.isError = true
 		}
-	case 2:
+	case 2: //decide whether sql is error when the condition is sql result not have record
 		if dr.errType == arr[1]+1 {
 			dr.isError = false
 		} else {

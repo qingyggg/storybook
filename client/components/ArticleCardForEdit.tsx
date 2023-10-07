@@ -29,6 +29,7 @@ export default function ArticleCardForEdit(props: articleItemForListI) {
           Description={props.Description}
           LikeNumber={props.LikeNumber}
           CommentNumber={props.CommentNumber}
+          CollectNumber={props.CollectNumber}
           editMode
         />
         <div className='absolute right-10 top-10'>

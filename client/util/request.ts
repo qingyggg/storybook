@@ -4,7 +4,7 @@ import { instance } from './http';
 export interface baseRes<T> {
   message: string;
   isError: boolean;
-  data: T[] | T | null;
+  data: T[] | T;
 }
 
 export const get = <T>(

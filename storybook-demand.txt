@@ -14,12 +14,17 @@ version 0.3-->use rich text edit replace to markdown editor,and drawing panel,xm
 
 ...
 current:
--->ssr
-->fix logout bug,cookie didnt deleted
-->following,followed
-->collect article-->shoucang
--->update profile(juejin style),login,register ui
----->comments be liked,reply usage
+->following,followed(this month)
+->avatar upload->use minio as oss storage to save avatars
+-->update profile ui,login,register ui
+->backend register form field validate
+-->comments be liked,reply usage
+-->article search?algolia
+-->article lable,tag
+-->notification,similar to mail in game
+-->i18n english and chinese
+
+-x->ssr->bug report branch
 
 1.draft(草稿)
 2.collect(收藏article) list

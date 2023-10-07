@@ -28,7 +28,6 @@ export default function ArticleList(props: PropI) {
       }
     }
   };
-
   return (
     <div className='w-8/12 space-y-6'>
       {renderList()}
@@ -36,6 +35,7 @@ export default function ArticleList(props: PropI) {
     </div>
   );
 }
+
 interface PropI {
   list: articleListType;
   isLoading?: boolean;

@@ -18,3 +18,8 @@ export interface commentEditI extends commentI {
 export interface commentDeleteI {
   ID: number;
 }
+
+export interface collectI {
+  UserID: number;
+  ArticleID: number;
+}
