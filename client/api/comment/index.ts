@@ -1,13 +1,14 @@
 import {
-  likeI,
-  commentI,
+  collectI,
   commentDeleteI,
   commentEditI,
-  collectI,
+  commentI,
+  likeI,
 } from './reqTypes';
-import { post, get } from '../../util/request';
+import { get, get2, post } from '../../util/request';
 import { collectStatus, commentListT, likeStatus } from './resTypes';
 import { articleListType } from '@/api/article/resTypes';
+
 export const postLike = (like: likeI) => () =>
   post<likeStatus>('/comment/like', like);
 export const postLikeStatus = (like: likeI) => () =>
@@ -28,3 +29,6 @@ export const postCollectStatus = (collect: collectI) => () =>
   post<collectStatus>('/comment/collectStatus', collect);
 export const getMyCollectListApi = (userId: string) => () =>
   get<articleListType>('/comment/collectList?uid=' + userId);
+//usually,please get comment Amount according detail CommentNumber field
+export const getCmtAmountApi = (ArticleId: number) => () =>
+  get2<number>('/comment/count', { ArticleId });

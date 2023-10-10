@@ -4,34 +4,63 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32486ade-7097-4794-8fdf-bc3b2c3c2163" name="Changes" comment="1.add getSeverSideProps render support on profile page">
-      <change afterPath="$PROJECT_DIR$/client/hooks/useAlert.ts" afterDir="false" />
+    <list default="true" id="32486ade-7097-4794-8fdf-bc3b2c3c2163" name="Changes" comment="1.optimize detail page&#10;2.useNewRequest hook established&#10;3.optimize profile ui&#10;4.dynamic origin restriction set in gin header and jwt">
+      <change afterPath="$PROJECT_DIR$/client/api/userBehavior/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/api/userBehavior/reqTypes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/api/userBehavior/resTypes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/components/FollowList.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/public/avatar.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/constants/behavior.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/controllers/behavior.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/db/models/follow.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/dto/behavior.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/services/behavior.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/api/user/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/user/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/api/user/reqTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/user/reqTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/MolsAlert.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/MolsAlert.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/hooks/useLogout.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/hooks/useLogout.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/api/comment/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/comment/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/api/user/resTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/user/resTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/AuthorForArticleDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/AuthorForArticleDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/CommentList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/CommentList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/pages/detail/[ad].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/detail/[ad].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/modify/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/modify/[id].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/store/alert.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/store/alert.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/constants/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/constants/auth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/auth.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pages/profile/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/profile/[id].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/util/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/util/request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/collect.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/collect.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/comment.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/comment.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/db/models/user_profile.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/db/models/user_profile.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/services/comment.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/services/comment.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/util/common.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/util/common.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/util/http.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/util/http.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/util/jwt.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/util/jwt.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/util/sql.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/util/sql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-demand.txt" beforeDir="false" afterPath="$PROJECT_DIR$/storybook-demand.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="EditorConfigPreviewManager">
+    <editorConfig file="$PROJECT_DIR$/.editorconfig" previewFile="$PROJECT_DIR$/server/controllers/behavior.go" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="Go File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="mySelectedFileTypes">
+      <set>
+        <option value="ECMAScript 6" />
+        <option value="Go" />
+        <option value="JavaScript" />
+        <option value="TypeScript" />
+        <option value="TypeScript JSX" />
+      </set>
     </option>
   </component>
   <component name="GOROOT" url="file://$USER_HOME$/.gvm/gos/go1.19" />
@@ -49,6 +78,15 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="mySelectedFileTypes">
+      <set>
+        <option value="Go" />
+        <option value="JavaScript" />
+        <option value="TypeScript" />
+      </set>
+    </option>
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -63,47 +101,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DefaultGoTemplateProperty": "Go File",
-    "RunOnceActivity.OpenDatabaseViewOnStart": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "full.screen.before.presentation.mode": "false",
-    "git-widget-placeholder": "develop",
-    "go.import.settings.migrated": "true",
-    "javascript.nodejs.core.library.configured.version": "18.17.1",
-    "javascript.nodejs.core.library.typings.version": "18.17.1",
-    "js.linters.configure.manually.selectedeslint": "true",
-    "last_opened_file_path": "/home/alice/GolandProjects/storybook/client",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "/home/alice/.nvm/versions/node/v18.17.1/bin/node",
-    "nodejs_package_manager_path": "pnpm",
-    "prettierjs.PrettierConfiguration.Package": "/home/alice/GolandProjects/storybook/client/node_modules/prettier",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "go.autoimport",
-    "ts.external.directory.path": "/home/alice/GolandProjects/storybook/client/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;RunOnceActivity.OpenDatabaseViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.17.1&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.17.1&quot;,
+    &quot;js.linters.configure.manually.selectedeslint&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/alice/GolandProjects/storybook/client&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;/home/alice/.nvm/versions/node/v18.17.1/bin/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/home/alice/GolandProjects/storybook/client/node_modules/prettier&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.TypeScript&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/alice/GolandProjects/storybook/client/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mariadb"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mariadb&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -114,7 +153,7 @@
       <recent name="$PROJECT_DIR$/client/util" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="npm.dev">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="storybook" />
       <working_directory value="$PROJECT_DIR$" />
@@ -175,6 +214,16 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="format" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/client/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="format" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="prepare" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/client/package.json" />
       <command value="run" />
@@ -185,30 +234,20 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/client/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="start" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Go Build.storybook server" />
+      <item itemvalue="npm.format" />
       <item itemvalue="npm.build" />
-      <item itemvalue="npm.start" />
       <item itemvalue="npm.prepare" />
       <item itemvalue="npm.dev" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
         <item itemvalue="Go Build.storybook server" />
+        <item itemvalue="npm.format" />
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.prepare" />
-        <item itemvalue="npm.start" />
       </list>
     </recent_temporary>
   </component>
@@ -238,7 +277,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="develop" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -258,7 +309,9 @@
     <MESSAGE value="1.fix profile edit bug&#10;2.add skeleton on article list page&#10;3.add comment style,comment card border will be red if this comment is this reader(after login)&#10;4.add authentication(email format) on log on page&#10;5." />
     <MESSAGE value="1.upgrade env loading" />
     <MESSAGE value="1.fix register bug&#10;2.deploy logical" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.fix register bug&#10;2.deploy logical" />
+    <MESSAGE value="1.add logout api and fix logout bug&#10;2.add useAlert hook on client module" />
+    <MESSAGE value="1.optimize detail page&#10;2.useNewRequest hook established&#10;3.optimize profile ui&#10;4.dynamic origin restriction set in gin header and jwt" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.optimize detail page&#10;2.useNewRequest hook established&#10;3.optimize profile ui&#10;4.dynamic origin restriction set in gin header and jwt" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
@@ -266,7 +319,7 @@
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="GoApplicationRunConfiguration">
-        <watch expression="err" />
+        <watch expression="err" language="go" />
       </configuration>
     </watches-manager>
   </component>

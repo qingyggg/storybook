@@ -13,6 +13,13 @@ type Comment struct {
 	DB *gorm.DB
 }
 
+func (c *Comment) Count(ad uint) (bool, int64) {
+	count := new(int64)
+	ds := new(util.DbRes)
+	result := c.DB.Model(&models.Comment{}).Where("article_id=?", ad).Count(count)
+	return ds.AssignResults(result).DistinguishSqlErrType().AssignIsErr([]uint{1, 1}).GetIsErr(), *count
+}
+
 func (c *Comment) List(ad uint) (bool, *models.ApiComments) {
 	return c.baseList("list", ad)
 }

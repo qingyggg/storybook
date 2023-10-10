@@ -6,7 +6,6 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { idTransform } from '../../util/common';
 import { useRouter } from 'next/router';
-import { useRequest } from '../../hooks/useRequest';
 import { getArticleDetailApi } from '@/api/article';
 import {
   getCommentListApi,
@@ -25,6 +24,8 @@ import moment from 'moment';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { collectI, likeI } from '../../api/comment/reqTypes';
 import { useNewRequest } from '../../hooks/useNewRequest';
+import { followApi, getFollowStatusApi } from '@/api/userBehavior';
+import { followI } from '@/api/userBehavior/reqTypes';
 
 export default function Detail() {
   //state hook
@@ -40,14 +41,35 @@ export default function Detail() {
   const [readerIsLike, setReaderIsLike] = useState<boolean>(false);
   const [readerIsCollect, setReaderIsCollect] = useState<boolean>(false);
   const [authorInfo, setAuthorInfo] = useState<showProfileI>();
-
+  const [followStatus, setFollowStatus] = useState<boolean>(false);
+  const followPayload: followI = useMemo(() => {
+    let FollowedID = -1;
+    if (authorInfo && authorInfo.UserID) {
+      FollowedID = authorInfo.UserID;
+    }
+    return { UserID: idTransform(readerId), FollowedID };
+  }, [readerId, authorInfo]);
   //new request hook
   const molsReq = useNewRequest();
   //pre request
   const getAuthorProfile = (authorId: number) =>
-    molsReq(showProfileApi(authorId), true).then((res) => setAuthorInfo(res));
+    molsReq(showProfileApi(authorId), true).then((res) => {
+      getFollowStatus(res.UserID);
+      setAuthorInfo(res);
+    });
+  //comment current article and flush comment lists
   const commentCurArticle = (data: string) =>
-    molsReq(postCommentApi({ ...likePayload, Content: data }));
+    molsReq(postCommentApi({ ...likePayload, Content: data })).then(() =>
+      getCommentLists(),
+    );
+  const getFollowStatus = (auId: number) =>
+    molsReq(
+      getFollowStatusApi({
+        ...followPayload,
+        FollowedID: auId,
+      }),
+      true,
+    ).then((res) => setFollowStatus(res.isFollow));
   //full request functions
   const getArticleDetail = () =>
     molsReq(getArticleDetailApi(idTransform(ad)), true).then((res) => {
@@ -84,13 +106,23 @@ export default function Detail() {
     setReaderIsCollect(!readerIsCollect);
     collectDebounced.run();
   };
-
+  const followAuthor = () =>
+    molsReq(followApi(followPayload)).then((res) =>
+      setFollowStatus(res.isFollow),
+    );
+  const followDebounced = useDebounceFn(followAuthor, {
+    wait: 500,
+  });
+  const followAuthorHandler = () => {
+    setFollowStatus(!followStatus);
+    followDebounced.run();
+  };
   //effect
   useEffect(() => {
     if (idTransform(ad) === -1 || idTransform(readerId) === -1) {
       return;
     }
-    getArticleDetail();
+    getArticleDetail(); //==getArticleDetail+getAuthorProfile
     getCommentLists();
     getCollectStatus();
     getLikeStatus();
@@ -121,7 +153,7 @@ export default function Detail() {
                 </ReactMarkdown>
               </article>
             </div>
-            <CommentList list={cmList} />
+            <CommentList list={cmList} count={detail.CommentNumber} />
           </div>
           <div className='fixed top-28 right-8'>
             <AuthorForArticleDetail
@@ -134,6 +166,8 @@ export default function Detail() {
               onClickForLike={likeHandler}
               collectStatus={readerIsCollect}
               onClickForCollect={collectHandler}
+              followStatus={followStatus}
+              onClickForFollow={followAuthorHandler}
             />
           </div>
           <FloatButton.BackTop

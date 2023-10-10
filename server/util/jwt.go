@@ -79,7 +79,8 @@ func TokenHandler(userId string, c *gin.Context, isCookieDel bool) (*gin.Context
 		return nil, errors.New("generate new token false")
 	} else {
 		c.SetSameSite(4)
-		c.SetCookie("token", token, maxAge, "/", "http://localhost:3000", true, true)
+		origin := c.Request.Header.Get("Origin")
+		c.SetCookie("token", token, maxAge, "/", origin, true, true)
 		return c, nil
 	}
 }

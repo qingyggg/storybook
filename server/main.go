@@ -16,7 +16,7 @@ func main() {
 		controllers.AuthController,
 		controllers.CommentController,
 		controllers.ProfileController,
-		//controllers.BehaviorController,
+		controllers.BehaviorController,
 		controllers.CollectController,
 	)
 }

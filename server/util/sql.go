@@ -6,11 +6,11 @@ import (
 )
 
 // old func,used to justify whether sql is okay(condition:ctx.Error == nil && ctx.RowsAffected > 0)
-func CrudJudgement(ctx *gorm.DB) (a bool) {
+func CrudJudgement(ctx *gorm.DB) (isOk bool) {
 	if ctx.Error == nil && ctx.RowsAffected > 0 {
-		a = true
+		isOk = true
 	} else {
-		a = false
+		isOk = false
 	}
 	return
 }

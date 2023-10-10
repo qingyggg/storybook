@@ -14,17 +14,18 @@ version 0.3-->use rich text edit replace to markdown editor,and drawing panel,xm
 
 ...
 current:
-->following,followed(this month)
-->avatar upload->use minio as oss storage to save avatars
--->update profile ui,login,register ui
-->backend register form field validate
--->comments be liked,reply usage
--->article search?algolia
--->article lable,tag
--->notification,similar to mail in game
--->i18n english and chinese
 
--x->ssr->bug report branch
+> >! freeze coding this project until next  year of april4,concentrate all of the attention on the preparation of bachelor transfer exam<<
+->try to use unocss plugin to fix css bug
+->avatar upload->use minio as oss storage to save avatars
+->backend register form field validate<go-validate
+-->comments be liked,reply usage
+-->article search?algolia || elastic rearch
+-->article lable,tag<<simalar to twitter tag
+-->mobile adaptation
+-->notification,similar to mail system in game
+-->i18n english and chinese
+-->public storybook v1.0.0 version
 
 1.draft(草稿)
 2.collect(收藏article) list

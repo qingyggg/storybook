@@ -25,8 +25,8 @@ func AssignBodyJson[T any](ctx *gin.Context, bodyDto T) {
 }
 
 // Response old response func()
-func Response(ctx *gin.Context, ok bool, resObj ...interface{}) {
-	if !ok {
+func Response(ctx *gin.Context, isOk bool, resObj ...interface{}) {
+	if !isOk {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"message": cst.SERVER_ERR, "isError": true, "data": nil})
 	} else {
 		ctx.JSON(http.StatusAccepted, gin.H{"message": cst.REQ_OK, "isError": false, "data": resObj})

@@ -10,6 +10,8 @@ import {
   FavoriteBorder,
   StarRateRounded,
   StarBorderRounded,
+  PersonAddRounded,
+  PersonAddOutlined,
 } from '@mui/icons-material';
 
 export default function AuthorForArticleDetail(props: propsI) {
@@ -19,12 +21,15 @@ export default function AuthorForArticleDetail(props: propsI) {
     onClickForLike,
     collectStatus,
     onClickForCollect,
+    followStatus,
+    onClickForFollow,
+    AuthorID,
+    ReaderID,
   } = props;
   const [comment, setComment] = useState<string>('');
-
   return (
-    <div className='flex flex-col items-start  py-2 mr-12 space-y-4 border-2 p-6 rounded-xl border-indigo-400 hover:bg-indigo-50'>
-      <div className='w-full cursor-pointer flex  items-center'>
+    <div className='flex flex-col items-start  py-2 mr-12 space-y-4 border-2 p-6 rounded-xl border-indigo-400 hover:bg-indigo-50 bg-white'>
+      <div className='w-full cursor-pointer flex  items-center '>
         <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
         <div className='mr-5'></div>
         <span className='text-xl'>{props?.authorInfo?.Name}</span>
@@ -66,9 +71,47 @@ export default function AuthorForArticleDetail(props: propsI) {
       >
         &nbsp;&nbsp;{collectStatus ? 'collected' : 'collect'}&nbsp; &nbsp;
       </Button>
+      {AuthorID !== ReaderID &&
+        StyledButton(
+          followStatus,
+          onClickForFollow,
+          {
+            TrueIcon: PersonAddRounded,
+            FalseIcon: PersonAddOutlined,
+          },
+          { trueInfo: 'followed', falseInfo: 'follow' },
+        )}
     </div>
   );
 }
+const StyledButton: styleButtonT = (status, onclick, Icon, info) => {
+  return (
+    <Button
+      onClick={onclick}
+      variant='outlined'
+      size='medium'
+      color={status ? 'secondary' : 'primary'}
+      startIcon={
+        status ? (
+          <Icon.TrueIcon fontSize='large' className='bg-inherit' />
+        ) : (
+          <Icon.FalseIcon fontSize='large' className='bg-inherit' />
+        )
+      }
+    >
+      &nbsp;&nbsp;{status ? info.trueInfo : info.falseInfo}&nbsp; &nbsp;
+    </Button>
+  );
+};
+type styleButtonT = (
+  status: boolean,
+  onclick: () => void,
+  Icon: {
+    TrueIcon: React.ElementType;
+    FalseIcon: React.ElementType;
+  },
+  info: { trueInfo: string; falseInfo: string },
+) => JSX.Element;
 
 interface propsI {
   AuthorID: number;
@@ -78,6 +121,8 @@ interface propsI {
   onClickForLike: () => any;
   onClickForCollect: () => any;
   onCmtAdd: (data: string) => any;
+  onClickForFollow: () => any;
+  followStatus: boolean;
   authorInfo: showProfileI;
   ReaderID: number;
 }

@@ -13,6 +13,11 @@ import (
 func CommentController() {
 	comment := router.GetAppRouter().Group("/comment")
 	cs := services.Comment{DB: db.GetDataBase()}
+	comment.GET("/count", func(ctx *gin.Context) {
+		articleId := util.QueryDefaultAssigner(ctx, "ArticleId", "0")
+		isErr, count := cs.Count(util.StringConvertToUint(articleId))
+		util.Response(ctx, !isErr, count)
+	})
 	comment.GET("/list", func(ctx *gin.Context) {
 		articleId := util.QueryDefaultAssigner(ctx, "ArticleId", "0")
 		isErr, list := cs.List(util.StringConvertToUint(articleId))

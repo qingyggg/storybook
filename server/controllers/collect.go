@@ -52,5 +52,6 @@ func CollectController() {
 		err, list := cs.List(util.StringConvertToUint(uid))
 		util.Response(ctx, !err, list)
 	})
+	//get who collected one(specified by articleID) of my article
 	//profile.GET("/collectedList", func(ctx *gin.Context) { )
 }
