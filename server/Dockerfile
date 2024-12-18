@@ -19,10 +19,9 @@ MAINTAINER "alice"
 ENV FOO_ENV=production
 
 WORKDIR /app
-RUN mkdir ca
+
 RUN mkdir envs
 
-COPY --from=builder /app/ca/ ./ca
 COPY --from=builder /app/envs/ ./envs
 COPY --from=builder /app/main ./
 

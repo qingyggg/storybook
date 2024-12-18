@@ -1,5 +1,7 @@
+name: storybook
+
 networks:
-  backend:
+  storybook:
     driver: bridge
 
 services:
@@ -8,50 +10,63 @@ services:
       context: client
       dockerfile: Dockerfile
     depends_on:
-      - backend
-      - db
+      - server
+      - mariadb
     networks:
-      - backend
+      - storybook
     ports:
       - 3000:3000
-  backend:
+    restart: always
+  server:
     build:
       context: server
       dockerfile: Dockerfile
     depends_on:
-      db:
+      mariadb:
         condition: service_healthy
     networks:
-      - backend
+      - storybook
     ports:
       - 8080:8080
-  db:
-    # We use a mariadb image which supports both amd64 & arm64 architecture
-#    image: mariadb:10-focal
-    # If you really want to use MySQL, uncomment the following line
-    image: mysql:8
-    command: '--default-authentication-plugin=mysql_native_password'
     restart: always
-    healthcheck:
-      test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 --password="$$(cat /run/secrets/db-password)" --silent']
-      interval: 3s
-      retries: 5
-      start_period: 30s
-    secrets:
-      - db-password
+  mariadb:
+    image: mariadb:11
+    container_name: mariadb
     volumes:
-      - db-data:/var/lib/mysql
+      - db-data:/var/lib/mysql  # 使用命名卷持久化 MySQL 数据
+    ports:
+      - "3306:3306"
     environment:
       - MYSQL_DATABASE=storybook
-      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
+      - MYSQL_USER=storybook
+      - MYSQL_PASSWORD=storybook123
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_CHARACTER_SET_SERVER=utf8mb4
+      - MYSQL_COLLATION_SERVER=utf8mb4_unicode_ci
     networks:
-      - backend
+      - storybook
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      start_period: 1m
+      interval: 30s
+      timeout: 5s
+      retries: 3
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "443:443"  # HTTP 端口
+    networks:
+      - storybook
+    volumes:
+      - ./proxy/nginx.conf:/etc/nginx/nginx.conf  # 挂载 Nginx 配置文件
+      - ./proxy/certs/:/etc/nginx/certs            # 挂载 SSL 证书
+    restart: always
 
 volumes:
   db-data:
 
-secrets:
-  db-password:
-    file: db/password.txt
+
 
 

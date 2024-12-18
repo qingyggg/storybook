@@ -16,11 +16,12 @@ func Bootstrap(routes ...func()) {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	r = gin.Default() //initialize gin
-	r.Use(Cors())
+	//r.Use(Cors())
 	r.Use(JwtAuth())
 	//register controller
 	RegRoutes(routes)
-	err := r.RunTLS(":8080", os.Getenv("CERT_PATH"), os.Getenv("KEY_PATH"))
+	//err := r.RunTLS(":8080", os.Getenv("CERT_PATH"), os.Getenv("KEY_PATH"))
+	err := r.Run(":8080")
 	if err != nil {
 		log.Fatal(err)
 	} // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
