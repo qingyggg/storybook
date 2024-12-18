@@ -1,4 +1,4 @@
-/node_modules
-/.vscode
-/.idea
-/proxy/certs/*
+/node_modules/
+/proxy/certs/*.pem
+/.idea/
+/.vscode/
